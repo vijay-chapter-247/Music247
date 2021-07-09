@@ -87,7 +87,7 @@
     <v-row>
       <v-col cols="12" sm="6" lg="3" v-for="(card, index) in cards" :key="index">
         <v-card id="create" class="rounded-xl darkest">
-          <v-img src="./../assets/image_5.png" height="200px">
+          <v-img  v-bind:src="require('./../assets/' + card.image)"  height="200px">
             <v-speed-dial top="top" right="right">
               <template v-slot:activator>
                 <v-chip
@@ -147,7 +147,7 @@ export default {
         text: "53K plays . 2 week ago",
         time: "7 min",
         color: "green",
-        image: "./../assets/image_5.png",
+        image: "image_5.png",
         avatar: "./../assets/image_10.png"
       },
       {
@@ -156,7 +156,7 @@ export default {
         text: "53K plays . 2 week ago",
         time: "7 min",
         color: "red",
-        image: "./../assets/image_7.png",
+        image: "image_7.png",
         avatar: "./../assets/image_12.png"
       },
       {
@@ -165,7 +165,7 @@ export default {
         text: "53K plays . 2 week ago",
         time: "7 min",
         color: "red",
-        image: "./../assets/image_6.png",
+        image: "image_6.png",
         avatar: "./../assets/image_11.png"
       },
       {
@@ -174,7 +174,7 @@ export default {
         text: "53K plays . 2 week ago",
         time: "7 min",
         color: "green",
-        image: "./../assets/image_8.png",
+        image: "image_8.png",
         avatar: "./../assets/image_13.png"
       },
     ],
