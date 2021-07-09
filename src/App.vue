@@ -3,9 +3,10 @@
     <!-- Navigation Bar -->
     <v-app-bar flat app dark color="dark">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-lg-none"></v-app-bar-nav-icon>
-        <v-card-title class="d-lg-none font-weight-bold font--subtitle--2 font-family--poppins white--text">
-            Songs247x7
-        </v-card-title>
+        <!-- <v-card-title> -->
+            <v-toolbar-title class="d-lg-none mr-3 font-weight-bold font--subtitle--2 font-family--poppins white--text">Songs247x7</v-toolbar-title>
+
+        <!-- </v-card-title> -->
 
         <v-text-field append-icon="mdi-magnify" placeholder="Search" filled dense rounded class="d-none d-sm-flex mt-6"></v-text-field>
 
