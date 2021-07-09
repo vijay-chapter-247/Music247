@@ -113,11 +113,24 @@
         <v-col cols="12" sm="6" md="3" v-for="(card, index) in cards" :key="index">
             <v-card id="create" class="rounded-xl darkest" height="370">
                 <v-img v-bind:src="require('./../assets/' + card.image)" height="200px">
-                    <v-speed-dial top="top" right="right">
+                    <v-speed-dial top right>
                         <template v-slot:activator>
                             <v-chip small color="#3d414d" class="white--text font-weight-bold font-family--poppins">{{ card.time }} </v-chip>
                         </template>
                     </v-speed-dial>
+
+                    <v-row justify="center" class="mt-14">
+                        <v-col align="center">
+                            <v-btn fab outlined large color="white" @click="changePause" v-if="pause">
+                                <v-icon x-large color="white">mdi-pause</v-icon>
+                            </v-btn>
+
+                            <v-btn fab outlined large color="white" @click="changePlay" v-if="play">
+                                <v-icon x-large color="white">mdi-play</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+
                 </v-img>
 
                 <v-speed-dial top right class="position--down">
@@ -161,6 +174,8 @@
 <script>
 export default {
     data: () => ({
+        pause: true,
+        play: false,
         cards: [{
                 name: "Andy William",
                 title: "Basic how to ride your skateboard comfortly",
@@ -199,6 +214,16 @@ export default {
             },
         ],
     }),
+    methods: {
+        changePause() {
+            this.pause = false;
+            this.play = true;
+        },
+        changePlay() {
+            this.play = false;
+            this.pause = true;
+        }
+    }
 };
 </script>
 
