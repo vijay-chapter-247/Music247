@@ -35,7 +35,7 @@
                                 <v-avatar size="50">
                                     <v-img src="./../assets/image_2.png"></v-img>
                                 </v-avatar>
-                                <span class="position--absolute rounded-pill border--card--1">
+                                <span class="position--absolute rounded-circle border--card--1">
                                     <v-icon color="white">mdi-check-circle</v-icon>
                                 </span>
                             </div>
@@ -79,7 +79,7 @@
                                 <v-avatar size="50">
                                     <v-img src="./../assets/image_4.png"></v-img>
                                 </v-avatar>
-                                <span class="position--absolute rounded-pill border--card--2">
+                                <span class="position--absolute rounded-circle border--card--2">
                                     <v-icon color="white">mdi-check-circle</v-icon>
                                 </span>
                             </div>
@@ -121,11 +121,11 @@
 
                     <v-row justify="center" class="mt-14">
                         <v-col align="center">
-                            <v-btn fab outlined large color="white" @click="changePause" v-if="pause">
+                            <v-btn fab outlined large color="white" class="border--btn" @click="changePause" v-if="pause">
                                 <v-icon x-large color="white">mdi-pause</v-icon>
                             </v-btn>
 
-                            <v-btn fab outlined large color="white" @click="changePlay" v-if="play">
+                            <v-btn fab outlined large color="white" class="border--btn" @click="changePlay" v-if="play">
                                 <v-icon x-large color="white">mdi-play</v-icon>
                             </v-btn>
                         </v-col>
@@ -139,7 +139,7 @@
                             <v-avatar size="50">
                                 <v-img v-bind:src="require('./../assets/' + card.avatar)"></v-img>
                             </v-avatar>
-                            <span class="position--absolute rounded-pill border--card--3">
+                            <span class="position--absolute rounded-circle border--card--3">
                                 <v-icon color="blue">mdi-check-circle</v-icon>
                             </span>
                         </div>
@@ -317,7 +317,7 @@ export default {
 }
 
 .avatar--border-3 {
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 50%;
 }
 
@@ -346,6 +346,11 @@ export default {
     background-color: #ffffff;
 }
 
+.border--btn {
+    border: 2px solid #ffffff !important;
+    /* background-color: #ffffff; */
+}
+
 .darkest {
     background-color: #202b38;
 }
@@ -358,3 +363,5 @@ export default {
     top: 165px !important;
 }
 </style>
+
+
