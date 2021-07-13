@@ -171,7 +171,7 @@ export default {
         });
 
         spotifyApi.setAccessToken(
-            "BQB-QDVVAmaLHkRO4dvK4T8fhn6IG0bSD3BUii4YbRepDX4j_pJ5fv7VvHe9gFdhTH4YuLx8Tq0czTzhXHT1JMnk-KRIWL_A70JGg2Qryh7QbzA7INqhA2dfu2frsL3D2pVXtUnC_Pi-ijFMD_v1o517CHFLH64XbveyA8sElQjI_0uHGyoRiLTZ2UFihEBk5s2VBB1-NDF7h3tqdJS6V5Fz303brLo53b6Ff9kJCG8TTK8pm3IoUv5UXcekIgW086Inm1GezmOr2W6Pz732HIkFAiiSuyOC65QBvyV-"
+            "BQDFcVDPzfLY2iK9cmZ1PfVlTzGqiBO_0qauiavB1yIM5yzowm7EqH3diyywHRNwgqM-GzQH_LOd1WGdZKp9tjuSGF866WeRk5b_U8bk-wwBKveK-1PODW7piIKT8NNxbderBcsIqYxSVu5r15JI-9gZAMBQs1-Z0afHRwuZxeinU8GEpVdkEebzB1_DqM5KbmrSI3uad5-A-jNxWr8D2fl3nGkwCVORAwOvI1O_1U9hoDYHye1RUCA2EyGI_LDKjsH5tJCQGQEkGAMRPQTcZdy4CuSWIXWe4jgeX1fP"
         );
 
         // // Get album
@@ -190,13 +190,13 @@ export default {
         //         console.error('2. Something went wrong!', err);
         //     });
 
-        // // Get an artist
-        // spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
-        //     .then(function (data) {
-        //         console.log('3. Artist information', data);
-        //     }, function (err) {
-        //         console.error('3. Something went wrong!', err);
-        //     });
+        // Get an artist
+        spotifyApi.getArtist('4YRxDV8wJFPHPTeXepOstw')
+            .then(function (data) {
+                console.log('3. Artist information', data);
+            }, function (err) {
+                console.error('3. Something went wrong!', err);
+            });
 
         // // Get multiple artists
         // spotifyApi.getArtists(['2hazSY4Ef3aB9ATXW7F5w3', '6J6yx1t3nwIDyPXk5xa7O8'])
@@ -290,7 +290,7 @@ export default {
         //     });
 
         // /* Get Audio Analysis for a Track */
-        // spotifyApi.getAudioAnalysisForTrack('3Qm86XLflmIXVm1wcwkgDK')
+        // spotifyApi.getAudioAnalysisForTrack('4YRxDV8wJFPHPTeXepOstw')
         //     .then(function (data) {
         //         console.log("15. Get Audio Analysis for a Track", data);
         //     }, function (err) {

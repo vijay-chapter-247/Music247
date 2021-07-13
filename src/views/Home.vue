@@ -45,8 +45,12 @@
                     <v-speed-dial bottom left class="card-1-name-position">
                         <template v-slot:activator>
                             <div class="card-title-cover rounded-xl pa-1">
-                                <div class="white--text text-h6 font-family--poppins wrap--text--1">Thomas Hope</div>
-                                <div class="subtitle-1 lightblue--text font-family--poppins wrap--text--1">53K plays . 2 week ago</div>
+                                <div class="white--text text-h6 font-family--poppins wrap--text--1">
+                                    Thomas Hope
+                                </div>
+                                <div class="subtitle-1 lightblue--text font-family--poppins wrap--text--1">
+                                    53K plays . 2 week ago
+                                </div>
                             </div>
                         </template>
                     </v-speed-dial>
@@ -89,8 +93,12 @@
                     <v-speed-dial bottom left class="card-2-name-position">
                         <template v-slot:activator>
                             <div class="card-title-cover rounded-xl pa-1">
-                                <div class="white--text text-h6 font-family--poppins wrap--text--1">Tony Andrew</div>
-                                <div class="subtitle-1 lightorange--text font-family--poppins wrap--text--1">53K plays . 2 week ago</div>
+                                <div class="white--text text-h6 font-family--poppins wrap--text--1">
+                                    Tony Andrew
+                                </div>
+                                <div class="subtitle-1 lightorange--text font-family--poppins wrap--text--1">
+                                    53K plays . 2 week ago
+                                </div>
                             </div>
                         </template>
                     </v-speed-dial>
@@ -109,28 +117,28 @@
         </v-card-title>
     </v-card>
 
+    <!-- Most Listened Card -->
     <v-row>
         <v-col cols="12" sm="6" md="3" v-for="(card, index) in cards" :key="index">
             <v-card id="create" class="rounded-xl darkest" height="370">
                 <v-img v-bind:src="require('./../assets/' + card.image)" height="200px">
                     <v-speed-dial top right>
                         <template v-slot:activator>
-                            <v-chip small color="#3d414d" class="white--text font-weight-bold font-family--poppins">{{ card.time }} </v-chip>
+                            <v-chip small color="#3d414d" class="white--text font-weight-bold font-family--poppins">{{ card.time }}
+                            </v-chip>
                         </template>
                     </v-speed-dial>
 
                     <v-row justify="center" class="mt-14">
                         <v-col align="center">
-                            <v-btn fab outlined large color="white" class="border--btn" @click="changePause" v-if="pause">
+                            <v-btn fab outlined large color="white" class="border--btn" @click="toggleActive($event, card)" v-show="card.active">
                                 <v-icon x-large color="white">mdi-pause</v-icon>
                             </v-btn>
-
-                            <v-btn fab outlined large color="white" class="border--btn" @click="changePlay" v-if="play">
+                            <v-btn fab outlined large color="white" class="border--btn" @click="toggleActive($event, card)" v-show="!card.active">
                                 <v-icon x-large color="white">mdi-play</v-icon>
                             </v-btn>
                         </v-col>
                     </v-row>
-
                 </v-img>
 
                 <v-speed-dial top right class="position--down">
@@ -167,15 +175,14 @@
             </v-card>
         </v-col>
     </v-row>
-
 </v-container>
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
     data: () => ({
-        pause: true,
-        play: false,
         cards: [{
                 name: "Andy William",
                 title: "Basic how to ride your skateboard comfortly",
@@ -183,7 +190,7 @@ export default {
                 time: "7 min",
                 color: "green",
                 image: "image_5.png",
-                avatar: "image_10.png"
+                avatar: "image_10.png",
             },
             {
                 name: "Johny Wise",
@@ -192,7 +199,7 @@ export default {
                 time: "7 min",
                 color: "red",
                 image: "image_7.png",
-                avatar: "image_12.png"
+                avatar: "image_12.png",
             },
             {
                 name: "Budi Hakim",
@@ -201,7 +208,7 @@ export default {
                 time: "7 min",
                 color: "red",
                 image: "image_6.png",
-                avatar: "image_11.png"
+                avatar: "image_11.png",
             },
             {
                 name: "Wijaya Abadi",
@@ -210,20 +217,19 @@ export default {
                 time: "7 min",
                 color: "green",
                 image: "image_8.png",
-                avatar: "image_13.png"
+                avatar: "image_13.png",
             },
         ],
     }),
     methods: {
-        changePause() {
-            this.pause = false;
-            this.play = true;
+        toggleActive: function (event, card) {
+            if (card.active) {
+                card.active = false;
+            } else if (!card.active) {
+                Vue.set(card, "active", true);
+            }
         },
-        changePlay() {
-            this.play = false;
-            this.pause = true;
-        }
-    }
+    },
 };
 </script>
 
@@ -272,7 +278,7 @@ export default {
 
 .card-1-name-position {
     bottom: 80px;
-    left: 100px
+    left: 100px;
 }
 
 .card-2-name-position {
@@ -363,5 +369,3 @@ export default {
     top: 165px !important;
 }
 </style>
-
-
