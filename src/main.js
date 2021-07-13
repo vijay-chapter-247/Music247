@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
 
+import Spotify from 'spotify-web-api-node'
+import VueSpotify from 'vue-spotify'
+
+Vue.use(VueSpotify, new Spotify())
+
 Vue.config.productionTip = false
 
 new Vue({
