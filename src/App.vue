@@ -49,7 +49,7 @@
             <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg">
                 <v-icon size="18" class="icon--white grey--icon" v-text="item.icon"></v-icon>
             </span>
-            <span class="font-weight-medium grey--text text font-weight-bold font-family--poppins" v-text="item.text">
+            <span class="font-weight-medium grey--text text font-weight-bold font-family--poppins text-capitalize" v-text="item.text">
             </span>
             <v-spacer></v-spacer>
         </v-btn>
@@ -63,11 +63,11 @@
         <!-- Artist Section -->
         <v-subheader class="font-weight-black grey--text">Artist</v-subheader>
 
-        <v-btn text block v-for="(artist, index) in artists" :key="index" :to="artist.route" class="body-2 py-5 text-none font-family--poppins">
+        <v-btn text block v-for="(artist, index) in artists" :key="index" :to="`/artists/${artist.id}`" class="body-2 py-5 text-none font-family--poppins">
             <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg ">
-                <v-icon size="18" class="icon--white grey--icon" v-text="artist.icon"></v-icon>
+                <v-icon size="18" class="icon--white grey--icon">mdi-nutrition</v-icon>
             </span>
-            <span class="grey--text text font-weight-bold font-family--poppins" v-text="artist.text">
+            <span class="grey--text text font-weight-bold font-family--poppins text-capitalize" v-text="artist.name">
             </span>
             <v-spacer></v-spacer>
         </v-btn>
@@ -87,8 +87,19 @@
 </template>
 
 <script>
+// import Albums from './views/Albums.vue'
+// import Trending from './views/Trending.vue'
+// import Playlists from './views/Playlists.vue'
+// import Profile from './views/Profile.vue'
+
 export default {
     name: "App",
+    // components: {
+    //     Albums,
+    //     Trending,
+    //     Playlists,
+    //     Profile
+    // },
     data: () => ({
         drawer: true,
         profile: [{
@@ -100,67 +111,31 @@ export default {
                 route: "/logout",
             },
         ],
-        setId: 1,
-        setArtistId: null,
-        menu: [{
-                id: 1,
+        menu: [
+            {text: "Home", icon: "mdi-home", route: "/"},
+            {text: "Treanding", icon: "mdi-library", route: "/trending"},
+            {text: "Playlists", icon: "mdi-file-check", route: "/playlists"},
+            {text: "Albums", icon: "mdi-library", route: "/albums"},
+            {text: "Profile", icon: "mdi-nutrition", route: "/profile"},
+        ],
+        artists_icon: [{
                 icon: "mdi-home",
-                text: "Home",
-                route: "/",
             },
             {
-                id: 2,
                 icon: "mdi-file-check",
-                text: "Trending",
-                route: "/trending",
             },
             {
-                id: 3,
                 icon: "mdi-nutrition",
-                text: "Playlist",
-                route: "/playlist",
             },
             {
-                id: 4,
                 icon: "mdi-library",
-                text: "Albums",
-                route: "/album",
-            },
-            {
-                id: 5,
-                icon: "mdi-clipboard-check",
-                text: "Profile",
-                route: "/profile",
             },
         ],
-        artists: [{
-                id: 1,
-                icon: "mdi-home",
-                text: "Arijit Singh",
-                route: "/arijit",
-            },
-            {
-                id: 2,
-                icon: "mdi-file-check",
-                text: "KAKA",
-                route: "/kaka",
-            },
-            {
-                id: 3,
-                icon: "mdi-nutrition",
-                text: "Arman Malik",
-                route: "/arman",
-            },
-            {
-                id: 4,
-                icon: "mdi-library",
-                text: "K.K.",
-                route: "/kk",
-            },
-        ],
+        artists: [],
+        albums: [],
     }),
-
     created() {
+
         var SpotifyWebApi = require("spotify-web-api-node");
 
         // credentials are optional
@@ -171,7 +146,7 @@ export default {
         });
 
         spotifyApi.setAccessToken(
-            "BQDFcVDPzfLY2iK9cmZ1PfVlTzGqiBO_0qauiavB1yIM5yzowm7EqH3diyywHRNwgqM-GzQH_LOd1WGdZKp9tjuSGF866WeRk5b_U8bk-wwBKveK-1PODW7piIKT8NNxbderBcsIqYxSVu5r15JI-9gZAMBQs1-Z0afHRwuZxeinU8GEpVdkEebzB1_DqM5KbmrSI3uad5-A-jNxWr8D2fl3nGkwCVORAwOvI1O_1U9hoDYHye1RUCA2EyGI_LDKjsH5tJCQGQEkGAMRPQTcZdy4CuSWIXWe4jgeX1fP"
+            "BQBVmo78sru9mWhEdx6W5oOjFge2Bo4M1mvQQWc5wY_dBsZI0PdzYeK6lg6BEffCJzXl9b3r-y4cYdzXNgz0Ws0M0lQlHKRv-K5fHiUjjTbUUMEisjA0sEg4HmLSly64HWRPQgmGDPntV0kqjsWR8kMgFTkAdD8g82Gx61jBDeEYT-j9fbX8EUD886A9lCVigHGgWetjcyNqJaVlsFFaTOqj4xVdf8iwgg9DgYstW8Ez6E7eex_TyosfSPibHp7I6Lsbve8OdeyUr-AupWetVi6LMnv-Ng9kPL-5r4k_"
         );
 
         // // Get album
@@ -183,28 +158,47 @@ export default {
         //     });
 
         // // Get multiple albums
-        // spotifyApi.getAlbums(['5U4W9E5WsYb2jUQWePT8Xm', '3KyVcddATClQKIdtaap4bV'])
+        // spotifyApi
+        //     .getAlbums(["5U4W9E5WsYb2jUQWePT8Xm", "3KyVcddATClQKIdtaap4bV"])
+        //     .then(
+        //         (data) => {
+        //             const album = data.body.albums;
+        //             for (var i = 0; i < album.length; i++) {
+        //                 this.albums.push(album[i]);
+        //             }
+        //             console.log("2. Multiple albums information", this.albums);
+        //         },
+        //         function (err) {
+        //             console.error("2. Something went wrong!", err);
+        //         }
+        //     );
+
+        // // Get an artist
+        // spotifyApi.getArtist('4YRxDV8wJFPHPTeXepOstw')
         //     .then(function (data) {
-        //         console.log('2. Multiple albums information', data);
+        //         console.log('3. Artist information', data);
         //     }, function (err) {
-        //         console.error('2. Something went wrong!', err);
+        //         console.error('3. Something went wrong!', err);
         //     });
 
-        // Get an artist
-        spotifyApi.getArtist('4YRxDV8wJFPHPTeXepOstw')
-            .then(function (data) {
-                console.log('3. Artist information', data);
-            }, function (err) {
-                console.error('3. Something went wrong!', err);
-            });
-
-        // // Get multiple artists
-        // spotifyApi.getArtists(['2hazSY4Ef3aB9ATXW7F5w3', '6J6yx1t3nwIDyPXk5xa7O8'])
-        //     .then(function (data) {
-        //         console.log('4. Artists information', data);
-        //     }, function (err) {
-        //         console.error('4. Something went wrong!', err);
-        //     });
+        // Get multiple artists
+        spotifyApi
+            .getArtists([
+                "2CIMQHirSU0MQqyYHq0eOx",
+                "57dN52uHvrHOxijzpIgu3E",
+                "1vCWHaC5f2uS3yhpwWbIA6",
+            ])
+            .then(
+                (data) => {
+                    const artist = data.body.artists;
+                    for (var i = 0; i < artist.length; i++) {
+                        this.artists.push(artist[i]);
+                    }
+                },
+                function (err) {
+                    console.error("4. Something went wrong!", err);
+                }
+            );
 
         // // Get albums by a certain artist
         // spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
@@ -924,7 +918,6 @@ export default {
         //     }, function (err) {
         //         console.log('68. Something went wrong!', err);
         //     });
-
     },
 };
 </script>
@@ -1001,5 +994,142 @@ export default {
 .v-btn--active span .icon--white {
     background-color: #ff7300 !important;
     color: white !important;
+}
+
+/* Home Css */
+
+.wrap--text--1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+}
+
+.wrap--text--2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+}
+
+.wrap--text--4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+}
+
+.wrap--text--3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+}
+
+.card--title {
+    max-width: 250px;
+}
+
+.card-title-position {
+    top: 40px;
+    left: 30px;
+}
+
+.card-avatar-position {
+    bottom: 80px;
+    left: 25px;
+}
+
+.card-1-name-position {
+    bottom: 80px;
+    left: 100px;
+}
+
+.card-2-name-position {
+    bottom: 155px;
+    left: 30px;
+}
+
+.lightblue--text {
+    color: #cfeef2;
+}
+
+.lightorange--text {
+    color: #fbebe0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .card--title {
+        max-width: 230px !important;
+    }
+
+    .card-title-cover {
+        background-color: #5046460f;
+    }
+
+    .card-title-position {
+        left: 20px;
+    }
+
+    .card-2-name-position {
+        left: 20px;
+    }
+}
+
+.avatar--border-1 {
+    border: 2px solid #09c6db;
+    border-radius: 50%;
+}
+
+.avatar--border-2 {
+    border: 2px solid #ead5b4;
+    border-radius: 50%;
+}
+
+.avatar--border-3 {
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+}
+
+.position--absolute {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+}
+
+#create .v-speed-dial {
+    position: absolute;
+}
+
+.border--card--1 {
+    border: 1px solid #50b7ca;
+    background-color: #50b7ca;
+}
+
+.border--card--2 {
+    border: 1px solid #ebc080;
+    background-color: #ebc080;
+}
+
+.border--card--3 {
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+}
+
+.border--btn {
+    border: 2px solid #ffffff !important;
+    /* background-color: #ffffff; */
+}
+
+.darkest {
+    background-color: #202b38 !important;
+}
+
+.font-family--poppins {
+    font-family: "Poppins", sans-serif !important;
+}
+
+.position--down {
+    top: 165px !important;
 }
 </style>

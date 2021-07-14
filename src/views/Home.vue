@@ -121,14 +121,13 @@
     <v-row>
         <v-col cols="12" sm="6" md="3" v-for="(card, index) in cards" :key="index">
             <v-card id="create" class="rounded-xl darkest" height="370">
-                <v-img v-bind:src="require('./../assets/' + card.image)" height="200px">
+                <v-img :src="require('./../assets/' + card.image)" height="200px">
                     <v-speed-dial top right>
                         <template v-slot:activator>
                             <v-chip small color="#3d414d" class="white--text font-weight-bold font-family--poppins">{{ card.time }}
                             </v-chip>
                         </template>
                     </v-speed-dial>
-
                     <v-row justify="center" class="mt-14">
                         <v-col align="center">
                             <v-btn fab outlined large color="white" class="border--btn" @click="toggleActive($event, card)" v-show="card.active">
@@ -145,7 +144,7 @@
                     <template v-slot:activator>
                         <div class="avatar--border-3 pa-2">
                             <v-avatar size="50">
-                                <v-img v-bind:src="require('./../assets/' + card.avatar)"></v-img>
+                                <v-img :src="require('./../assets/' + card.avatar)"></v-img>
                             </v-avatar>
                             <span class="position--absolute rounded-circle border--card--3">
                                 <v-icon color="blue">mdi-check-circle</v-icon>
