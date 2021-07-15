@@ -156,19 +156,8 @@
 </template>
 
 <script>
-// import Albums from './views/Albums.vue'
-// import Trending from './views/Trending.vue'
-// import Playlists from './views/Playlists.vue'
-// import Profile from './views/Profile.vue'
-
 export default {
   name: "App",
-  // components: {
-  //     Albums,
-  //     Trending,
-  //     Playlists,
-  //     Profile
-  // },
   data: () => ({
     drawer: true,
     profile: [
@@ -207,16 +196,13 @@ export default {
   }),
   created() {
     var SpotifyWebApi = require("spotify-web-api-node");
-
-    // credentials are optional
     var spotifyApi = new SpotifyWebApi({
       clientId: "6d280f8d789b4a858a67c830a85545be",
       clientSecret: "354f43281e0e40b8afa003a6f5361b54",
       redirectUri: "http://localhost:8080/",
     });
-
     spotifyApi.setAccessToken(
-      "BQDAL6k9Jz5naXHxhgxN1ncYLiO24YaiBcQ43nlCZvPso86vyYnVybItJjE3P0X8EneBLkJpeP1Ab08VS3iBhGTkT6J4ixvGHz-tU-yRXstJNaotWal0-BzzWSYbGf35ipeb2Nqlk9MAH_-cYCppj80wuefDd0LeNj7vPHKt3W_e2M3NE1XjlmYIGf3BIldlLeZxdVS2o_EEMYwUmMZsUhOddMiiXScxNC417dNHYtJTeapfRQEMxlnK3Y3F618GAy7yPVuEV94H6DhLYpmBbsoD_l2uCDqWTaU0O_0a"
+      "BQDekwVKx9PEqPLI01y6LpSnNlEYrDSldynh5wFKRzHmoR7rlKTLoPmt2LZhwCflIhfpWMmqkoOUb7J1_quKIEKoRYwmu8DzTOtqOSGUpMdII6jDOx1R8EPgTD7nNzrSCBe5rBP9OA6KNOspd50TBUgFAnbm0e0bgl9TwBxwvA7l7r2slh7Qu0JivEiV_d_7e3HeqLT0Jr663vyKAa5iXBHeY7r52BOXqIaSxWvf0wsRt7-GbbHabNo5-H6RKUFgLwaEbYPXJjxvgFt4IDHypt87JM39MZpg535J2GDq"
     );
 
     // // Get album
@@ -1069,31 +1055,31 @@ export default {
 /* Home Css */
 
 .wrap--text--1 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 1;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  -webkit-line-clamp: 1 !important;
 }
 
 .wrap--text--2 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  -webkit-line-clamp: 2 !important;
 }
 
 .wrap--text--4 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  -webkit-line-clamp: 4 !important;
 }
 
 .wrap--text--3 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 3;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  -webkit-line-clamp: 3 !important;
 }
 
 .card--title {

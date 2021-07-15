@@ -173,6 +173,10 @@
                 </v-card-actions>
             </v-card>
         </v-col>
+
+        <v-col>
+            <p></p>
+        </v-col>
     </v-row>
 </v-container>
 </template>

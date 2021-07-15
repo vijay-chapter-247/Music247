@@ -25,6 +25,11 @@ const routes = [
     name: 'Albums',
     component: () => import('../views/Albums.vue')
   },
+  {
+    path: '/albums/:albumId',
+    name: 'AlbumsTrack',
+    component: () => import('../views/AlbumsTrack.vue')
+  },
 ]
 
 const router = new VueRouter({
