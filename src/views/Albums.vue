@@ -86,7 +86,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQDzGfPQs6Xj4suf5GqpyREf8XEdh0CM3tA99EOOFem2IwVzANalONflvB1OrVF788Z_NjtaQySVLgbXr57jDPOoSx7NG2MjlPp6F2MxvepQ_sFV4zFj-i6FBL3DHAfA_P_7bhgXyJM2EXkl5N6odCNlegt9CCMugLz_h-8HYYVaucrO4Pjpiuugzx5iZLrtVILDKxtvp37q5CkfM62qZAix-v7eXkFxlDpoamq-nM9jRYEwoPQ3Ipopkye-Lf9fUhg1X0SNHnysqecITjVe3e5nlh9Jr5kLwCdgLkhd"
+      "BQC-cj4Ht1AhOWoa2PUb2MzKapjbdnL5OlkVyRcdbqJj9eMCy6B5vVK8EKP6cbp6r1glI5kB3ii8v8bJwU-yGOz155wFlEMGYsuVkYc0OhRce6qpbukYXD4IhA_q2U4GjPqJF4PKFjrrcsyjY3EkbHe8GXsPOC9Tu9BMnxu5LpDMl66zaD60-QynbxrbGx_VWVUlDk4jQYie9uoFYj6FLi6R4GF8teUR2ymAzehiefIzuqyOMzYbgMjJOX_BBuAlbKkgpHxL3EPYK8epYbub8uafFrI3jydTeo7MaSzP"
     );
 
     // Get multiple albums
