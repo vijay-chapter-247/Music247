@@ -156,20 +156,21 @@
 
       <!-- Footer Section -->
       <v-footer color="darkest" app height="90">
-        <!-- <v-spacer></v-spacer> -->
-
-        <!-- <v-btn outlined rounded v-for="link in links" :key="link" class="white--text mx-2 rounded-circle">
-                    <v-icon large>mdi-skip-next</v-icon>
-                </v-btn> -->
         <v-avatar size="50" rounded>
-          <v-img src="./assets/image_1.png"></v-img>
+          <v-img :src="require(`./assets/image_${imageIndex}.png`)"></v-img>
         </v-avatar>
 
         <v-spacer></v-spacer>
 
         <span class="wrap--text--1">
           <v-hover v-slot="{ hover }">
-            <v-btn text fab small class="white--text no-background-hover">
+            <v-btn
+              text
+              fab
+              small
+              class="white--text no-background-hover"
+              @click="decrement"
+            >
               <v-icon :class="{ 'text--orange': hover }"
                 >mdi-skip-previous</v-icon
               >
@@ -213,7 +214,13 @@
           </v-hover>
 
           <v-hover v-slot="{ hover }">
-            <v-btn text fab small class="white--text no-background-hover">
+            <v-btn
+              text
+              fab
+              small
+              class="white--text no-background-hover"
+              @click="increment"
+            >
               <v-icon :class="{ 'text--orange': hover }">mdi-skip-next</v-icon>
             </v-btn>
           </v-hover>
@@ -231,6 +238,7 @@ export default {
   data: () => ({
     drawer: true,
     player: true,
+    imageIndex: 1,
     links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
     profile: [
       {
@@ -286,6 +294,27 @@ export default {
     artists: [],
     albums: [],
   }),
+
+  methods: {
+    increment() {
+      if (this.imageIndex < 14) {
+        this.imageIndex++;
+        this.player = false;
+      } else {
+        this.imageIndex = 1;
+        this.player = false;
+      }
+    },
+    decrement() {
+      if (this.imageIndex > 1) {
+        this.imageIndex--;
+        this.player = false;
+      } else {
+        this.imageIndex = 14;
+        this.player = false;
+      }
+    },
+  },
   created() {
     var SpotifyWebApi = require("spotify-web-api-node");
     var spotifyApi = new SpotifyWebApi({
@@ -294,7 +323,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQC-cj4Ht1AhOWoa2PUb2MzKapjbdnL5OlkVyRcdbqJj9eMCy6B5vVK8EKP6cbp6r1glI5kB3ii8v8bJwU-yGOz155wFlEMGYsuVkYc0OhRce6qpbukYXD4IhA_q2U4GjPqJF4PKFjrrcsyjY3EkbHe8GXsPOC9Tu9BMnxu5LpDMl66zaD60-QynbxrbGx_VWVUlDk4jQYie9uoFYj6FLi6R4GF8teUR2ymAzehiefIzuqyOMzYbgMjJOX_BBuAlbKkgpHxL3EPYK8epYbub8uafFrI3jydTeo7MaSzP"
+      "BQD48NX7wxsdR5CH20ANPO03CPCQ3zJRMHmeBlLJgunSPtbUJwNXs5f3o8ynouvNcV_enmBiOyA1rKKugQQmgRJbWTYgqizEDOwwf3lRyQ2TLGL1x22xcWh9rhOt3TxirC2jvG9_fO1GAdt_6ISz5bi59pfLL3OpNL18tuHm0WvjJu_nW9FvZvlCPohp8rQvaCrbDuyGITv-GFHc43WRYMmjqAGjSfBEcz11RAddCORWnsqY5tvvchV4fh3bmzCkGTq6S08Uss48nRFMfK6XlTRTe8gxU3vNpYuxvdKO"
     );
 
     // // Get album

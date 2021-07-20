@@ -50,8 +50,8 @@
           <v-hover v-slot:default="{ hover }" :key="item.id">
             <v-row class="rounded-lg mb-2" :class="{ darkest: hover }">
               <v-col
-                cols="1"
-                class="text-center body-2 pa-0 font-weight-medium"
+                sm="1"
+                class="text-center  body-2 pa-0 font-weight-medium d-none d-sm-inline"
                 align-self="center"
               >
                 <div v-show="!hover && !(isPlaying && item.id === selectedId)">
@@ -90,14 +90,12 @@
                             </v-btn>
                         </v-col> -->
 
-              <v-col cols="10" md="6" align-self="center" class=" py-0">
-                <v-list-item class="pa-0 ml-1 ml-sm-0">
-                  <v-list-item-avatar
-                    tile
-                    size="50"
-                    class="d-none d-md-flex rounded-lg"
-                  >
-                    <v-img src="../assets/image_4.png"></v-img>
+              <v-col cols="10" sm="10" md="6" align-self="center" class="py-0 ">
+                <v-list-item class="pa-0">
+                  <v-list-item-avatar tile size="50" class="rounded-lg">
+                    <v-img
+                      :src="require(`../assets/image_${item.track_number}.png`)"
+                    ></v-img>
                   </v-list-item-avatar>
                   <v-list-item-content>
                     <v-list-item-title class="body-2 font-weight-medium mb-1">
@@ -126,20 +124,26 @@
                 </v-list-item>
               </v-col>
 
-              <v-col cols="1" align-self="center" class="text-center  pa-0">
+              <v-col
+                cols="2"
+                sm="1"
+                align-self="center"
+                class="text-center  pa-0"
+              >
                 <v-list-item class="pa-0">
                   <v-list-item-content>
                     <v-list-item-subtitle
-                      class="body-2 font-weight-medium d-none d-md-block"
+                      class="body-2 font-weight-medium d-none d-md-inline"
                     >
                       {{ millisToMinutesAndSeconds(item.duration_ms) }}
                     </v-list-item-subtitle>
+
                     <v-list-item-subtitle
-                      class="body-2 font-weight-medium d-block d-md-none"
+                      class="body-2 font-weight-medium d-inline d-md-none"
                     >
-                      <!-- <v-btn icon small> -->
-                      <v-icon>mdi-dots-vertical</v-icon>
-                      <!-- </v-btn> -->
+                      <v-btn icon small class="no-background-hover">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -194,7 +198,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQC-cj4Ht1AhOWoa2PUb2MzKapjbdnL5OlkVyRcdbqJj9eMCy6B5vVK8EKP6cbp6r1glI5kB3ii8v8bJwU-yGOz155wFlEMGYsuVkYc0OhRce6qpbukYXD4IhA_q2U4GjPqJF4PKFjrrcsyjY3EkbHe8GXsPOC9Tu9BMnxu5LpDMl66zaD60-QynbxrbGx_VWVUlDk4jQYie9uoFYj6FLi6R4GF8teUR2ymAzehiefIzuqyOMzYbgMjJOX_BBuAlbKkgpHxL3EPYK8epYbub8uafFrI3jydTeo7MaSzP"
+      "BQD48NX7wxsdR5CH20ANPO03CPCQ3zJRMHmeBlLJgunSPtbUJwNXs5f3o8ynouvNcV_enmBiOyA1rKKugQQmgRJbWTYgqizEDOwwf3lRyQ2TLGL1x22xcWh9rhOt3TxirC2jvG9_fO1GAdt_6ISz5bi59pfLL3OpNL18tuHm0WvjJu_nW9FvZvlCPohp8rQvaCrbDuyGITv-GFHc43WRYMmjqAGjSfBEcz11RAddCORWnsqY5tvvchV4fh3bmzCkGTq6S08Uss48nRFMfK6XlTRTe8gxU3vNpYuxvdKO"
     );
 
     // Get tracks in an album
