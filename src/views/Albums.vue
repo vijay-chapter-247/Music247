@@ -10,7 +10,13 @@
 
     <!-- Albums -->
     <v-row justify="space-between">
-      <v-col cols="12" sm="6" v-for="(album, index) in albums" :key="index">
+      <v-col
+        cols="12"
+        sm="6"
+        md="5"
+        v-for="(album, index) in albums"
+        :key="index"
+      >
         <v-card id="create" class="rounded-xl darkest" height="370">
           <v-img :src="album.images[0].url" height="200px">
             <v-speed-dial top right>
@@ -19,7 +25,7 @@
                   small
                   color="#3d414d"
                   class="white--text font-weight-bold font-family--poppins"
-                  >{{ album.label }}
+                  >7:00 min
                 </v-chip>
               </template>
             </v-speed-dial>
@@ -62,9 +68,6 @@
           </v-card-actions>
         </v-card>
       </v-col>
-
-      <!-- <v-col class="white--text">
-        </v-col> -->
     </v-row>
   </v-container>
 </template>
@@ -83,7 +86,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQChJQezDPdVwOXpzLXxWjF38zhYN1rts0X7BeEa3T6DjGiYUYDeRpBQRhxM9galKaz6hiQgfrBnq7IesRRHY0-eeJtOCFRF2SIih-6PBq0EbdIfCwsTe939B8CsqlFTiJveglYG553J5zb1MPPDGC_KAFZB8FrxCUdoD3UTIgKI1xmobcvdR_yDeWAU5fKz-F9eeTo912xrsHlQMwM50WeWVutIakk4ZEzftoSLW0C-mwrQliXaTDc1kxpM0S-Zm90ApeZNic4L3QhH7caQSPAzFcVjDpYp449skvN5"
+      "BQDzGfPQs6Xj4suf5GqpyREf8XEdh0CM3tA99EOOFem2IwVzANalONflvB1OrVF788Z_NjtaQySVLgbXr57jDPOoSx7NG2MjlPp6F2MxvepQ_sFV4zFj-i6FBL3DHAfA_P_7bhgXyJM2EXkl5N6odCNlegt9CCMugLz_h-8HYYVaucrO4Pjpiuugzx5iZLrtVILDKxtvp37q5CkfM62qZAix-v7eXkFxlDpoamq-nM9jRYEwoPQ3Ipopkye-Lf9fUhg1X0SNHnysqecITjVe3e5nlh9Jr5kLwCdgLkhd"
     );
 
     // Get multiple albums
