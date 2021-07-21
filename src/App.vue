@@ -168,12 +168,11 @@
               text
               fab
               small
+              :class="{ 'bg--orange border--btn': hover }"
               class="white--text no-background-hover"
               @click="decrement"
             >
-              <v-icon :class="{ 'text--orange': hover }"
-                >mdi-skip-previous</v-icon
-              >
+              <v-icon>mdi-skip-previous</v-icon>
             </v-btn>
           </v-hover>
 
@@ -182,34 +181,35 @@
               text
               fab
               small
+              :class="{ 'bg--orange border--btn': hover }"
               class="white--text no-background-hover mx-sm-5 mx-1"
             >
-              <v-icon :class="{ 'text--orange': hover }"
-                >mdi-skip-backward</v-icon
-              >
+              <v-icon>mdi-skip-backward</v-icon>
             </v-btn>
           </v-hover>
-
-          <v-btn
-            text
-            fab
-            small
-            class="white--text border--btn no-background-hover"
-            @click="player = !player"
-          >
-            <v-icon>{{ player ? "mdi-play" : "mdi-pause" }}</v-icon>
-          </v-btn>
 
           <v-hover v-slot="{ hover }">
             <v-btn
               text
               fab
               small
+              :class="{ 'bg--orange': hover }"
+              class="bg--orange border--btn white--text no-background-hover"
+              @click="player = !player"
+            >
+              <v-icon>{{ player ? "mdi-play" : "mdi-pause" }}</v-icon>
+            </v-btn>
+          </v-hover>
+
+          <v-hover v-slot="{ hover }">
+            <v-btn
+              text
+              fab
+              small
+              :class="{ 'bg--orange border--btn': hover }"
               class="white--text no-background-hover mx-sm-5 mx-1"
             >
-              <v-icon :class="{ 'text--orange': hover }"
-                >mdi-skip-forward</v-icon
-              >
+              <v-icon>mdi-skip-forward</v-icon>
             </v-btn>
           </v-hover>
 
@@ -218,10 +218,11 @@
               text
               fab
               small
+              :class="{ 'bg--orange border--btn': hover }"
               class="white--text no-background-hover"
               @click="increment"
             >
-              <v-icon :class="{ 'text--orange': hover }">mdi-skip-next</v-icon>
+              <v-icon>mdi-skip-next</v-icon>
             </v-btn>
           </v-hover>
         </span>
@@ -323,7 +324,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQD48NX7wxsdR5CH20ANPO03CPCQ3zJRMHmeBlLJgunSPtbUJwNXs5f3o8ynouvNcV_enmBiOyA1rKKugQQmgRJbWTYgqizEDOwwf3lRyQ2TLGL1x22xcWh9rhOt3TxirC2jvG9_fO1GAdt_6ISz5bi59pfLL3OpNL18tuHm0WvjJu_nW9FvZvlCPohp8rQvaCrbDuyGITv-GFHc43WRYMmjqAGjSfBEcz11RAddCORWnsqY5tvvchV4fh3bmzCkGTq6S08Uss48nRFMfK6XlTRTe8gxU3vNpYuxvdKO"
+      "BQASBosTlLyVKapi5NgG6zZjZuAVp0NpVba6ArISjtkysb4E-haRy5H7b2fM7inc2mgHhi7fP2YdnQhYJSvFwe3WBaxHH6jocQhshLwHNFIsMzoX49G5tO_EbZ9mVfjEdAXQ4KeYQN09kV6jYvx4TZuFY8XfvH2jZnJ18qQh8LKmXuuOdbwqXwyh30rgG4N_kx5H2ybq2J-4IjD2mCLnACHvsKGpRoouBOCDpakPItKkgKX_BW8vgsRT6vyJqwVcDDLksYKdCHBiqAcqysAUAYquHTcn5UCjzAah7yLq"
     );
 
     // // Get album
@@ -499,26 +500,6 @@ export default {
     /*
      * Playlist methods
      */
-
-    // // Get a playlist
-    // spotifyApi.getPlaylist("5ieJqeLJjjI8iJWaxeBLuK").then(
-    //   function(data) {
-    //     console.log("19. Some information about this playlist", data);
-    //   },
-    //   function(err) {
-    //     console.log("19. Something went wrong!", err);
-    //   }
-    // );
-
-    // // Get a user's playlists
-    // spotifyApi.getUserPlaylists("thelinmichael").then(
-    //   function(data) {
-    //     console.log("20. Retrieved playlists", data);
-    //   },
-    //   function(err) {
-    //     console.log("20. Something went wrong!", err);
-    //   }
-    // );
 
     // // Create a private playlist
     // spotifyApi
@@ -1294,7 +1275,7 @@ export default {
 }
 
 .border--btn {
-  border: 2px solid #ffffff !important;
+  border: 1px solid #ffffff !important;
   /* background-color: #ffffff; */
 }
 
@@ -1319,7 +1300,7 @@ export default {
   background-color: transparent !important;
 }
 
-.text--orange {
-  color: #ef7105 !important;
+.bg--orange {
+  background: #ef7105 !important;
 }
 </style>
