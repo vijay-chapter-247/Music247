@@ -2,7 +2,7 @@
   <v-container fluid-lg>
     <v-card dark flat class="dark mt-2">
       <v-card-title>
-        <div class="headline font-family--poppins wrap--text--1">
+        <div class="headline  wrap--text--1">
           Albums
         </div>
         <!-- <v-spacer></v-spacer>
@@ -48,7 +48,7 @@
       >
         <template class="white--text " v-for="item in album.items">
           <v-hover v-slot:default="{ hover }" :key="item.id">
-            <v-row class="rounded-lg mb-2" :class="{ darkest: hover }">
+            <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
               <v-col
                 sm="1"
                 class="text-center  body-2 pa-0 font-weight-medium d-none d-sm-inline"
@@ -198,7 +198,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQASBosTlLyVKapi5NgG6zZjZuAVp0NpVba6ArISjtkysb4E-haRy5H7b2fM7inc2mgHhi7fP2YdnQhYJSvFwe3WBaxHH6jocQhshLwHNFIsMzoX49G5tO_EbZ9mVfjEdAXQ4KeYQN09kV6jYvx4TZuFY8XfvH2jZnJ18qQh8LKmXuuOdbwqXwyh30rgG4N_kx5H2ybq2J-4IjD2mCLnACHvsKGpRoouBOCDpakPItKkgKX_BW8vgsRT6vyJqwVcDDLksYKdCHBiqAcqysAUAYquHTcn5UCjzAah7yLq"
+      "BQBp6d2T0-Go6c9sd_snvyEbXTgLsKyHZHNUvDLolaP42YYsQvo6sMl2BMmGetCyKZGEuwKR5tnksRWrJsbsEbbtPLh1ai3rH29NkSxlT2sVqeWlGe8jxwfMb1hTdMVUUBEiEev0Q20qSY72kzVnt11aPzJzfy4N1ioWn2VxfXtH0mVH8a2EQGcISBgdCvvM7fBeXvbt3ZTQl6u_NXuFpaMznYmNF_rZ1bYaI-ZCZTK5rVDIYl-bEYCNLAy3QBDufuWJZWKICH-qGJrh5eXYbKq6tn6hbOmVMRkeZUyA"
     );
 
     // Get tracks in an album

@@ -9,7 +9,7 @@
         ></v-app-bar-nav-icon>
         <!-- <v-card-title> -->
         <v-toolbar-title
-          class="d-lg-none mr-3 font-weight-bold font--subtitle--2 font-family--poppins white--text"
+          class="d-lg-none mr-3 font-weight-bold font--subtitle--2  white--text"
           >Songs247x7</v-toolbar-title
         >
 
@@ -32,7 +32,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               text
-              class="profile--btn text-none font-family--poppins"
+              class="profile--btn text-none "
               color="dark"
               rounded
               v-bind="attrs"
@@ -41,9 +41,7 @@
               <v-avatar size="25" left>
                 <v-img src="./assets/image_14.png" />
               </v-avatar>
-              <span class="font-weight-bold ml-2 font-family--poppins"
-                >Profile</span
-              >
+              <span class="font-weight-bold ml-2 ">Profile</span>
               <v-icon right size="24">mdi-chevron-down</v-icon>
             </v-btn>
           </template>
@@ -56,7 +54,7 @@
             >
               <v-list-item-content>
                 <v-list-item-title
-                  class="font-weight-bold profile--text--dropdown text-center font-family--poppins"
+                  class="font-weight-bold profile--text--dropdown text-center "
                   >{{ item.title }}</v-list-item-title
                 >
               </v-list-item-content>
@@ -73,7 +71,7 @@
         color="dark"
         class="white--text"
       >
-        <v-card-title class="dark font-weight-bold font-family--poppins">
+        <v-card-title class="dark font-weight-bold ">
           Songs247x7
         </v-card-title>
 
@@ -95,7 +93,7 @@
           v-for="item in menu"
           :key="item.text"
           :to="item.route"
-          class="body-2 py-5 text-none font-family--poppins"
+          class="body-2 py-5 text-none "
         >
           <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg">
             <v-icon
@@ -105,7 +103,7 @@
             ></v-icon>
           </span>
           <span
-            class="font-weight-medium grey--text text font-weight-bold font-family--poppins text-capitalize"
+            class="font-weight-medium grey--text text font-weight-bold  text-capitalize"
             v-text="item.text"
           >
           </span>
@@ -127,7 +125,7 @@
           v-for="(artist, index) in artists"
           :key="index"
           :to="`/artists/${artist.id}`"
-          class="body-2 py-5 text-none font-family--poppins"
+          class="body-2 py-5 text-none "
         >
           <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg ">
             <v-icon size="18" class="icon--white grey--icon"
@@ -135,7 +133,7 @@
             >
           </span>
           <span
-            class="grey--text text font-weight-bold font-family--poppins text-capitalize"
+            class="grey--text text font-weight-bold  text-capitalize"
             v-text="artist.name"
           >
           </span>
@@ -155,8 +153,8 @@
       </v-main>
 
       <!-- Footer Section -->
-      <v-footer color="darkest" app height="90">
-        <v-avatar size="50" rounded>
+      <v-footer color="lightdark" app :height="playerHeight">
+        <v-avatar :size="playerAvatarSize" rounded>
           <v-img :src="require(`./assets/image_${imageIndex}.png`)"></v-img>
         </v-avatar>
 
@@ -295,7 +293,36 @@ export default {
     artists: [],
     albums: [],
   }),
-
+  computed: {
+    playerHeight() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return "60px";
+        case "sm":
+          return "70px";
+        case "md":
+          return "80px";
+        case "lg":
+          return "90px";
+        default:
+          return "90px";
+      }
+    },
+    playerAvatarSize() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return "40";
+        case "sm":
+          return "45";
+        case "md":
+          return "50";
+        case "lg":
+          return "55";
+        default:
+          return "55";
+      }
+    },
+  },
   methods: {
     increment() {
       if (this.imageIndex < 14) {
@@ -324,7 +351,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQASBosTlLyVKapi5NgG6zZjZuAVp0NpVba6ArISjtkysb4E-haRy5H7b2fM7inc2mgHhi7fP2YdnQhYJSvFwe3WBaxHH6jocQhshLwHNFIsMzoX49G5tO_EbZ9mVfjEdAXQ4KeYQN09kV6jYvx4TZuFY8XfvH2jZnJ18qQh8LKmXuuOdbwqXwyh30rgG4N_kx5H2ybq2J-4IjD2mCLnACHvsKGpRoouBOCDpakPItKkgKX_BW8vgsRT6vyJqwVcDDLksYKdCHBiqAcqysAUAYquHTcn5UCjzAah7yLq"
+      "BQBp6d2T0-Go6c9sd_snvyEbXTgLsKyHZHNUvDLolaP42YYsQvo6sMl2BMmGetCyKZGEuwKR5tnksRWrJsbsEbbtPLh1ai3rH29NkSxlT2sVqeWlGe8jxwfMb1hTdMVUUBEiEev0Q20qSY72kzVnt11aPzJzfy4N1ioWn2VxfXtH0mVH8a2EQGcISBgdCvvM7fBeXvbt3ZTQl6u_NXuFpaMznYmNF_rZ1bYaI-ZCZTK5rVDIYl-bEYCNLAy3QBDufuWJZWKICH-qGJrh5eXYbKq6tn6hbOmVMRkeZUyA"
     );
 
     // // Get album
@@ -1099,12 +1126,12 @@ export default {
   }
 }
 
-.font-family--poppins {
-  font-family: "Poppins", sans-serif !important;
-}
-
 .dark {
   background: #17212d !important;
+}
+
+.lightdark {
+  background-color: #202b38 !important;
 }
 
 .v-text-field.v-input--dense:not(.v-text-field--outlined) .v-text-field__prefix,
@@ -1279,14 +1306,6 @@ export default {
   /* background-color: #ffffff; */
 }
 
-.darkest {
-  background-color: #202b38 !important;
-}
-
-.font-family--poppins {
-  font-family: "Poppins", sans-serif !important;
-}
-
 .position--down {
   top: 165px !important;
 }
@@ -1302,5 +1321,9 @@ export default {
 
 .bg--orange {
   background: #ef7105 !important;
+}
+
+.pointer {
+  cursor: pointer !important;
 }
 </style>

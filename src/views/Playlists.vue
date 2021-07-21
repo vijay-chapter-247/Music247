@@ -2,35 +2,32 @@
   <v-container class="">
     <v-card dark flat class="dark mt-2 ">
       <v-card-title class="">
-        <div class="headline font-family--poppins wrap--text--1 ">
+        <div class="headline  wrap--text--1 ">
           Playlists
         </div>
       </v-card-title>
     </v-card>
 
-    <v-row justify="">
+    <v-row>
       <v-col cols="6" sm="3" v-for="card in cards" :key="card.title">
-        <v-card class="pa-3 darkest rounded">
-          <v-img
-            :src="card.src"
-            class="rounded"
-            :height="
-              $vuetify.breakpoint.xs
-                ? '120px'
-                : $vuetify.breakpoint.sm
-                ? '110px'
-                : $vuetify.breakpoint.md
-                ? '140px'
-                : $vuetify.breakpoint.lg
-                ? '200px '
-                : '20px '
-            "
+        <v-hover v-slot="{ hover }">
+          <v-card
+            :class="{ '': hover }"
+            :elevation="hover ? 15 : 0"
+            class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg"
           >
-          </v-img>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
+            <v-img :src="card.src" class="rounded-lg" :height="imageHeight">
+            </v-img>
+            <v-card-text class="white--text">
+              <p class="mb-2 text-sm-Subtitle-2 font-weight-bold wrap--text--1">
+                {{ card.name }}
+              </p>
+              <p class="mb-2 text-sm-body-2 grey--text wrap--text--2">
+                {{ card.artist }}
+              </p>
+            </v-card-text>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
   </v-container>
@@ -43,32 +40,45 @@ export default {
       {
         title: "Best airlines1",
         src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
+        name: "Kapoor & Sons",
+        artist: "Mothoon, Jasleen Royal",
       },
       {
         title: "Pre-fab homes",
         src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
+        name: "Shore in the City (Original Motion Picture Soundtrack)",
+        artist: "Sachine-Jigar, Harpreet",
       },
       {
         title: "Favorite road trips",
         src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
+        name: "Ae dil hai mushkil",
+        artist: "Tulsi Kumar, Darshan Raval",
       },
       {
         title: "Best airlines",
         src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
+        name: "Tu hi yaar mera",
+        artist: "Pritam, Arijit Singh, Ritviz",
       },
     ],
   }),
-  // computed: {
-  //   imageHeight () {
-  //     switch (this.$vuetify.breakpoint.name) {
-  //       case 'xs': return '50px'
-  //       case 'sm': return '70px'
-  //       case 'md': return '100px'
-  //       case 'lg': return '150px'
-  //       case 'xl': return '150px'
-  //     }
-  //   },
-  // },
+  computed: {
+    imageHeight() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return "120px";
+        case "sm":
+          return "110px";
+        case "md":
+          return "140px";
+        case "lg":
+          return "200px";
+        default:
+          return "200px";
+      }
+    },
+  },
   created() {
     var SpotifyWebApi = require("spotify-web-api-node");
     var spotifyApi = new SpotifyWebApi({
@@ -77,7 +87,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQASBosTlLyVKapi5NgG6zZjZuAVp0NpVba6ArISjtkysb4E-haRy5H7b2fM7inc2mgHhi7fP2YdnQhYJSvFwe3WBaxHH6jocQhshLwHNFIsMzoX49G5tO_EbZ9mVfjEdAXQ4KeYQN09kV6jYvx4TZuFY8XfvH2jZnJ18qQh8LKmXuuOdbwqXwyh30rgG4N_kx5H2ybq2J-4IjD2mCLnACHvsKGpRoouBOCDpakPItKkgKX_BW8vgsRT6vyJqwVcDDLksYKdCHBiqAcqysAUAYquHTcn5UCjzAah7yLq"
+      "BQBp6d2T0-Go6c9sd_snvyEbXTgLsKyHZHNUvDLolaP42YYsQvo6sMl2BMmGetCyKZGEuwKR5tnksRWrJsbsEbbtPLh1ai3rH29NkSxlT2sVqeWlGe8jxwfMb1hTdMVUUBEiEev0Q20qSY72kzVnt11aPzJzfy4N1ioWn2VxfXtH0mVH8a2EQGcISBgdCvvM7fBeXvbt3ZTQl6u_NXuFpaMznYmNF_rZ1bYaI-ZCZTK5rVDIYl-bEYCNLAy3QBDufuWJZWKICH-qGJrh5eXYbKq6tn6hbOmVMRkeZUyA"
     );
 
     // Get a playlist
