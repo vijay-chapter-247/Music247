@@ -198,7 +198,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQA5xKURGuaJqjyGW17QfOgbzGqLYl7Hi9vU_aFyNdvPCqO_Pd_Ct4XiOkuTLz0DY9GV6YfiQl2E7PC7FWs7gWRGRlt4qvEfi63q2CaRPjyfwDchYmva6NQsTogt3taHQxl26H_n1GQ_UgOAc0MO4jswahCgneDnUf6Gw-mtxcVPwDL62_HMCeXaVULQ32Sk1xl4fp_pK_aYbonWERFbFDNwz4tNC2g0r0YGdy4dXd0qQq-QKvQnTjXtk4N1OdCm09y8l82mQZFLZ2QhdanFrP5kHSK_vv_rWNeEyH8Y"
+      "BQBMqcAAAL4MN-bdZH1TpjHgg3mzHxsr4_ehyHV4PPgRvu4NlXo5ddCJG1rxkp76SE5aSgDR0EizCdXcDMWzIHpbmc3IcbxZmb0Rl8ALpTugo0eLD-678d9U-0VKVY7xRNCzl4x52T_u_ozVIe3kjEOcMAHDaVfmSEobp7dkZX5wfY42rmbdxgDJEMqq4gwiTmC1mV4KVG3Eps5o6WuXGxhF_NkErxLOyQnCfZd1NMmCXa1L8xsG2-m4nvs83miS8Q3RYIb5HbjmSac_U0KncbBqhaLGWLwVJH0cOxXd"
     );
 
     // Get tracks in an album

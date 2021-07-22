@@ -166,7 +166,7 @@
               text
               fab
               v-bind="size"
-              :class="{ 'bg--orange border--btn': hover }"
+              :class="{ 'bg--orange ': hover }"
               class="white--text no-background-hover"
               @click="decrement"
             >
@@ -179,7 +179,7 @@
               text
               fab
               v-bind="size"
-              :class="{ 'bg--orange border--btn': hover }"
+              :class="{ 'bg--orange ': hover }"
               class="white--text no-background-hover mx-sm-5 mx-1"
             >
               <v-icon>mdi-skip-backward</v-icon>
@@ -192,7 +192,7 @@
               fab
               v-bind="size"
               :class="{ 'bg--orange': hover }"
-              class="bg--orange border--btn white--text no-background-hover"
+              class="bg--orange  white--text no-background-hover"
               @click="player = !player"
             >
               <v-icon>{{ player ? "mdi-play" : "mdi-pause" }}</v-icon>
@@ -204,7 +204,7 @@
               text
               fab
               v-bind="size"
-              :class="{ 'bg--orange border--btn': hover }"
+              :class="{ 'bg--orange ': hover }"
               class="white--text no-background-hover mx-sm-5 mx-1"
             >
               <v-icon>mdi-skip-forward</v-icon>
@@ -216,7 +216,7 @@
               text
               fab
               v-bind="size"
-              :class="{ 'bg--orange border--btn': hover }"
+              :class="{ 'bg--orange ': hover }"
               class="white--text no-background-hover"
               @click="increment"
             >
@@ -365,7 +365,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQA5xKURGuaJqjyGW17QfOgbzGqLYl7Hi9vU_aFyNdvPCqO_Pd_Ct4XiOkuTLz0DY9GV6YfiQl2E7PC7FWs7gWRGRlt4qvEfi63q2CaRPjyfwDchYmva6NQsTogt3taHQxl26H_n1GQ_UgOAc0MO4jswahCgneDnUf6Gw-mtxcVPwDL62_HMCeXaVULQ32Sk1xl4fp_pK_aYbonWERFbFDNwz4tNC2g0r0YGdy4dXd0qQq-QKvQnTjXtk4N1OdCm09y8l82mQZFLZ2QhdanFrP5kHSK_vv_rWNeEyH8Y"
+      "BQBMqcAAAL4MN-bdZH1TpjHgg3mzHxsr4_ehyHV4PPgRvu4NlXo5ddCJG1rxkp76SE5aSgDR0EizCdXcDMWzIHpbmc3IcbxZmb0Rl8ALpTugo0eLD-678d9U-0VKVY7xRNCzl4x52T_u_ozVIe3kjEOcMAHDaVfmSEobp7dkZX5wfY42rmbdxgDJEMqq4gwiTmC1mV4KVG3Eps5o6WuXGxhF_NkErxLOyQnCfZd1NMmCXa1L8xsG2-m4nvs83miS8Q3RYIb5HbjmSac_U0KncbBqhaLGWLwVJH0cOxXd"
     );
 
     // // Get album
@@ -494,29 +494,40 @@ export default {
     //         console.log('13. Something went wrong!', err);
     //     });
 
-    // /* Get Audio Features for a Track */
-    // spotifyApi.getAudioFeaturesForTrack('3Qm86XLflmIXVm1wcwkgDK')
-    //     .then(function (data) {
-    //         console.log("14. Get Audio Features for a Track ", data);
-    //     }, function (err) {
-    //         console.log('14. Something went wrong!', err);
-    //     });
+    /* Get Audio Features for a Track */
+    spotifyApi.getAudioFeaturesForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
+      function(data) {
+        console.log("14. Get Audio Features for a Track ", data);
+      },
+      function(err) {
+        console.log("14. Something went wrong!", err);
+      }
+    );
 
-    // /* Get Audio Analysis for a Track */
-    // spotifyApi.getAudioAnalysisForTrack('4YRxDV8wJFPHPTeXepOstw')
-    //     .then(function (data) {
-    //         console.log("15. Get Audio Analysis for a Track", data);
-    //     }, function (err) {
-    //         console.log('15. Something went wrong!', err);
-    //     });
+    /* Get Audio Analysis for a Track */
+    spotifyApi.getAudioAnalysisForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
+      function(data) {
+        console.log("15. Get Audio Analysis for a Track", data);
+      },
+      function(err) {
+        console.log("15. Something went wrong!", err);
+      }
+    );
 
-    // /* Get Audio Features for several tracks */
-    // spotifyApi.getAudioFeaturesForTracks(['4iV5W9uYEdYUVa79Axb7Rh', '3Qm86XLflmIXVm1wcwkgDK'])
-    //     .then(function (data) {
-    //         console.log("16. Get Audio Features for several tracks", data);
-    //     }, function (err) {
-    //         console.log('16. Something went wrong!', err);
-    //     });
+    /* Get Audio Features for several tracks */
+    spotifyApi
+      .getAudioFeaturesForTracks([
+        "4iV5W9uYEdYUVa79Axb7Rh",
+        "3Qm86XLflmIXVm1wcwkgDK",
+      ])
+      .then(
+        function(data) {
+          console.log("16. Get Audio Features for several tracks", data);
+        },
+        function(err) {
+          console.log("16. Something went wrong!", err);
+        }
+      );
 
     /*
      * User methods
@@ -1315,11 +1326,6 @@ export default {
   background-color: #ffffff;
 }
 
-.border--btn {
-  border: 1px solid #ffffff !important;
-  /* background-color: #ffffff; */
-}
-
 .position--down {
   top: 165px !important;
 }
@@ -1339,5 +1345,8 @@ export default {
 
 .pointer {
   cursor: pointer !important;
+}
+.arrow {
+  cursor: default !important;
 }
 </style>

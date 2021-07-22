@@ -163,7 +163,7 @@
                   outlined
                   large
                   color="white"
-                  class="border--btn"
+                  class=""
                   @click="toggleActive($event, card)"
                   v-show="card.active"
                 >
@@ -174,7 +174,7 @@
                   outlined
                   large
                   color="white"
-                  class="border--btn"
+                  class=""
                   @click="toggleActive($event, card)"
                   v-show="!card.active"
                 >
@@ -401,7 +401,7 @@ export default {
   background-color: #ffffff;
 }
 
-.border--btn {
+. {
   border: 2px solid #ffffff !important;
   /* background-color: #ffffff; */
 }
