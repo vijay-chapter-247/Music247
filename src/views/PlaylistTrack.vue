@@ -1,144 +1,284 @@
 <template>
-  <v-container>
-    <v-row class="dark mt-2">
-      <v-col>
-        <v-card flat v-for="(item, i) in items" :key="i" class="dark">
-          <v-row class="white--text" justify="center">
-            <v-col cols="12" md="3" class="text-center text-md-start">
-              <v-avatar :size="avatarSize" tile>
-                <v-img :src="item.src"></v-img>
-              </v-avatar>
-            </v-col>
+<div>
+    <v-container>
+        <v-row class="dark mt-md-2 mt-0">
+            <v-col>
+                <v-card flat class="dark" v-for="(playlists, i) in playlistTrack" :key="i">
+                    <v-row class="white--text" justify="center">
+                        <v-col cols="12" md="3" class="text-center text-md-start">
+                            <v-avatar :size="avatarSize" tile>
+                                <v-img :src="playlists.images[0].url"></v-img>
+                            </v-avatar>
+                        </v-col>
 
-            <v-col cols="12" md="9" class="text-center text-md-start">
-              <v-subheader
-                class="pl-0 d-none d-md-flex white--text font-weight-bold"
-                >Playlist</v-subheader
-              >
-              <p
-                class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--1"
-              >
-                Arijit Happy Melodies
-              </p>
-              <p class="my-3 text-body-2 text-md-body-1 wrap--text--2">
-                New playlist description
-              </p>
-              <p class="my-3 caption text-md-body-2 wrap--text--2">
-                VIJAY VISHWAKARMA . 1HR 30 MIN
-              </p>
-            </v-col>
+                        <v-col cols="12" md="9" class="text-center text-md-start pb-0 mt-0 mt-md-5">
+                            <v-subheader class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold">
+                                {{ playlists.type }}
+                            </v-subheader>
+                            <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--1">
+                                {{ playlists.name }}
+                            </p>
+                            <p class="my-3 body-2 text-md-body-2 wrap--text--2">
+                                {{ playlists.description }}
+                            </p>
+                            <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2">
+                                {{ playlists.owner.display_name }} . 1HR 30 MIN
+                            </p>
+                        </v-col>
 
-            <v-col class="text-center text-md-end pt-0">
-              <v-btn
-                fab
-                v-bind="size"
-                class="arrow bg--orange  white--text no-background-hover"
-                @click="changeSong(item.id)"
-                v-if="isPlaying && item.id === selectedId"
-              >
-                <v-icon>mdi-pause</v-icon>
-              </v-btn>
-              <v-btn
-                fab
-                v-bind="size"
-                class="arrow bg--orange  white--text no-background-hover"
-                @click="changeSong(item.id)"
-                v-else
-              >
-                <v-icon>mdi-play</v-icon>
-              </v-btn>
+                        <v-col class="text-center text-md-start pt-0 my-0 my-md-5">
+                            <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="!show">
+                                <v-icon v-bind="iconSize">mdi-pause</v-icon>
+                            </v-btn>
+                            <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="show">
+                                <v-icon v-bind="iconSize">mdi-play</v-icon>
+                            </v-btn>
+
+                            <v-icon large class="grey--text no-background-hover d-none d-md-inline ml-5">mdi-dots-horizontal</v-icon>
+                        </v-col>
+                    </v-row>
+                </v-card>
             </v-col>
-          </v-row>
+        </v-row>
+
+        <v-card dark flat class="dark mt-0 mt-md-2">
+            <v-card-text class="d-none d-md-block">
+                <!-- Heading -->
+                <v-row class="white--text d-none d-md-flex">
+                    <v-col cols="1" class="text-center">
+                        <div class="body-1 font-weight-medium grey--text">#</div>
+                    </v-col>
+
+                    <v-col md="5">
+                        <div class="body-1 font-weight-medium grey--text">Title</div>
+                    </v-col>
+
+                    <v-col md="3" class="d-none d-md-flex">
+                        <div class="wrap--text--1 body-1 font-weight-medium grey--text">
+                            Album
+                        </div>
+                    </v-col>
+
+                    <v-col md="2" class="d-none d-md-flex">
+                        <div class="wrap--text--1 body-1 font-weight-medium grey--text">
+                            Date Added
+                        </div>
+                    </v-col>
+
+                    <v-col cols="1" class="text-center">
+                        <v-icon color="grey">mdi-clock-outline</v-icon>
+                    </v-col>
+                </v-row>
+
+                <!-- Divider -->
+                <v-row>
+                    <v-divider color="grey"></v-divider>
+                </v-row>
+            </v-card-text>
+
+            <!-- Content -->
+            <v-card-text class="mt-3">
+                <template v-for="(playlistSongs) in playlistSongs">
+                    <div v-for="(playlistSong, k) in playlistSongs.items" :key="k">
+                        <!-- <p>{{ playlistSong.track.artists }}</p> -->
+
+                        <v-hover v-slot:default="{ hover }">
+                            <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
+                                <v-col cols="1" sm="1" class="text-center body-2 pa-0 font-weight-medium" align-self="center">
+                                    <div v-show="!hover && !(isPlaying && playlistSong.track.id === selectedId)">
+                                        {{ k + 1 }}
+                                    </div>
+                                    <v-btn icon small class="no-background-hover" @click="changeSong(playlistSong.track.id)" v-if="isPlaying && playlistSong.track.id === selectedId">
+                                        <v-icon>mdi-pause</v-icon>
+                                    </v-btn>
+                                    <v-btn icon small class="no-background-hover" @click="changeSong(playlistSong.track.id)" v-else v-show="hover">
+                                        <v-icon>mdi-play</v-icon>
+                                    </v-btn>
+                                </v-col>
+
+                                <v-col cols="10" md="5" align-self="center" class="py-0 ">
+                                    <v-list-item class="pa-0">
+                                        <v-list-item-avatar tile size="50" class="rounded-lg">
+                                            <v-img :src="playlistSong.track.album.images[0].url"></v-img>
+                                        </v-list-item-avatar>
+                                        <v-list-item-content>
+                                            <v-list-item-title class="body-2 font-weight-medium mb-1">
+                                                {{ playlistSong.track.name }}
+                                            </v-list-item-title>
+                                            <v-list-item-subtitle class="body-2 font-weight-medium" :class="{ 'white--text': hover }">
+
+                                                <span class="item" @click="artistName(artist.name)" v-for="(artist,index) in playlistSong.track.artists" :key="index">
+                                                    {{ artist.name }}
+                                                </span>
+                                            </v-list-item-subtitle>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-col>
+
+                                <v-col md="3" align-self="center" class="d-none d-md-flex py-0">
+                                    <v-list-item class="wrap--text--1 pl-0 pt-4">
+                                        <v-list-item-content>
+                                            <v-hover v-slot="{ hover }">
+                                                <v-list-item-subtitle :class="{'text-decoration-underline pointer white--text': hover,}" class="body-2 font-weight-medium">
+                                                    {{ playlistSong.track.name }}
+                                                </v-list-item-subtitle>
+                                            </v-hover>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-col>
+
+                                <v-col md="2" align-self="center" class="d-none d-md-flex py-0">
+                                    <v-list-item class="wrap--text--1 pl-0 pt-4">
+                                        <v-list-item-content>
+                                            <v-list-item-subtitle class="body-2 font-weight-medium">
+                                                {{ playlistSong.added_at }}
+                                            </v-list-item-subtitle>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-col>
+
+                                <v-col cols="1" sm="1" md="1" align-self="center" class="text-center  pa-0">
+                                    <v-list-item class="pa-0">
+                                        <v-list-item-content>
+                                            <v-list-item-subtitle class="body-2 font-weight-medium d-none d-md-inline">
+                                                {{ millisToMinutesAndSeconds( playlistSong.track.duration_ms ) }}
+                                            </v-list-item-subtitle>
+
+                                            <v-list-item-subtitle class="body-2 font-weight-medium d-inline d-md-none">
+                                                <v-btn icon small class="no-background-hover">
+                                                    <v-icon>mdi-dots-vertical</v-icon>
+                                                </v-btn>
+                                            </v-list-item-subtitle>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-col>
+                            </v-row>
+                        </v-hover>
+                    </div>
+                </template>
+            </v-card-text>
         </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    </v-container>
+</div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    isPlaying: false,
-    selectedId: null,
-    items: [
-      {
-        src: "https://cdn.vuetifyjs.com/images/cards/halcyon.png",
-        title: "Halcyon Days",
-        artist: "Ellie Goulding",
-      },
-    ],
-  }),
-  methods: {
-    play() {
-      this.isPlaying = true;
+    data: () => ({
+        isPlaying: false,
+        selectedId: null,
+        items: [{
+            src: "https://cdn.vuetifyjs.com/images/cards/halcyon.png",
+            title: "Halcyon Days",
+            artist: "Ellie Goulding",
+        }, ],
+        show: true,
+        playlistTrack: [],
+        playlistSongs: [],
+        array: [],
+    }),
+    methods: {
+        millisToMinutesAndSeconds(millis) {
+            var minutes = Math.floor(millis / 60000);
+            var seconds = ((millis % 60000) / 1000).toFixed(0);
+            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        },
+        play() {
+            this.isPlaying = true;
+        },
+        pause() {
+            this.isPlaying = false;
+        },
+        changeSong(songId) {
+            if (this.selectedId === songId) {
+                if (this.isPlaying) {
+                    this.pause();
+                } else {
+                    this.play();
+                }
+            } else {
+                this.selectedId = songId;
+                this.play();
+            }
+        },
     },
-    pause() {
-      this.isPlaying = false;
+    computed: {
+        size() {
+            const size = {
+                md: "large",
+                lg: "large",
+                xl: "large",
+            } [this.$vuetify.breakpoint.name];
+            return size ? {
+                [size]: true,
+            } : {};
+        },
+        iconSize() {
+            const iconSize = {
+                sm: "large",
+                md: "large",
+                lg: "large",
+                xl: "large",
+            } [this.$vuetify.breakpoint.name];
+            return iconSize ? {
+                [iconSize]: true,
+            } : {};
+        },
+        avatarSize() {
+            switch (this.$vuetify.breakpoint.name) {
+                case "xs":
+                    return "120";
+                case "sm":
+                    return "150";
+                case "md":
+                    return "210";
+                case "lg":
+                    return "210";
+                default:
+                    return "210";
+            }
+        },
     },
-    changeSong(songId) {
-      if (this.selectedId === songId) {
-        if (this.isPlaying) {
-          this.pause();
-        } else {
-          this.play();
-        }
-      } else {
-        this.selectedId = songId;
-        this.play();
-      }
-    },
-  },
-  computed: {
-    size() {
-      const size = {
-        xs: "small",
-        sm: "small",
-        md: "large",
-        lg: "large",
-        xl: "large",
-      }[this.$vuetify.breakpoint.name];
-      return size
-        ? {
-            [size]: true,
-          }
-        : {};
-    },
-    avatarSize() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "100";
-        case "sm":
-          return "100";
-        case "md":
-          return "210";
-        case "lg":
-          return "210";
-        default:
-          return "210";
-      }
-    },
-  },
-  created() {
-    var SpotifyWebApi = require("spotify-web-api-node");
-    var spotifyApi = new SpotifyWebApi({
-      clientId: "6d280f8d789b4a858a67c830a85545be",
-      clientSecret: "354f43281e0e40b8afa003a6f5361b54",
-      redirectUri: "http://localhost:8080/",
-    });
-    spotifyApi.setAccessToken(
-      "BQBMqcAAAL4MN-bdZH1TpjHgg3mzHxsr4_ehyHV4PPgRvu4NlXo5ddCJG1rxkp76SE5aSgDR0EizCdXcDMWzIHpbmc3IcbxZmb0Rl8ALpTugo0eLD-678d9U-0VKVY7xRNCzl4x52T_u_ozVIe3kjEOcMAHDaVfmSEobp7dkZX5wfY42rmbdxgDJEMqq4gwiTmC1mV4KVG3Eps5o6WuXGxhF_NkErxLOyQnCfZd1NMmCXa1L8xsG2-m4nvs83miS8Q3RYIb5HbjmSac_U0KncbBqhaLGWLwVJH0cOxXd"
-    );
+    created() {
+        var SpotifyWebApi = require("spotify-web-api-node");
+        var spotifyApi = new SpotifyWebApi({
+            clientId: "6d280f8d789b4a858a67c830a85545be",
+            clientSecret: "354f43281e0e40b8afa003a6f5361b54",
+            redirectUri: "http://localhost:8080/",
+        });
+        spotifyApi.setAccessToken(
+            "BQAJrRiu4jCKH0V7rBJBbmSB6FjNQXUhznnqNR_Tvuvz6kRLHSzb_H6GvLovLoNfvKPQd8wfgIZPO0QhXIuG1Ud73ksp0S5BBo8AJwOOYnR_Nf7uia34MPXBdC1UjWsXhlJy2Ov7zufKI2FNZ_gKEWIRxNblse2qQZCPyZfFSSZFe3OhehRfMauVoHwNw3AFCU1sTXkIrz4V3whPheQxlWAe5AhVhTHD6Xu3fg3GjYHVpze8pQ5z8qlOud1woIToce3Et1YCkX1gi02RBD3n7BhB5nhti4gZ6rR7Dyil"
+        );
 
-    // Get a playlist
-    const playlistId = this.$route.params.playlistId;
-    spotifyApi.getPlaylist(playlistId).then(
-      function(data) {
-        console.log("19. Some information about this playlist", data.body);
-      },
-      function(err) {
-        console.log("19. Something went wrong!", err);
-      }
-    );
-  },
+        const playlistId = this.$route.params.playlistId;
+
+        // Get tracks in an Playlist
+        spotifyApi.getPlaylistTracks(playlistId).then(
+            (data) => {
+                this.playlistSongs.push(data.body);
+                console.log("11. Get tracks in an playlist", this.playlistSongs[0]);
+            },
+            function (err) {
+                console.log("11. Something went wrong!", err);
+            }
+        );
+
+        // Get a playlist
+        spotifyApi.getPlaylist(playlistId).then(
+            (data) => {
+                this.playlistTrack.push(data.body);
+                // console.log("19. Some information about this playlist", data.body);
+            },
+            function (err) {
+                console.log("19. Something went wrong!", err);
+            }
+        );
+    },
 };
 </script>
+
+<style scoped>
+.item + .item:before {
+  content: ",";
+}
+</style>

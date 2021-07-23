@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid-lg>
+  <v-container fluid>
     <v-card dark flat class="dark mt-2">
       <v-card-title>
         <div class="headline  wrap--text--1">
@@ -51,7 +51,7 @@
             <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
               <v-col
                 sm="1"
-                class="text-center  body-2 pa-0 font-weight-medium d-none d-sm-inline"
+                class="text-center body-2 pa-0 font-weight-medium d-none d-sm-inline"
                 align-self="center"
               >
                 <div v-show="!hover && !(isPlaying && item.id === selectedId)">
@@ -77,18 +77,6 @@
                   <v-icon>mdi-play</v-icon>
                 </v-btn>
               </v-col>
-
-              <!-- <v-col cols="1" class="text-center body-2 pa-0 font-weight-medium d-sm-none d-inline" align-self="center">
-                            <div v-show="!hover && !(isPlaying && item.id === selectedId)">
-                                {{ item.track_number }}
-                            </div>
-                            <v-btn icon small class="no-background-hover" @click="changeSong(item.id)" v-if="isPlaying && item.id === selectedId">
-                                <v-icon >mdi-pause</v-icon>
-                            </v-btn>
-                            <v-btn icon small class="no-background-hover" @click="changeSong(item.id)" v-else v-show="hover">
-                                <v-icon >mdi-play</v-icon>
-                            </v-btn>
-                        </v-col> -->
 
               <v-col cols="10" sm="10" md="6" align-self="center" class="py-0 ">
                 <v-list-item class="pa-0">
@@ -198,7 +186,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQBMqcAAAL4MN-bdZH1TpjHgg3mzHxsr4_ehyHV4PPgRvu4NlXo5ddCJG1rxkp76SE5aSgDR0EizCdXcDMWzIHpbmc3IcbxZmb0Rl8ALpTugo0eLD-678d9U-0VKVY7xRNCzl4x52T_u_ozVIe3kjEOcMAHDaVfmSEobp7dkZX5wfY42rmbdxgDJEMqq4gwiTmC1mV4KVG3Eps5o6WuXGxhF_NkErxLOyQnCfZd1NMmCXa1L8xsG2-m4nvs83miS8Q3RYIb5HbjmSac_U0KncbBqhaLGWLwVJH0cOxXd"
+      "BQAJrRiu4jCKH0V7rBJBbmSB6FjNQXUhznnqNR_Tvuvz6kRLHSzb_H6GvLovLoNfvKPQd8wfgIZPO0QhXIuG1Ud73ksp0S5BBo8AJwOOYnR_Nf7uia34MPXBdC1UjWsXhlJy2Ov7zufKI2FNZ_gKEWIRxNblse2qQZCPyZfFSSZFe3OhehRfMauVoHwNw3AFCU1sTXkIrz4V3whPheQxlWAe5AhVhTHD6Xu3fg3GjYHVpze8pQ5z8qlOud1woIToce3Et1YCkX1gi02RBD3n7BhB5nhti4gZ6rR7Dyil"
     );
 
     // Get tracks in an album

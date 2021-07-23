@@ -365,8 +365,27 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQBMqcAAAL4MN-bdZH1TpjHgg3mzHxsr4_ehyHV4PPgRvu4NlXo5ddCJG1rxkp76SE5aSgDR0EizCdXcDMWzIHpbmc3IcbxZmb0Rl8ALpTugo0eLD-678d9U-0VKVY7xRNCzl4x52T_u_ozVIe3kjEOcMAHDaVfmSEobp7dkZX5wfY42rmbdxgDJEMqq4gwiTmC1mV4KVG3Eps5o6WuXGxhF_NkErxLOyQnCfZd1NMmCXa1L8xsG2-m4nvs83miS8Q3RYIb5HbjmSac_U0KncbBqhaLGWLwVJH0cOxXd"
+      "BQAJrRiu4jCKH0V7rBJBbmSB6FjNQXUhznnqNR_Tvuvz6kRLHSzb_H6GvLovLoNfvKPQd8wfgIZPO0QhXIuG1Ud73ksp0S5BBo8AJwOOYnR_Nf7uia34MPXBdC1UjWsXhlJy2Ov7zufKI2FNZ_gKEWIRxNblse2qQZCPyZfFSSZFe3OhehRfMauVoHwNw3AFCU1sTXkIrz4V3whPheQxlWAe5AhVhTHD6Xu3fg3GjYHVpze8pQ5z8qlOud1woIToce3Et1YCkX1gi02RBD3n7BhB5nhti4gZ6rR7Dyil"
     );
+
+    // Get multiple artists
+    spotifyApi
+      .getArtists([
+        "2CIMQHirSU0MQqyYHq0eOx",
+        "57dN52uHvrHOxijzpIgu3E",
+        "1vCWHaC5f2uS3yhpwWbIA6",
+      ])
+      .then(
+        (data) => {
+          const artist = data.body.artists;
+          for (var i = 0; i < artist.length; i++) {
+            this.artists.push(artist[i]);
+          }
+        },
+        function(err) {
+          console.error("4. Something went wrong!", err);
+        }
+      );
 
     // // Get album
     // spotifyApi.getAlbum('5U4W9E5WsYb2jUQWePT8Xm')
@@ -399,25 +418,6 @@ export default {
     //     }, function (err) {
     //         console.error('3. Something went wrong!', err);
     //     });
-
-    // Get multiple artists
-    spotifyApi
-      .getArtists([
-        "2CIMQHirSU0MQqyYHq0eOx",
-        "57dN52uHvrHOxijzpIgu3E",
-        "1vCWHaC5f2uS3yhpwWbIA6",
-      ])
-      .then(
-        (data) => {
-          const artist = data.body.artists;
-          for (var i = 0; i < artist.length; i++) {
-            this.artists.push(artist[i]);
-          }
-        },
-        function(err) {
-          console.error("4. Something went wrong!", err);
-        }
-      );
 
     // // Get albums by a certain artist
     // spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
@@ -494,40 +494,40 @@ export default {
     //         console.log('13. Something went wrong!', err);
     //     });
 
-    /* Get Audio Features for a Track */
-    spotifyApi.getAudioFeaturesForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
-      function(data) {
-        console.log("14. Get Audio Features for a Track ", data);
-      },
-      function(err) {
-        console.log("14. Something went wrong!", err);
-      }
-    );
+    // /* Get Audio Features for a Track */
+    // spotifyApi.getAudioFeaturesForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
+    //   function(data) {
+    //     console.log("14. Get Audio Features for a Track ", data);
+    //   },
+    //   function(err) {
+    //     console.log("14. Something went wrong!", err);
+    //   }
+    // );
 
-    /* Get Audio Analysis for a Track */
-    spotifyApi.getAudioAnalysisForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
-      function(data) {
-        console.log("15. Get Audio Analysis for a Track", data);
-      },
-      function(err) {
-        console.log("15. Something went wrong!", err);
-      }
-    );
+    // /* Get Audio Analysis for a Track */
+    // spotifyApi.getAudioAnalysisForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
+    //   function(data) {
+    //     console.log("15. Get Audio Analysis for a Track", data);
+    //   },
+    //   function(err) {
+    //     console.log("15. Something went wrong!", err);
+    //   }
+    // );
 
-    /* Get Audio Features for several tracks */
-    spotifyApi
-      .getAudioFeaturesForTracks([
-        "4iV5W9uYEdYUVa79Axb7Rh",
-        "3Qm86XLflmIXVm1wcwkgDK",
-      ])
-      .then(
-        function(data) {
-          console.log("16. Get Audio Features for several tracks", data);
-        },
-        function(err) {
-          console.log("16. Something went wrong!", err);
-        }
-      );
+    // /* Get Audio Features for several tracks */
+    // spotifyApi
+    //   .getAudioFeaturesForTracks([
+    //     "4iV5W9uYEdYUVa79Axb7Rh",
+    //     "3Qm86XLflmIXVm1wcwkgDK",
+    //   ])
+    //   .then(
+    //     function(data) {
+    //       console.log("16. Get Audio Features for several tracks", data);
+    //     },
+    //     function(err) {
+    //       console.log("16. Something went wrong!", err);
+    //     }
+    //   );
 
     /*
      * User methods
@@ -1346,6 +1346,7 @@ export default {
 .pointer {
   cursor: pointer !important;
 }
+
 .arrow {
   cursor: default !important;
 }
