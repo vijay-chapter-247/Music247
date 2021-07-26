@@ -165,22 +165,22 @@ export default {
 
         // credentials are optional
         var spotifyApi = new SpotifyWebApi({
-            clientId: "6d280f8d789b4a858a67c830a85545be",
-            clientSecret: "354f43281e0e40b8afa003a6f5361b54",
+            clientId: "10392945411e4853b52f5b7049f85c20",
+            clientSecret: "c2f3f640df1d4f98b495a9fff2a1370e",
             redirectUri: "http://localhost:8080/",
         });
 
         spotifyApi.setAccessToken(
-            "BQB-QDVVAmaLHkRO4dvK4T8fhn6IG0bSD3BUii4YbRepDX4j_pJ5fv7VvHe9gFdhTH4YuLx8Tq0czTzhXHT1JMnk-KRIWL_A70JGg2Qryh7QbzA7INqhA2dfu2frsL3D2pVXtUnC_Pi-ijFMD_v1o517CHFLH64XbveyA8sElQjI_0uHGyoRiLTZ2UFihEBk5s2VBB1-NDF7h3tqdJS6V5Fz303brLo53b6Ff9kJCG8TTK8pm3IoUv5UXcekIgW086Inm1GezmOr2W6Pz732HIkFAiiSuyOC65QBvyV-"
+            "BQDxOUgtpdNu53miU38bfm0tSVwUnr-5FxJTg2fUWV4yS638cNIbz_7wvZAnXZKxF7_UAZ5mEa5fhChfziNx1UjAgzU0jxtjpePxTiIAS2zGgEOiZN2iWyU3n7JwEbyp9_7QIJq-LK4zlM3owfHIgJLf4XH4HxFtCz6qv6pV5wj8M-Nrs-QSDUe-SZMYZioXOk93qWltzSc1Vw8PdzK0aBmAeYLqL0NOT39x-5WHmn2ibf20JWnfzdTU8qfKd9WvDJLx6wKtFZKM13Fiehx14QtpgyqE4WI908TqEUkf"
         );
 
         // // Get album
-        // spotifyApi.getAlbum('5U4W9E5WsYb2jUQWePT8Xm')
-        //     .then(function (data) {
-        //         console.log('1. Album information', data);
-        //     }, function (err) {
-        //         console.error('1. Something went wrong!', err);
-        //     });
+        spotifyApi.getAlbum("382ObEPsp2rxGrnsizN5TX")
+            .then(function (data) {
+                console.log('1. Album information', data);
+            }, function (err) {
+                console.error('1. Something went wrong!', err);
+            });
 
         // // Get multiple albums
         // spotifyApi.getAlbums(['5U4W9E5WsYb2jUQWePT8Xm', '3KyVcddATClQKIdtaap4bV'])
@@ -330,7 +330,7 @@ export default {
          */
 
         // // Get a playlist
-        // spotifyApi.getPlaylist("5ieJqeLJjjI8iJWaxeBLuK").then(
+        // spotifyApi.getPlaylist("7jreZHMMkg4XrSTPVEhwS3").then(
         //   function(data) {
         //     console.log("19. Some information about this playlist", data);
         //   },
