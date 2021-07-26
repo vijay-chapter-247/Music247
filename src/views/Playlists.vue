@@ -154,7 +154,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQAJrRiu4jCKH0V7rBJBbmSB6FjNQXUhznnqNR_Tvuvz6kRLHSzb_H6GvLovLoNfvKPQd8wfgIZPO0QhXIuG1Ud73ksp0S5BBo8AJwOOYnR_Nf7uia34MPXBdC1UjWsXhlJy2Ov7zufKI2FNZ_gKEWIRxNblse2qQZCPyZfFSSZFe3OhehRfMauVoHwNw3AFCU1sTXkIrz4V3whPheQxlWAe5AhVhTHD6Xu3fg3GjYHVpze8pQ5z8qlOud1woIToce3Et1YCkX1gi02RBD3n7BhB5nhti4gZ6rR7Dyil"
+      "BQBPhD7dUhf3NgNCjxJ6Jh_Io2kfKlvVpM_ROgoJMm5YDAcdtfY30N5M67MpbpsV9CGTITxKJYv0H_4FHkcuV8ZYaWmWcWkR62dvbefo65JO4LDFx7GRlVx8W3Y8GHWYyveBPUQgywGA1hct-1_IaQEacxQeZEPmNfWoDscrfzj2INhrNIeoyHntlZZSnNwor43F7NdX8x15Kj7DrVzUM1k1Jm3qHUYqXxSwuUExxKeNX3y066C4z8u4kwQOa88-9EMcpOVnYfTJ5c96MRicMQ3QM8VCfAFIcQzMKFgU"
     );
 
     // Get a user's playlists
