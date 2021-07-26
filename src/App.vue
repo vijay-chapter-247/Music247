@@ -256,7 +256,7 @@ export default {
         route: "/",
       },
       {
-        text: "Treanding",
+        text: "Trending",
         icon: "mdi-library",
         route: "/trending",
       },
@@ -365,7 +365,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQBPhD7dUhf3NgNCjxJ6Jh_Io2kfKlvVpM_ROgoJMm5YDAcdtfY30N5M67MpbpsV9CGTITxKJYv0H_4FHkcuV8ZYaWmWcWkR62dvbefo65JO4LDFx7GRlVx8W3Y8GHWYyveBPUQgywGA1hct-1_IaQEacxQeZEPmNfWoDscrfzj2INhrNIeoyHntlZZSnNwor43F7NdX8x15Kj7DrVzUM1k1Jm3qHUYqXxSwuUExxKeNX3y066C4z8u4kwQOa88-9EMcpOVnYfTJ5c96MRicMQ3QM8VCfAFIcQzMKFgU"
+      "BQB0B0wUgK9UCS8KudFYV4enxk7qO6BHXiXi9kVZy0l43cOcy5F-20Bpbb7FOJXvVuJSdkk2C9xAY65NOrlHzj863HfNfHMAjY1NV1oZ6NhwVbqSkldle8G8QJj-w_rJuiEg0bTbwPiP_gB68_19x0bcBzMe9x0exr_hk0bGUFBMGD4aD7W4GJOmdhVeVaogzzwL-2pxs5x51ZwsO-7zhQUUD59PvZPkco-G283u-DAm-PyK8MQVEjtxzeP2NG_so3Y0cY7bRngn2ZwZ7-lY1nZi3_ziNNRYyYD1q7TT"
     );
 
     // Get multiple artists
@@ -428,12 +428,14 @@ export default {
     //     });
 
     // // Search tracks whose name, album or artist contains 'Love'
-    // spotifyApi.searchTracks('Love')
-    //     .then(function (data) {
-    //         console.log('6. Search by "Love"', data);
-    //     }, function (err) {
-    //         console.error('6. Something went wrong!', err);
-    //     });
+    // spotifyApi.searchTracks("Love").then(
+    //   function(data) {
+    //     console.log('6. Search by "Love"', data);
+    //   },
+    //   function(err) {
+    //     console.error("6. Something went wrong!", err);
+    //   }
+    // );
 
     // // Search artists whose name contains 'Love'
     // spotifyApi.searchArtists('Love')
@@ -452,12 +454,17 @@ export default {
     //     });
 
     // // Search tracks whose artist's name contains 'Kendrick Lamar', and track name contains 'Alright'
-    // spotifyApi.searchTracks('track:Alright artist:Kendrick Lamar')
-    //     .then(function (data) {
-    //         console.log('9. Search tracks by "Alright" in the track name and "Kendrick Lamar" in the artist name', data);
-    //     }, function (err) {
-    //         console.log('9. Something went wrong!', err);
-    //     });
+    // spotifyApi.searchTracks("track:Alright artist:Kendrick Lamar").then(
+    //   function(data) {
+    //     console.log(
+    //       '9. Search tracks by "Alright" in the track name and "Kendrick Lamar" in the artist name',
+    //       data
+    //     );
+    //   },
+    //   function(err) {
+    //     console.log("9. Something went wrong!", err);
+    //   }
+    // );
 
     // // Search playlists whose name or description contains 'workout'
     // spotifyApi.searchPlaylists('workout')
@@ -497,7 +504,7 @@ export default {
     // /* Get Audio Features for a Track */
     // spotifyApi.getAudioFeaturesForTrack("3Qm86XLflmIXVm1wcwkgDK").then(
     //   function(data) {
-    //     console.log("14. Get Audio Features for a Track ", data);
+    //     console.log("14. Get Audio Features for a Track ", data.body);
     //   },
     //   function(err) {
     //     console.log("14. Something went wrong!", err);
@@ -854,7 +861,7 @@ export default {
     //     })
     //     .then(function (data) {
     //         // Output items
-    //         console.log("43. Get albums in the signed in user's Your Music library",data.body.items);
+    //         console.log("43. Get albums in the signed in user's Your Music library",data);
     //     }, function (err) {
     //         console.log('43. Something went wrong!', err);
     //     });
@@ -895,19 +902,6 @@ export default {
      * Browse methods
      */
 
-    // // Retrieve new releases
-    // spotifyApi.getNewReleases({
-    //         limit: 5,
-    //         offset: 0,
-    //         country: 'SE'
-    //     })
-    //     .then(function (data) {
-    //         console.log("47. Retrieve new releases",data);
-    //         // done();
-    //     }, function (err) {
-    //         console.log("47. Something went wrong!", err);
-    //     });
-
     // //  Retrieve featured playlists
     // spotifyApi.getFeaturedPlaylists({
     //         limit: 3,
@@ -923,28 +917,36 @@ export default {
     //     });
 
     // // Get a List of Categories
-    // spotifyApi.getCategories({
-    //         limit: 5,
-    //         offset: 0,
-    //         country: 'SE',
-    //         locale: 'sv_SE'
-    //     })
-    //     .then(function (data) {
-    //         console.log("49. Get a List of Categories",data);
-    //     }, function (err) {
-    //         console.log("49. Something went wrong!", err);
-    //     });
+    // spotifyApi
+    //   .getCategories({
+    //     limit: 50,
+    //     offset: 0,
+    //     country: "SE",
+    //     locale: "sv_SE",
+    //   })
+    //   .then(
+    //     function(data) {
+    //       console.log("49. Get a List of Categories", data);
+    //     },
+    //     function(err) {
+    //       console.log("49. Something went wrong!", err);
+    //     }
+    //   );
 
     // // Get a Category (in Sweden)
-    // spotifyApi.getCategory('party', {
-    //         country: 'SE',
-    //         locale: 'sv_SE'
-    //     })
-    //     .then(function (data) {
-    //         console.log("50 Get a Category (in Sweden)",data);
-    //     }, function (err) {
-    //         console.log("50. Something went wrong!", err);
-    //     });
+    // spotifyApi
+    //   .getCategory("party", {
+    //     country: "SE",
+    //     locale: "sv_SE",
+    //   })
+    //   .then(
+    //     function(data) {
+    //       console.log("50 Get a Category (in Sweden)", data);
+    //     },
+    //     function(err) {
+    //       console.log("50. Something went wrong!", err);
+    //     }
+    //   );
 
     // // Get Playlists for a Category (Party in Brazil)
     // spotifyApi.getPlaylistsForCategory('party', {
@@ -1118,15 +1120,6 @@ export default {
     //         console.log("67. Get a User’s Top Artists",topArtists);
     //     }, function (err) {
     //         console.log('67. Something went wrong!', err);
-    //     });
-
-    // /* Get a User’s Top Tracks*/
-    // spotifyApi.getMyTopTracks()
-    //     .then(function (data) {
-    //         let topTracks = data.body.items;
-    //         console.log("68. Get a User’s Top Tracks",topTracks);
-    //     }, function (err) {
-    //         console.log('68. Something went wrong!', err);
     //     });
   },
 };

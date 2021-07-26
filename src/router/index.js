@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../views/Trending.vue')
   },
   {
+    path: '/trending/:trendingId',
+    name: 'TrendingTrack',
+    component: () => import('../views/TrendingTrack.vue')
+  },
+  {
     path: '/playlists',
     name: 'Playlists',
     component: () => import('../views/Playlists.vue')
