@@ -346,7 +346,7 @@ export default {
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-        this.$mySetAccessToken
+      "BQD1jPTO1fGmCDGjaZP3aD1VP2SdJZUo_43V-JsNasgbH1N7pAeCrLxQDTZuYc7s4-ytJbo2eIXcdmNZPOW5l4NPdfKS9Q0JnSQJ3ELj1zeXYH7uzd7LKN4ec7FJcayv4mZ8ZlnVoT0jop5rTePDYpuCw0AKHLW8U_kmrT1dM6ndAeY_Wq2P_Z_jODnYPThRz5Rr8uLLuA326ggGuR2Kn6-r_L3urBqw0EM1WDB74h-TpQtDTDni5bGnSThGVEn8fX_VsgShYQXdJ7fnQ4IHFssA8TOHjdt382BnMYYG"
     );
 
     const playlistId = this.$route.params.playlistId;

@@ -1,283 +1,243 @@
 <template>
-  <div>
+<div>
     <v-container v-for="tracks in trendingTrack" :key="tracks.id">
-      <v-row class="dark mt-md-2 mt-0">
-        <v-col>
-          <v-card flat class="dark">
-            <v-row class="white--text" justify="center">
-              <v-col cols="12" md="3" class="text-center text-md-start">
-                <v-avatar :size="avatarSize" tile>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                  ></v-img>
-                </v-avatar>
-              </v-col>
+        <v-row class="dark mt-md-2 mt-0">
+            <v-col>
+                <v-card flat class="dark">
+                    <v-row class="white--text" justify="center">
+                        <v-col cols="12" md="3" class="text-center text-md-start">
+                            <v-avatar :size="avatarSize" tile>
+                                <v-img :src="imageSource"></v-img>
+                            </v-avatar>
+                        </v-col>
 
-              <v-col
-                cols="12"
-                md="9"
-                class="text-center text-md-start pb-0 mt-0 mt-md-5"
-              >
-                <v-subheader
-                  class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold"
-                >
-                  SINGLE
-                </v-subheader>
-                <p
-                  class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--2"
-                >
-                  {{ tracks.name }}
-                </p>
-                <p
-                  class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2 "
-                >
-                  <span
-                    class="item"
-                    v-for="artist in tracks.artists"
-                    :key="artist.id"
-                  >
-                    {{ artist.name }}
-                  </span>
-                </p>
-              </v-col>
+                        <v-col cols="12" md="9" class="text-center text-md-start pb-0 mt-0 mt-md-5">
+                            <v-subheader class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold">
+                                SINGLE
+                            </v-subheader>
+                            <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--2">
+                                {{ tracks.name }}
+                            </p>
+                            <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2 ">
+                                <span class="item" v-for="artist in tracks.artists" :key="artist.id">
+                                    {{ artist.name }}
+                                </span>
+                            </p>
+                        </v-col>
 
-              <v-col class="text-center text-md-start pt-0 my-0 my-md-5">
-                <v-btn
-                  fab
-                  v-bind="size"
-                  class="arrow bg--orange  white--text no-background-hover"
-                  @click="show = !show"
-                  v-show="!show"
-                >
-                  <v-icon v-bind="iconSize">mdi-pause</v-icon>
-                </v-btn>
-                <v-btn
-                  fab
-                  v-bind="size"
-                  class="arrow bg--orange  white--text no-background-hover"
-                  @click="show = !show"
-                  v-show="show"
-                >
-                  <v-icon v-bind="iconSize">mdi-play</v-icon>
-                </v-btn>
+                        <v-col class="text-center text-md-start pt-0 my-0 my-md-5">
+                            <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="!show">
+                                <v-icon v-bind="iconSize">mdi-pause</v-icon>
+                            </v-btn>
+                            <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="show">
+                                <v-icon v-bind="iconSize">mdi-play</v-icon>
+                            </v-btn>
 
-                <v-icon
-                  large
-                  class="grey--text no-background-hover d-none d-md-inline ml-5"
-                  >mdi-dots-horizontal</v-icon
-                >
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <v-card dark flat class="dark mt-0 mt-md-2">
-        <v-card-text class="d-none d-md-block">
-          <!-- Heading -->
-          <v-row class="white--text d-none d-md-flex">
-            <v-col cols="1" class="text-center">
-              <div class="body-1 font-weight-medium grey--text">#</div>
+                            <v-icon large class="grey--text no-background-hover d-none d-md-inline ml-5">mdi-dots-horizontal</v-icon>
+                        </v-col>
+                    </v-row>
+                </v-card>
             </v-col>
+        </v-row>
 
-            <v-col cols="10">
-              <div class="body-1 font-weight-medium grey--text">Title</div>
-            </v-col>
+        <v-card dark flat class="dark mt-0 mt-md-2">
+            <v-card-text class="d-none d-md-block">
+                <!-- Heading -->
+                <v-row class="white--text d-none d-md-flex">
+                    <v-col cols="1" class="text-center">
+                        <div class="body-1 font-weight-medium grey--text">#</div>
+                    </v-col>
 
-            <v-col cols="1" class="text-center">
-              <v-icon color="grey">mdi-clock-outline</v-icon>
-            </v-col>
-          </v-row>
+                    <v-col cols="10">
+                        <div class="body-1 font-weight-medium grey--text">Title</div>
+                    </v-col>
 
-          <!-- Divider -->
-          <v-row>
-            <v-divider color="grey"></v-divider>
-          </v-row>
-        </v-card-text>
+                    <v-col cols="1" class="text-center">
+                        <v-icon color="grey">mdi-clock-outline</v-icon>
+                    </v-col>
+                </v-row>
 
-        <!-- Content -->
-        <v-card-text class="mt-5 mt-sm-3">
-          <v-hover v-slot:default="{ hover }">
-            <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
-              <v-col
-                cols="1"
-                class="text-center body-2 pa-0 font-weight-medium"
-                align-self="center"
-              >
-                <div>
-                  1
-                </div>
-              </v-col>
+                <!-- Divider -->
+                <v-row>
+                    <v-divider color="grey"></v-divider>
+                </v-row>
+            </v-card-text>
 
-              <v-col cols="10" align-self="center" class="py-0 ">
-                <v-list-item class="pa-0">
-                  <v-list-item-avatar tile size="50" class="rounded-lg">
-                    <v-img
-                      src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                    ></v-img>
-                  </v-list-item-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title class="body-2 font-weight-medium mb-1">
-                      {{ tracks.name }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle
-                      class="body-2 font-weight-medium"
-                      :class="{ 'white--text': hover }"
-                    >
-                      <span
-                        class="item"
-                        v-for="artist in tracks.artists"
-                        :key="artist.id"
-                      >
-                        {{ artist.name }}
-                      </span>
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
+            <!-- Content -->
+            <v-card-text class="mt-5 mt-sm-3">
+                <v-hover v-slot:default="{ hover }">
+                    <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
+                        <v-col cols="1" class="text-center body-2 pa-0 font-weight-medium" align-self="center">
+                            <div v-show="!hover && !(isPlaying && tracks.id === selectedId)">
+                                1
+                            </div>
+                            <v-btn icon small class="no-background-hover" @click="changeSong(tracks.id)" v-if="isPlaying && tracks.id === selectedId">
+                                <v-icon>mdi-pause</v-icon>
+                            </v-btn>
+                            <v-btn icon small class="no-background-hover" @click="changeSong(tracks.id)" v-else v-show="hover">
+                                <v-icon>mdi-play</v-icon>
+                            </v-btn>
+                        </v-col>
 
-              <v-col cols="1" align-self="center" class="text-center  pa-0">
-                <v-list-item class="pa-0">
-                  <v-list-item-content>
-                    <v-list-item-subtitle
-                      class="body-2 font-weight-medium d-none d-md-inline"
-                    >
-                      {{ millisToMinutesAndSeconds(tracks.duration_ms) }}
-                    </v-list-item-subtitle>
+                        <v-col cols="10" align-self="center" class="py-0 ">
+                            <v-list-item class="pa-0">
+                                <v-list-item-avatar tile size="50" class="rounded-lg">
+                                    <v-img :src="imageSource"></v-img>
+                                </v-list-item-avatar>
+                                <v-list-item-content>
+                                    <v-list-item-title class="body-2 font-weight-medium mb-1">
+                                        {{ tracks.name }}
+                                    </v-list-item-title>
+                                    <v-list-item-subtitle class="body-2 font-weight-medium" :class="{ 'white--text': hover }">
+                                        <span class="item" v-for="artist in tracks.artists" :key="artist.id">
+                                            {{ artist.name }}
+                                        </span>
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-col>
 
-                    <v-list-item-subtitle
-                      class="body-2 font-weight-medium d-inline d-md-none"
-                    >
-                      <v-btn icon small class="no-background-hover">
-                        <v-icon>mdi-dots-vertical</v-icon>
-                      </v-btn>
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-            </v-row>
-          </v-hover>
-        </v-card-text>
-      </v-card>
+                        <v-col cols="1" align-self="center" class="text-center  pa-0">
+                            <v-list-item class="pa-0">
+                                <v-list-item-content>
+                                    <v-list-item-subtitle class="body-2 font-weight-medium d-none d-md-inline">
+                                        {{ millisToMinutesAndSeconds(tracks.duration_ms) }}
+                                    </v-list-item-subtitle>
+
+                                    <v-list-item-subtitle class="body-2 font-weight-medium d-inline d-md-none">
+                                        <v-btn icon small class="no-background-hover">
+                                            <v-icon>mdi-dots-vertical</v-icon>
+                                        </v-btn>
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-col>
+                    </v-row>
+                </v-hover>
+            </v-card-text>
+        </v-card>
     </v-container>
-  </div>
+</div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    isPlaying: false,
-    selectedId: null,
-    show: true,
-    trendingTrack: [],
-  }),
-  methods: {
-    millisToMinutesAndSeconds(millis) {
-      var minutes = Math.floor(millis / 60000);
-      var seconds = ((millis % 60000) / 1000).toFixed(0);
-      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    props: {
+        imageSource: String,
     },
-    play() {
-      this.isPlaying = true;
+    data: () => ({
+        isPlaying: false,
+        selectedId: null,
+        show: true,
+        trendingTrack: [],
+    }),
+    methods: {
+        millisToMinutesAndSeconds(millis) {
+            var minutes = Math.floor(millis / 60000);
+            var seconds = ((millis % 60000) / 1000).toFixed(0);
+            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        },
+        play() {
+            this.isPlaying = true;
+        },
+        pause() {
+            this.isPlaying = false;
+        },
+        changeSong(songId) {
+            if (this.selectedId === songId) {
+                if (this.isPlaying) {
+                    this.pause();
+                } else {
+                    this.play();
+                }
+            } else {
+                this.selectedId = songId;
+                this.play();
+            }
+        },
     },
-    pause() {
-      this.isPlaying = false;
+    computed: {
+        size() {
+            const size = {
+                md: "large",
+                lg: "large",
+                xl: "large",
+            } [this.$vuetify.breakpoint.name];
+            return size ?
+                {
+                    [size]: true,
+                } :
+                {};
+        },
+        iconSize() {
+            const iconSize = {
+                sm: "large",
+                md: "large",
+                lg: "large",
+                xl: "large",
+            } [this.$vuetify.breakpoint.name];
+            return iconSize ?
+                {
+                    [iconSize]: true,
+                } :
+                {};
+        },
+        avatarSize() {
+            switch (this.$vuetify.breakpoint.name) {
+                case "xs":
+                    return "120";
+                case "sm":
+                    return "150";
+                case "md":
+                    return "210";
+                case "lg":
+                    return "210";
+                default:
+                    return "210";
+            }
+        },
     },
-    changeSong(songId) {
-      if (this.selectedId === songId) {
-        if (this.isPlaying) {
-          this.pause();
-        } else {
-          this.play();
-        }
-      } else {
-        this.selectedId = songId;
-        this.play();
-      }
-    },
-  },
-  computed: {
-    size() {
-      const size = {
-        md: "large",
-        lg: "large",
-        xl: "large",
-      }[this.$vuetify.breakpoint.name];
-      return size
-        ? {
-            [size]: true,
-          }
-        : {};
-    },
-    iconSize() {
-      const iconSize = {
-        sm: "large",
-        md: "large",
-        lg: "large",
-        xl: "large",
-      }[this.$vuetify.breakpoint.name];
-      return iconSize
-        ? {
-            [iconSize]: true,
-          }
-        : {};
-    },
-    avatarSize() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "120";
-        case "sm":
-          return "150";
-        case "md":
-          return "210";
-        case "lg":
-          return "210";
-        default:
-          return "210";
-      }
-    },
-  },
-  created() {
-    var SpotifyWebApi = require("spotify-web-api-node");
-    var spotifyApi = new SpotifyWebApi({
-      clientId: this.$myClientId,
-      clientSecret: this.$myClientSecret,
-      redirectUri: "http://localhost:8080/",
-    });
-    spotifyApi.setAccessToken(
-        this.$mySetAccessToken
-    );
+    created() {
+        var SpotifyWebApi = require("spotify-web-api-node");
+        var spotifyApi = new SpotifyWebApi({
+            clientId: "6d280f8d789b4a858a67c830a85545be",
+            clientSecret: "354f43281e0e40b8afa003a6f5361b54",
+            redirectUri: "http://localhost:8080/",
+        });
+        spotifyApi.setAccessToken(
+            "BQCxAo5tcIfmoySfSI1L96elfvMuGvjKYExJRFiuwsRtIsg14FKNiMX7t3kWKKqXJ-Vl_79tOjRvPw2kwED50HNuingvlIgDM12GuX8l55YQcmoYF6ZuN1AcNPGWNS6qttEdbVYYkAhcbvBchC9bqF2NOS6Bw7AOpx-7AKaXP1Hh31OIdGYOyzE0UVi1Geks8GPSEKYZcIx5MCB_yThlo0H4b7Lz342Bm19vnf5RWn-4YkJQTNMeSMNKN7mJBnbfZy811KMmso1e1_e_ILH2kwzIFZk6dVSdga79yJpw"
+        );
 
-    const trendingId = this.$route.params.trendingId;
+        const trendingId = this.$route.params.trendingId;
 
-    // // Retrieve new releases
-    // spotifyApi
-    //     .getNewReleases(trendingId)
-    //     .then(
-    //         (data) => {
-    //             this.trendingTrack.push(data.body);
-    //             console.log("47. Retrieve new releases", data.body);
-    //         },
-    //         function (err) {
-    //             console.log("47. Something went wrong!", err);
-    //         }
-    //     );
+        // // Retrieve new releases
+        // spotifyApi
+        //     .getNewReleases(trendingId)
+        //     .then(
+        //         (data) => {
+        //             this.trendingTrack.push(data.body);
+        //             console.log("47. Retrieve new releases", data.body);
+        //         },
+        //         function (err) {
+        //             console.log("47. Something went wrong!", err);
+        //         }
+        //     );
 
-    spotifyApi.getAlbumTracks(trendingId, {}).then(
-      (data) => {
-        this.trendingTrack.push(data.body.items[0]);
-        console.log(data.body.items[0]);
-      },
-      function(err) {
-        console.log("Something went wrong!", err);
-      }
-    );
-  },
+        spotifyApi.getAlbumTracks(trendingId).then(
+            (data) => {
+                this.trendingTrack.push(data.body.items[0]);
+                console.log(data.body.items[0]);
+            },
+            function (err) {
+                console.log("Something went wrong!", err);
+            }
+        );
+    },
 };
 </script>
 
 <style scoped>
-.item + .item:before {
-  content: "," !important;
+.item+.item:before {
+    content: "," !important;
 }
 </style>

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
+import { store } from "./store/index";
+
 
 import Spotify from 'spotify-web-api-node'
 import VueSpotify from 'vue-spotify'
@@ -10,12 +12,13 @@ Vue.use(VueSpotify, new Spotify())
 
 Vue.config.productionTip = false
 
-Vue.prototype.$myClientId = '10392945411e4853b52f5b7049f85c20'
-Vue.prototype.$myClientSecret = 'c2f3f640df1d4f98b495a9fff2a1370e'
-Vue.prototype.$mySetAccessToken = 'BQAjKx_Mkie-StaqA-NPQEm1NLAyGyZrw6mqzmdcCsnDl300HAZb1rctzNuBUq_bI67q-5pT6YPhSiAotJvZiffPOGpKb1WR9-mgmMJoEIIOk-hsOP3jNhpdnOByHX4TVPBCP3heas4p_BDbLZzfjUkzj98EUIUuAgqho7Im_RYR5NtaNenO9QVxD4qbduKrBo4taWovaVUWAHo23b7_JNqdCFi4G6J5Q52wrh4aBfRyjmelpRJ4rNK3fim55bN0CXRseleateAcqNAS7EKvUonguwCz4_aZSx6Xmta2'
+Vue.prototype.$myClientId = '6d280f8d789b4a858a67c830a85545be'
+Vue.prototype.$myClientSecret = '354f43281e0e40b8afa003a6f5361b54'
+Vue.prototype.$mySetAccessToken = 'BQCHt-UArXRYxCINjTXK8JkJnudz96duYGnlpjniwcvrsyoGuKE-6LU8PjOw-P4FebX3CMe2jVOxgAqGv7f00uN8WIG80opcDi6br52uCAwZiVHZZ5LkbOClv_kLxU5HId6vl78lYveo7zlU00zaz38dxjjptNVLBTa4eR9LKgklUGzqknFqP-lIvY36DiClvw22ca1kPfNIAO6yoP1YLohoveGXjZo2VxIEY1NgW4wtPjPoI5Z1qppsTfMO2mQiKYblDjmto2GWVxItJlC7ndvMa6C3ADlF84NOaeIh'
 
 new Vue({
   router,
+  store,
   vuetify,
   render: h => h(App)
 }).$mount('#app')
