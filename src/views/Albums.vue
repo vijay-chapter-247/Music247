@@ -81,12 +81,12 @@ export default {
   created() {
     var SpotifyWebApi = require("spotify-web-api-node");
     var spotifyApi = new SpotifyWebApi({
-      clientId: "6d280f8d789b4a858a67c830a85545be",
-      clientSecret: "354f43281e0e40b8afa003a6f5361b54",
+      clientId: this.$myClientId,
+      clientSecret: this.$myClientSecret,
       redirectUri: "http://localhost:8080/",
     });
     spotifyApi.setAccessToken(
-      "BQB0B0wUgK9UCS8KudFYV4enxk7qO6BHXiXi9kVZy0l43cOcy5F-20Bpbb7FOJXvVuJSdkk2C9xAY65NOrlHzj863HfNfHMAjY1NV1oZ6NhwVbqSkldle8G8QJj-w_rJuiEg0bTbwPiP_gB68_19x0bcBzMe9x0exr_hk0bGUFBMGD4aD7W4GJOmdhVeVaogzzwL-2pxs5x51ZwsO-7zhQUUD59PvZPkco-G283u-DAm-PyK8MQVEjtxzeP2NG_so3Y0cY7bRngn2ZwZ7-lY1nZi3_ziNNRYyYD1q7TT"
+        this.$mySetAccessToken
     );
 
     // Get multiple albums
