@@ -163,11 +163,9 @@ export default {
                 lg: "large",
                 xl: "large",
             } [this.$vuetify.breakpoint.name];
-            return size ?
-                {
-                    [size]: true,
-                } :
-                {};
+            return size ? {
+                [size]: true,
+            } : {};
         },
         iconSize() {
             const iconSize = {
@@ -176,11 +174,9 @@ export default {
                 lg: "large",
                 xl: "large",
             } [this.$vuetify.breakpoint.name];
-            return iconSize ?
-                {
-                    [iconSize]: true,
-                } :
-                {};
+            return iconSize ? {
+                [iconSize]: true,
+            } : {};
         },
         avatarSize() {
             switch (this.$vuetify.breakpoint.name) {
@@ -198,15 +194,15 @@ export default {
         },
     },
     created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: "6d280f8d789b4a858a67c830a85545be",
-            clientSecret: "354f43281e0e40b8afa003a6f5361b54",
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            "BQCxAo5tcIfmoySfSI1L96elfvMuGvjKYExJRFiuwsRtIsg14FKNiMX7t3kWKKqXJ-Vl_79tOjRvPw2kwED50HNuingvlIgDM12GuX8l55YQcmoYF6ZuN1AcNPGWNS6qttEdbVYYkAhcbvBchC9bqF2NOS6Bw7AOpx-7AKaXP1Hh31OIdGYOyzE0UVi1Geks8GPSEKYZcIx5MCB_yThlo0H4b7Lz342Bm19vnf5RWn-4YkJQTNMeSMNKN7mJBnbfZy811KMmso1e1_e_ILH2kwzIFZk6dVSdga79yJpw"
-        );
+    var SpotifyWebApi = require("spotify-web-api-node");
+    var spotifyApi = new SpotifyWebApi({
+      clientId: this.$myClientId,
+      clientSecret: this.$myClientSecret,
+      redirectUri: "http://localhost:8080/",
+    });
+    spotifyApi.setAccessToken(
+        this.$mySetAccessToken
+    );
 
         const trendingId = this.$route.params.trendingId;
 

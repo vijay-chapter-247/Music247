@@ -5,6 +5,11 @@
       <v-card-title>
         <div class="font-weight-bold text-h4  wrap--text--1">
           Discover
+
+
+          <v-btn to="test">
+            Go to test
+          </v-btn>
         </div>
       </v-card-title>
     </v-card>
@@ -401,7 +406,7 @@ export default {
   background-color: #ffffff;
 }
 
-. {
+.white--border {
   border: 2px solid #ffffff !important;
   /* background-color: #ffffff; */
 }
@@ -410,9 +415,9 @@ export default {
   background-color: #202b38;
 }
 
-. {
+/* . {
   font-family: "Poppins", sans-serif !important;
-}
+} */
 
 .position--down {
   top: 165px !important;
