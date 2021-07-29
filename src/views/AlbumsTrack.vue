@@ -101,27 +101,28 @@
                         </v-col> -->
 
 
-                        <iframe :src="`https://open.spotify.com/embed?uri=${item.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe :src="`https://open.spotify.com/embed?uri=${item.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="1"></iframe>
                     </v-row>
                 </v-hover>
             </template>
         </v-card-text>
     </v-card>
 
+  <!-- <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
 
 </v-container>
 </template>
 
 <script>
 export default {
-    data: () => ({
-        albumsTrack: [],
+  data: () => ({
+    albumsTrack: [],
         isPlaying: false,
         selectedId: null,
     }),
     methods: {
-        millisToMinutesAndSeconds(millis) {
-            var minutes = Math.floor(millis / 60000);
+      millisToMinutesAndSeconds(millis) {
+        var minutes = Math.floor(millis / 60000);
             var seconds = ((millis % 60000) / 1000).toFixed(0);
             return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
         },
@@ -130,7 +131,7 @@ export default {
             this.isPlaying = true;
         },
         pause() {
-            this.isPlaying = false;
+          this.isPlaying = false;
         },
         changeSong(songId) {
             if (this.selectedId === songId) {

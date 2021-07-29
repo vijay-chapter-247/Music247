@@ -7,8 +7,8 @@
             </div>
         </v-card-title>
     </v-card>
-    <v-row v-for="tracks in topTracks" :key="tracks.id">
-        <v-col cols="6" sm="3" v-for="(track, i) in tracks" :key="i">
+    <v-row v-for="tracks in topTracks" :key="tracks.id" class="px-3">
+        <v-col cols="6" sm="3" v-for="(track, i) in tracks" :key="i" class="px-1 px-sm-2">
             <v-hover v-slot="{ hover }">
                 <v-card exact tile :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" @click.native="doSomething(track.images[0].url)" :to="`trending/${track.id}`">
                     <v-img :src="track.images[0].url" :height="imageHeight" class="rounded-lg">

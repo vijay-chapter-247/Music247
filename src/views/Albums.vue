@@ -9,7 +9,7 @@
     </v-card>
 
     <!-- Albums -->
-    
+
     <v-row justify="space-between">
         <v-col cols="12" sm="6" md="4" v-for="(album, index) in albums" :key="index">
             <v-card id="create" class="rounded-xl lightdark" height="370">
