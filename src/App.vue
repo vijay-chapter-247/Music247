@@ -86,7 +86,7 @@
         </v-main>
 
         <!-- Footer Section -->
-        <!-- <v-footer color="lightdark" app :height="playerHeight">
+        <v-footer color="lightdark" app :height="playerHeight">
             <v-avatar :size="playerAvatarSize" rounded>
                 <v-img :src="require(`./assets/image_${imageIndex}.png`)"></v-img>
             </v-avatar>
@@ -126,7 +126,7 @@
             </span>
 
             <v-spacer></v-spacer>
-        </v-footer> -->
+        </v-footer>
     </v-app>
 </div>
 </template>
@@ -282,7 +282,7 @@ export default {
                     console.error("4. Something went wrong!", err);
                 }
             );
-        
+
         // // Get album
         // spotifyApi.getAlbum('5U4W9E5WsYb2jUQWePT8Xm')
         //     .then(function (data) {

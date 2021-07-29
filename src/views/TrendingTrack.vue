@@ -67,7 +67,7 @@
             <v-card-text class="mt-5 mt-sm-3">
                 <v-hover v-slot:default="{ hover }">
                     <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
-                        <v-col cols="1" class="text-center body-2 pa-0 font-weight-medium" align-self="center">
+                        <!-- <v-col cols="1" class="text-center body-2 pa-0 font-weight-medium" align-self="center">
                             <div v-show="!hover && !(isPlaying && tracks.id === selectedId)">
                                 1
                             </div>
@@ -111,7 +111,11 @@
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
-                        </v-col>
+                        </v-col> -->
+
+
+                        <iframe :src="`https://open.spotify.com/embed?uri=${tracks.uri}`" width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
                     </v-row>
                 </v-hover>
             </v-card-text>
