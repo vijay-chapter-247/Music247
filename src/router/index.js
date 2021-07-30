@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/artists/:artistId',
     name: 'ArtistTrack',
-    component: ArtistTrack
+    component: () => import('../views/ArtistTrack.vue')
   },
   {
     path: '/trending/:trendingId',
