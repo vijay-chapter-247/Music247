@@ -16,11 +16,6 @@ const routes = [
     component: () => import('../views/Trending.vue')
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: () => import('../views/Test.vue')
-  },
-  {
     path: '/artists/:artistId',
     name: 'ArtistTrack',
     component: () => import('../views/ArtistTrack.vue')
