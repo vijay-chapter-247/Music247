@@ -12,14 +12,14 @@
             <v-hover v-slot="{ hover }">
                 <v-card exact tile :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" @click.native="doSomething(track.images[0].url)" :to="`trending/${track.id}`">
                     <v-img :src="track.images[0].url" :height="imageHeight" class="rounded-lg">
-                        <span class="d-none d-sm-inline">
+                        <!-- <span class="d-none d-sm-inline">
                             <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(track.id)" v-if="isPlaying && item.id === selectedId" to="playlists">
                                 <v-icon>mdi-pause</v-icon>
                             </v-btn>
                             <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(track.id)" v-else v-show="hover" to="playlists">
                                 <v-icon>mdi-play</v-icon>
                             </v-btn>
-                        </span>
+                        </span> -->
                     </v-img>
 
                     <v-card-text class="white--text px-0">
@@ -27,7 +27,7 @@
                             {{ track.name }}
                         </p>
                         <v-hover v-slot="{ hover }" :class="{ 'text-decoration-underline': hover }">
-                            <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2 ">
+                            <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
                                 <span class="item" v-for="(artist, j) in track.artists" :key="j">
                                     {{ artist.name }}
                                 </span>
@@ -82,11 +82,9 @@ export default {
                 lg: "small",
                 xl: "small",
             } [this.$vuetify.breakpoint.name];
-            return size ?
-                {
-                    [size]: true,
-                } :
-                {};
+            return size ? {
+                [size]: true,
+            } : {};
         },
         imageHeight() {
             switch (this.$vuetify.breakpoint.name) {

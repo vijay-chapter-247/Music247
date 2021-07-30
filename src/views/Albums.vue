@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<!-- <v-container>
     <v-card dark flat class="dark mt-2">
         <v-card-title>
             <div class="headline  wrap--text--1">
@@ -8,7 +8,7 @@
         </v-card-title>
     </v-card>
 
-    <!-- Albums -->
+     Albums
 
     <v-row justify="space-between">
         <v-col cols="12" sm="6" md="4" v-for="(album, index) in albums" :key="index">
@@ -61,6 +61,46 @@
         </v-col>
     </v-row>
 
+</v-container> -->
+
+<v-container>
+    <v-card dark flat class="dark mt-2 ">
+        <v-card-title class="">
+            <div class="headline  wrap--text--1 ">
+                Albums
+            </div>
+        </v-card-title>
+    </v-card>
+
+    <v-row class="px-3">
+        <v-col cols="6" sm="3" v-for="(album, index) in albums" :key="index" class="px-1 px-sm-2">
+            <v-hover v-slot="{ hover }">
+                <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${album.id}`">
+                    <v-img :src="album.images[0].url" :height="imageHeight" class="rounded-lg">
+                        <!-- <span class="d-none d-sm-inline">
+                            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-if="isPlaying && item.id === selectedId" to="playlists">
+                                <v-icon>mdi-pause</v-icon>
+                            </v-btn>
+                            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-else v-show="hover" to="playlists">
+                                <v-icon>mdi-play</v-icon>
+                            </v-btn>
+                        </span> -->
+                    </v-img>
+
+                    <v-card-text class="white--text px-0">
+                        <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
+                            {{album.name}}
+                        </p>
+                        <v-hover v-slot="{ hover }">
+                            <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
+                                {{ album.label }}
+                            </p>
+                        </v-hover>
+                    </v-card-text>
+                </v-card>
+            </v-hover>
+        </v-col>
+    </v-row>
 </v-container>
 </template>
 
@@ -69,7 +109,68 @@ export default {
     data: () => ({
         albums: [],
     }),
-
+    methods: {
+        play() {
+            this.isPlaying = true;
+        },
+        pause() {
+            this.isPlaying = false;
+        },
+        changeSong(songId) {
+            if (this.selectedId === songId) {
+                if (this.isPlaying) {
+                    this.pause();
+                } else {
+                    this.play();
+                }
+            } else {
+                this.selectedId = songId;
+                this.play();
+            }
+        },
+    },
+    computed: {
+        size() {
+            const size = {
+                xs: "x-small",
+                sm: "x-small",
+                md: "x-small",
+                lg: "small",
+                xl: "small",
+            } [this.$vuetify.breakpoint.name];
+            return size ? {
+                [size]: true,
+            } : {};
+        },
+        imageHeight() {
+            switch (this.$vuetify.breakpoint.name) {
+                case "xs":
+                    return "120";
+                case "sm":
+                    return "110";
+                case "md":
+                    return "140";
+                case "lg":
+                    return "200";
+                default:
+                    return "200";
+            }
+        },
+        cardHeight() {
+            switch (this.$vuetify.breakpoint.name) {
+                case "xs":
+                    return "230";
+                case "sm":
+                    return "230";
+                case "md":
+                    return "260";
+                case "lg":
+                    return "320";
+                default:
+                    return "320";
+            }
+        },
+    },
     created() {
         var SpotifyWebApi = require("spotify-web-api-node");
         var spotifyApi = new SpotifyWebApi({

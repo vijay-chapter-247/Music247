@@ -179,11 +179,6 @@ export default {
     data: () => ({
         isPlaying: false,
         selectedId: null,
-        items: [{
-            src: "https://cdn.vuetifyjs.com/images/cards/halcyon.png",
-            title: "Halcyon Days",
-            artist: "Ellie Goulding",
-        }, ],
         show: true,
         playlistTrack: [],
         playlistSongs: [],

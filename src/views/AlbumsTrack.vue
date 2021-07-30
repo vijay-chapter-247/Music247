@@ -1,14 +1,10 @@
 <template>
-<v-container fluid>
+<v-container>
     <v-card dark flat class="dark mt-2">
         <v-card-title>
             <div class="headline  wrap--text--1">
                 Albums
             </div>
-            <!-- <v-spacer></v-spacer>
-            <div>
-                <v-btn dark text color="orange" to="5U4W9E5WsYb2jUQWePT8Xm/new">Click Me!</v-btn>
-            </div> -->
         </v-card-title>
     </v-card>
 
@@ -101,7 +97,7 @@
                         </v-col> -->
 
 
-                        <iframe :src="`https://open.spotify.com/embed?uri=${item.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="1"></iframe>
+                        <iframe :src="`https://open.spotify.com/embed?uri=${item.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="0"></iframe>
                     </v-row>
                 </v-hover>
             </template>

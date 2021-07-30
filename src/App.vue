@@ -62,16 +62,19 @@
             </v-row>
 
             <!-- Artist Section -->
-            <v-subheader class="font-weight-black grey--text">Artist</v-subheader>
+            <v-subheader class="font-weight-black grey--text">Artists</v-subheader>
 
-            <v-btn text block v-for="(artist, index) in artists" :key="index" :to="`/artists/${artist.id}`" class="body-2 py-5 text-none ">
-                <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg ">
-                    <v-icon size="18" class="icon--white grey--icon">mdi-nutrition</v-icon>
-                </span>
-                <span class="grey--text text font-weight-bold  text-capitalize" v-text="artist.name">
-                </span>
-                <v-spacer></v-spacer>
-            </v-btn>
+            <div v-for="(artist, index) in artists" :key="index">
+                <v-btn text block v-for="(artistdata, index) in artist" :key="index" :to="`/artists/${artistdata.id}`" class="body-2 py-5 text-none ">
+                    <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg ">
+                        <v-icon size="18" class="icon--white grey--icon"> {{ artists_icon[index] }}</v-icon>
+                    </span>
+                    <span class="grey--text text font-weight-bold  text-capitalize">
+                        {{ artistdata.name }}
+                    </span>
+                    <v-spacer></v-spacer>
+                </v-btn>
+            </div>
 
             <v-row justify="center">
                 <v-col cols="10">
@@ -86,7 +89,7 @@
         </v-main>
 
         <!-- Footer Section -->
-        <v-footer color="lightdark" app :height="playerHeight">
+        <!-- <v-footer color="lightdark" app :height="playerHeight">
             <v-avatar :size="playerAvatarSize" rounded>
                 <v-img :src="require(`./assets/image_${imageIndex}.png`)"></v-img>
             </v-avatar>
@@ -126,7 +129,7 @@
             </span>
 
             <v-spacer></v-spacer>
-        </v-footer>
+        </v-footer> -->
     </v-app>
 </div>
 </template>
@@ -156,38 +159,26 @@ export default {
             },
             {
                 text: "Trending",
-                icon: "mdi-library",
+                icon: "mdi-unity",
                 route: "/trending",
             },
             {
                 text: "Playlists",
-                icon: "mdi-file-check",
+                icon: "mdi-recycle",
                 route: "/playlists",
             },
             {
                 text: "Albums",
-                icon: "mdi-library",
+                icon: "mdi-react",
                 route: "/albums",
             },
             {
                 text: "Profile",
-                icon: "mdi-nutrition",
+                icon: "mdi-vpn",
                 route: "/profile",
             },
         ],
-        artists_icon: [{
-                icon: "mdi-home",
-            },
-            {
-                icon: "mdi-file-check",
-            },
-            {
-                icon: "mdi-nutrition",
-            },
-            {
-                icon: "mdi-library",
-            },
-        ],
+        artists_icon: [ "mdi-hops", "mdi-leaf", "mdi-chart-pie", "mdi-chart-donut-variant", "mdi-lock-pattern", "mdi-kodi" ],
         artists: [],
         albums: [],
     }),
@@ -254,34 +245,45 @@ export default {
         },
     },
     created() {
-    var SpotifyWebApi = require("spotify-web-api-node");
-    var spotifyApi = new SpotifyWebApi({
-      clientId: this.$myClientId,
-      clientSecret: this.$myClientSecret,
-      redirectUri: "http://localhost:8080/",
-    });
-    spotifyApi.setAccessToken(
-        this.$mySetAccessToken
-    );
+        var SpotifyWebApi = require("spotify-web-api-node");
+        var spotifyApi = new SpotifyWebApi({
+            clientId: this.$myClientId,
+            clientSecret: this.$myClientSecret,
+            redirectUri: "http://localhost:8080/",
+        });
+        spotifyApi.setAccessToken(
+            this.$mySetAccessToken
+        );
 
-        // Get multiple artists
-        spotifyApi
-            .getArtists([
-                "2CIMQHirSU0MQqyYHq0eOx",
-                "57dN52uHvrHOxijzpIgu3E",
-                "1vCWHaC5f2uS3yhpwWbIA6",
-            ])
-            .then(
-                (data) => {
-                    const artist = data.body.artists;
-                    for (var i = 0; i < artist.length; i++) {
-                        this.artists.push(artist[i]);
-                    }
-                },
-                function (err) {
-                    console.error("4. Something went wrong!", err);
-                }
-            );
+        /* Get a User’s Top Artists*/
+        spotifyApi.getMyTopArtists()
+            .then((data) => {
+                let topArtists = data.body.items;
+                this.artists.push(topArtists);
+                console.log("67. Get a User’s Top Artists", topArtists);
+            }, function (err) {
+                console.log('67. Something went wrong!', err);
+            });
+
+        // // Get multiple artists
+        // spotifyApi
+        //     .getArtists([
+        //         "2CIMQHirSU0MQqyYHq0eOx",
+        //         "57dN52uHvrHOxijzpIgu3E",
+        //         "1vCWHaC5f2uS3yhpwWbIA6",
+        //     ])
+        //     .then(
+        //         (data) => {
+        //             const artist = data.body.artists;
+        //             for (var i = 0; i < artist.length; i++) {
+        //                 this.artists.push(artist[i]);
+        //             }
+        //             console.log(data);
+        //         },
+        //         function (err) {
+        //             console.error("4. Something went wrong!", err);
+        //         }
+        //     );
 
         // // Get album
         // spotifyApi.getAlbum('5U4W9E5WsYb2jUQWePT8Xm')
@@ -750,9 +752,9 @@ export default {
 
         /* Albums */
 
-        // // Get albums in the signed in user's Your Music library
+        // Get albums in the signed in user's Your Music library
         // spotifyApi.getMySavedAlbums({
-        //         limit: 1,
+        //         limit: 50,
         //         offset: 0
         //     })
         //     .then(function (data) {
@@ -905,17 +907,6 @@ export default {
         //         console.log('55. Something went wrong!', err);
         //     });
 
-        // // Get Current User's Recently Played Tracks
-        // spotifyApi.getMyRecentlyPlayedTracks({
-        //     limit: 20
-        // }).then(function (data) {
-        //     // Output items
-        //     console.log("56. Your 20 most recently played tracks are:");
-        //     data.body.items.forEach(item => console.log(item.track));
-        // }, function (err) {
-        //     console.log('56. Something went wrong!', err);
-        // });
-
         // // Get the User's Currently Playing Track
         // spotifyApi.getMyCurrentPlayingTrack()
         //     .then(function (data) {
@@ -1009,14 +1000,6 @@ export default {
          * Personalization Endpoints
          */
 
-        // /* Get a User’s Top Artists*/
-        // spotifyApi.getMyTopArtists()
-        //     .then(function (data) {
-        //         let topArtists = data.body.items;
-        //         console.log("67. Get a User’s Top Artists",topArtists);
-        //     }, function (err) {
-        //         console.log('67. Something went wrong!', err);
-        //     });
     },
 };
 </script>
