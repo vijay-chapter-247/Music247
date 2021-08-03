@@ -2,8 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
-// import { store } from "./store/index";
-import store from "../store/index";
+import { store } from "../store/index";
+// import store from "../store/index";
 
 import Spotify from "spotify-web-api-node";
 import VueSpotify from "vue-spotify";
