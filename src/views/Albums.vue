@@ -72,28 +72,20 @@
         </v-card-title>
     </v-card>
 
-    <v-row class="px-3">
-        <v-col cols="6" sm="3" v-for="(album, index) in albums" :key="index" class="px-1 px-sm-2">
+    <v-row class="px-3" >
+        <v-col cols="12" sm="3" class="px-1 px-sm-2" v-for="(albumData, index) in album" :key="index">
             <v-hover v-slot="{ hover }">
-                <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${album.id}`">
-                    <v-img :src="album.images[0].url" :height="imageHeight" class="rounded-lg">
-                        <!-- <span class="d-none d-sm-inline">
-                            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-if="isPlaying && item.id === selectedId" to="playlists">
-                                <v-icon>mdi-pause</v-icon>
-                            </v-btn>
-                            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-else v-show="hover" to="playlists">
-                                <v-icon>mdi-play</v-icon>
-                            </v-btn>
-                        </span> -->
+                <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${albumData.id}`">
+                    <v-img :src="albumData.images[0].url" :height="imageHeight" class="rounded-lg">
                     </v-img>
 
                     <v-card-text class="white--text px-0">
                         <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
-                            {{album.name}}
+                            {{albumData.name}}
                         </p>
                         <v-hover v-slot="{ hover }">
                             <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
-                                {{ album.label }}
+                                {{ albumData.label }}
                             </p>
                         </v-hover>
                     </v-card-text>
@@ -105,11 +97,10 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-    data: () => ({
-        albums: [],
-    }),
     methods: {
+        ...mapActions(['fetchalbum']),
         play() {
             this.isPlaying = true;
         },
@@ -130,6 +121,7 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(['album']),
         size() {
             const size = {
                 xs: "x-small",
@@ -172,39 +164,16 @@ export default {
         },
     },
     created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
-
-        // Get multiple albums
-        spotifyApi
-            .getAlbums([
-                "5U4W9E5WsYb2jUQWePT8Xm",
-                "3KyVcddATClQKIdtaap4bV",
-                "6GKdqG98cRgVf8mI9wJU5g",
-                "61kijqkLmurIjlNOv65WYJ",
-                "1lz1oSTTrZuNe0nE02PjKJ",
-                "4KA206tstq17hbvPIZm2nZ",
-            ])
-            .then(
-                (data) => {
-                    const album = data.body.albums;
-                    for (var i = 0; i < album.length; i++) {
-                        this.albums.push(album[i]);
-                    }
-                    // debugger
-                    console.log("2. Multiple albums information", this.albums);
-                },
-                function (err) {
-                    console.error("2. Something went wrong!", err);
-                }
-            );
+        this.fetchalbum();
     },
 };
 </script>
+
+        <!-- <span class="d-none d-sm-inline">
+            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-if="isPlaying && item.id === selectedId" to="playlists">
+                <v-icon>mdi-pause</v-icon>
+            </v-btn>
+            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-else v-show="hover" to="playlists">
+                <v-icon>mdi-play</v-icon>
+            </v-btn>
+        </span> -->

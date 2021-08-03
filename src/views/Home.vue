@@ -108,7 +108,7 @@
         </v-col>
     </v-row>
 
-    <!-- Most Listened Section -->
+    <!-- Recently Played Section -->
 
     <v-card dark flat class="dark mt-2">
         <v-card-title>
@@ -176,21 +176,22 @@
         </v-col>
     </v-row> -->
 
-     <v-row class="px-3" v-for="(recentTrack,i) in recentTracks" :key="i">
-        <v-col cols="6" sm="3" class="px-1 px-sm-2" v-for="(trackData,i) in recentTrack" :key="i" >
+     <v-row class="px-3" >
+        <v-col cols="12" sm="3" class="px-1 px-sm-2" v-for="(recentTrack,i) in recentplaylist" :key="i" >
+            <!-- <p> {{ recentTrack.track.album.album_type }} </p> -->
             <v-hover v-slot="{ hover }">
-                <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${trackData.track.album.id}`">
-                    <v-img :src="trackData.track.album.images[0].url" :height="imageHeight" class="rounded-lg">
+                <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${recentTrack.track.album.id}`">
+                    <v-img :src="recentTrack.track.album.images[0].url" :height="imageHeight" class="rounded-lg">
                     </v-img>
 
                     <v-card-text class="white--text px-0">
                         <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
-                            {{trackData.track.album.album_type}}
+                            {{recentTrack.track.album.album_type}}
 
                         </p>
                         <v-hover v-slot="{ hover }">
                             <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
-                            {{trackData.track.album.name}}
+                            {{recentTrack.track.album.name}}
                            </p>
                         </v-hover>
                     </v-card-text>
@@ -209,51 +210,14 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     data: () => ({
         isPlaying: false,
         selectedId: null,
-        recentTracks: [],
-
-        // cards: [{
-        //         name: "Andy William",
-        //         title: "Basic how to ride your skateboard comfortly",
-        //         text: "53K plays . 2 week ago",
-        //         time: "7 min",
-        //         color: "green",
-        //         image: "image_5.png",
-        //         avatar: "image_10.png",
-        //     },
-        //     {
-        //         name: "Johny Wise",
-        //         title: "Prepare for your first skateboard jump",
-        //         text: "53K plays . 2 week ago",
-        //         time: "7 min",
-        //         color: "red",
-        //         image: "image_7.png",
-        //         avatar: "image_12.png",
-        //     },
-        //     {
-        //         name: "Budi Hakim",
-        //         title: "Tips to playing skateboard on the ramp",
-        //         text: "53K plays . 2 week ago",
-        //         time: "7 min",
-        //         color: "red",
-        //         image: "image_6.png",
-        //         avatar: "image_11.png",
-        //     },
-        //     {
-        //         name: "Wijaya Abadi",
-        //         title: "Basic Equipment to play skateboard safely",
-        //         text: "53K plays . 2 week ago",
-        //         time: "7 min",
-        //         color: "green",
-        //         image: "image_8.png",
-        //         avatar: "image_13.png",
-        //     },
-        // ],
     }),
     methods: {
+        ...mapActions(['fetchrecentplaylist']),
         play() {
             this.isPlaying = true;
         },
@@ -272,15 +236,9 @@ export default {
                 this.play();
             }
         },
-        // toggleActive: function (event, card) {
-        //     if (card.active) {
-        //         card.active = false;
-        //     } else if (!card.active) {
-        //         Vue.set(card, "active", true);
-        //     }
-        // },
     },
     computed: {
+        ...mapGetters(['recentplaylist']),
         size() {
             const size = {
                 xs: "x-small",
@@ -324,28 +282,7 @@ export default {
     },
 
     created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
-
-        // Get Current User's Recently Played Tracks
-        spotifyApi.getMyRecentlyPlayedTracks({
-            limit: 20
-        }).then((data) => {
-
-            this.recentTracks.push(data.body.items)
-
-            console.log("56. Your 20 most recently played tracks are:", data.body.items);
-
-        }, function (err) {
-            console.log('56. Something went wrong!', err);
-        });
+        this.fetchrecentplaylist();
     }
 };
 </script>

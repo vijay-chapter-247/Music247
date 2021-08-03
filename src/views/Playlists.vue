@@ -8,8 +8,8 @@
         </v-card-title>
     </v-card>
 
-    <v-row v-for="playlist in playlist" :key="playlist.href" class="px-3">
-        <v-col cols="6" sm="3" v-for="item in playlist.items" :key="item.id" class="px-1 px-sm-2">
+    <v-row class="px-3">
+        <v-col v-for="(item,i) in playlist" :key="i" cols="6" sm="3"  class="px-1 px-sm-2">
             <v-hover v-slot="{ hover }">
                 <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`playlists/${item.id}`">
                     <v-img :src="item.images[0].url" :height="imageHeight" class="rounded-lg">
@@ -22,7 +22,6 @@
                             </v-btn>
                         </span> -->
                     </v-img>
-
                     <v-card-text class="white--text px-0">
                         <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
                             {{ item.type }}
@@ -41,13 +40,14 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     data: () => ({
         isPlaying: false,
         selectedId: null,
-        playlist: [],
     }),
     methods: {
+        ...mapActions(["fetchplaylist"]),
         play() {
             this.isPlaying = true;
         },
@@ -68,6 +68,7 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(["playlist"]),
         size() {
             const size = {
                 xs: "x-small",
@@ -112,30 +113,7 @@ export default {
         },
     },
     created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
-
-        // Get a user's playlists
-        spotifyApi
-            .getUserPlaylists("yzwbnheupw8eocc5io5at5fup", {
-                limit: 8,
-            })
-            .then(
-                (data) => {
-                    this.playlist.push(data.body);
-                    console.log("20. Retrieved playlists", data.body);
-                },
-                function (err) {
-                    console.log("20. Something went wrong!", err);
-                }
-            );
+        this.fetchplaylist();
     },
 };
 </script>

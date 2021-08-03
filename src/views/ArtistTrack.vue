@@ -1,28 +1,30 @@
 <template>
 <div>
-    <v-container v-for="(artistTrack,i) in artistTracks" :key="i">
-        <v-row class="dark mt-md-2 mt-0">
+    <v-container>
+        <!-- <p class="white--text"> {{ artist.images[0].url }} </p> -->
+
+         <v-row class="dark mt-md-2 mt-0">
             <v-col>
                 <v-card flat class="dark">
                     <v-row class="white--text" justify="center">
                         <v-col cols="12" md="3" class="text-center text-md-start">
                             <v-avatar :size="avatarSize" tile>
-                                <v-img :src="artistTrack.images[0].url"></v-img>
+                                <v-img :src="artist.images[0].url"></v-img>
                             </v-avatar>
                         </v-col>
 
                         <v-col cols="12" md="9" class="text-center text-md-start pb-0 mt-0 mt-md-5">
                             <v-subheader class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold">
-                                {{ artistTrack.type }}
+                                {{ artist.type }}
                             </v-subheader>
                             <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--1">
-                                {{ artistTrack.name }}
+                                {{ artist.name }}
                             </p>
                             <p class="my-3 body-2 text-md-body-2 wrap--text--2 text-uppercase">
-                                Followers : {{ artistTrack.followers.total }}
+                                Followers : {{ artist.followers.total }}
                             </p>
                             <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2">
-                                <span class="item text-uppercase" v-for="(genres,i) in artistTrack.genres" :key="i">
+                                <span class="item text-uppercase" v-for="(genres,i) in artist.genres" :key="i">
                                     {{ genres }}
                                 </span>
                             </p>
@@ -84,7 +86,7 @@
                 <v-hover v-slot:default="{ hover }">
                     <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
 
-                        <iframe :src="`https://open.spotify.com/embed?uri=${artistTrack.uri}`" width="100%" height="400" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe :src="`https://open.spotify.com/embed?uri=${artist.uri}`" width="100%" height="400" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
                     </v-row>
                 </v-hover>
@@ -96,37 +98,18 @@
 </template>
 
 <script>
+import {
+    mapActions,
+    mapGetters
+} from 'vuex'
 export default {
     data: () => ({
         isPlaying: false,
         selectedId: null,
         show: true,
-        artistTracks: []
     }),
-
-    created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
-
-        // Get an artist
-        const artistsId = this.$route.params.artistId;
-        console.log(artistsId);
-        spotifyApi.getArtist(artistsId)
-            .then((data) => {
-                this.artistTracks.push(data.body);
-                console.log('Artist information', data.body);
-            }, function (err) {
-                console.error(err);
-            });
-    },
     methods: {
+        ...mapActions(['fetchartist']),
         millisToMinutesAndSeconds(millis) {
             var minutes = Math.floor(millis / 60000);
             var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -152,6 +135,7 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(['artist']),
         size() {
             const size = {
                 md: "large",
@@ -188,6 +172,31 @@ export default {
             }
         },
     },
+
+    created() {
+
+        this.fetchartist();
+
+        // var SpotifyWebApi = require("spotify-web-api-node");
+        // var spotifyApi = new SpotifyWebApi({
+        //     clientId: this.$myClientId,
+        //     clientSecret: this.$myClientSecret,
+        //     redirectUri: "http://localhost:8080/",
+        // });
+        // spotifyApi.setAccessToken(
+        //     this.$mySetAccessToken
+        // );
+
+        // // Get an artist
+        // const artistsId = this.$route.params.artistId;
+        // spotifyApi.getArtist(artistsId)
+        //     .then((data) => {
+        //         this.artistTracks.push(data.body);
+        //         console.log('Artist information', data.body);
+        //     }, function (err) {
+        //         console.error(err);
+        //     });
+    },
 };
 </script>
 
@@ -196,3 +205,5 @@ export default {
     content: ",";
 }
 </style>
+
+

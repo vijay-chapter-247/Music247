@@ -7,8 +7,8 @@
             </div>
         </v-card-title>
     </v-card>
-    <v-row v-for="tracks in topTracks" :key="tracks.id" class="px-3">
-        <v-col cols="6" sm="3" v-for="(track, i) in tracks" :key="i" class="px-1 px-sm-2">
+    <v-row class="px-3">
+        <v-col cols="6" sm="3" v-for="(track, i) in trending" :key="i" class="px-1 px-sm-2">
             <v-hover v-slot="{ hover }">
                 <v-card exact tile :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" @click.native="doSomething(track.images[0].url)" :to="`trending/${track.id}`">
                     <v-img :src="track.images[0].url" :height="imageHeight" class="rounded-lg">
@@ -42,15 +42,17 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     data: () => ({
         isPlaying: false,
         selectedId: null,
-        playlist: [],
         topTracks: [],
         props: ["imageSource"],
     }),
     methods: {
+        ...mapActions(['fetchtrending']),
+
         doSomething(imageLink) {
             this.$emit("imageLinkChange", imageLink);
         },
@@ -74,6 +76,7 @@ export default {
         },
     },
     computed: {
+        ...mapGetters(['trending']),
         size() {
             const size = {
                 xs: "x-small",
@@ -117,46 +120,7 @@ export default {
     },
 
     created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
-
-        // Retrieve new releases
-        spotifyApi
-            .getNewReleases({
-                limit: 50,
-                country: "IN",
-            })
-            .then(
-                (data) => {
-                    this.topTracks.push(data.body.albums.items);
-                    console.log("47. Retrieve new releases", data.body.albums.items);
-                },
-                function (err) {
-                    console.log("47. Something went wrong!", err);
-                }
-            );
-
-        // /* Get a User’s Top Tracks*/
-        // spotifyApi
-        //     .getMyTopTracks({
-        //         limit: 50,
-        //         offset: 0,
-        //     })
-        //     .then((data) => {
-        //             this.topTracks.push(data.body.items);
-        //             console.log("68. Get a User’s Top Tracks", data.body.items);
-        //         },
-        //         function (err) {
-        //             console.log("68. Something went wrong!", err);
-        //         }
-        //     );
+        this.fetchtrending();
     },
 };
 </script>

@@ -276,7 +276,6 @@ export default {
         spotifyApi.getPlaylist(playlistId).then(
             (data) => {
                 this.playlistTrack.push(data.body);
-                // console.log("19. Some information about this playlist", data.body);
             },
             function (err) {
                 console.log("19. Something went wrong!", err);

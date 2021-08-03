@@ -37,11 +37,12 @@
         </v-card-text>
 
         <!-- Content -->
-        <v-card-text class="mt-3" v-for="(album, index) in albumsTrack" :key="index">
+        <!-- <v-card-text class="mt-3" v-for="(album, index) in albumsTrack" :key="index">
             <template class="white--text " v-for="item in album.items">
                 <v-hover v-slot:default="{ hover }" :key="item.id">
                     <v-row class="rounded-lg" :class="{ lightdark: hover }">
-                        <!-- <v-col sm="1" class="text-center body-2 pa-0 font-weight-medium d-none d-sm-inline" align-self="center">
+
+                        <v-col sm="1" class="text-center body-2 pa-0 font-weight-medium d-none d-sm-inline" align-self="center">
                             <div v-show="!hover && !(isPlaying && item.id === selectedId)">
                                 {{ item.track_number }}
                             </div>
@@ -94,88 +95,76 @@
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
-                        </v-col> -->
-
+                        </v-col>
 
                         <iframe :src="`https://open.spotify.com/embed?uri=${item.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="0"></iframe>
                     </v-row>
                 </v-hover>
             </template>
+        </v-card-text> -->
+
+        <v-card-text class="mt-3">
+            <template v-for="(album, index) in albumtrack.items">
+                <v-hover v-slot:default="{ hover }" :key="index">
+                    <v-row class="rounded-lg" :class="{ lightdark: hover }">
+
+                        <iframe :src="`https://open.spotify.com/embed?uri=${album.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="0"></iframe>
+                    </v-row>
+                </v-hover>
+            </template>
         </v-card-text>
     </v-card>
-
-  <!-- <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
-
 </v-container>
 </template>
 
 <script>
-export default {
-  data: () => ({
-    albumsTrack: [],
-        isPlaying: false,
-        selectedId: null,
-    }),
-    methods: {
-      millisToMinutesAndSeconds(millis) {
-        var minutes = Math.floor(millis / 60000);
-            var seconds = ((millis % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        },
-
-        play() {
-            this.isPlaying = true;
-        },
-        pause() {
-          this.isPlaying = false;
-        },
-        changeSong(songId) {
-            if (this.selectedId === songId) {
-                if (this.isPlaying) {
-                    this.pause();
+    import {
+        mapActions,
+        mapGetters
+    } from "vuex";
+    export default {
+        data: () => ({
+            isPlaying: false,
+            selectedId: null,
+        }),
+        methods: {
+            ...mapActions(["fetchalbumtrack"]),
+            play() {
+                this.isPlaying = true;
+            },
+            pause() {
+                this.isPlaying = false;
+            },
+            changeSong(songId) {
+                if (this.selectedId === songId) {
+                    if (this.isPlaying) {
+                        this.pause();
+                    } else {
+                        this.play();
+                    }
                 } else {
+                    this.selectedId = songId;
                     this.play();
                 }
-            } else {
-                this.selectedId = songId;
-                this.play();
-            }
+            },
+            millisToMinutesAndSeconds(millis) {
+                var minutes = Math.floor(millis / 60000);
+                var seconds = ((millis % 60000) / 1000).toFixed(0);
+                return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+            },
         },
-    },
-
-    created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
-
-        // Get tracks in an album
-        const albumId = this.$route.params.albumId;
-        spotifyApi
-            .getAlbumTracks(albumId, {
-                limit: 50,
-                offset: 0,
-            })
-            .then(
-                (data) => {
-                    this.albumsTrack.push(data.body);
-                    console.log("11. Get tracks in an album", this.albumsTrack);
-                },
-                function (err) {
-                    console.log("11. Something went wrong!", err);
-                }
-            );
-    },
-};
+        computed: {
+            ...mapGetters(["albumtrack"]),
+        },
+        created() {
+            this.fetchalbumtrack();
+        },
+    };
 </script>
 
 <style scoped>
-.border {
-    border: 1px solid red;
-}
+    .border {
+        border: 1px solid red;
+    }
 </style>
+

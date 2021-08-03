@@ -64,13 +64,15 @@
             <!-- Artist Section -->
             <v-subheader class="font-weight-black grey--text">Artists</v-subheader>
 
-            <div v-for="(artist, index) in artists" :key="index">
-                <v-btn text block v-for="(artistdata, index) in artist" :key="index" :to="`/artists/${artistdata.id}`" class="body-2 py-5 text-none ">
+            <div v-for="(artist, index) in topartist" :key="index">
+
+                <v-btn text block :to="`/artists/${artist.id}`" class="body-2 py-5 text-none ">
                     <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg ">
-                        <v-icon size="18" class="icon--white grey--icon"> {{ artists_icon[index] }}</v-icon>
+                        <v-icon size="18" class="icon--white grey--icon">
+                            {{ artists_icon[index] }}</v-icon>
                     </span>
                     <span class="grey--text text font-weight-bold  text-capitalize">
-                        {{ artistdata.name }}
+                        {{ artist.name }}
                     </span>
                     <v-spacer></v-spacer>
                 </v-btn>
@@ -135,6 +137,10 @@
 </template>
 
 <script>
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 export default {
     name: "App",
     data: () => ({
@@ -178,11 +184,19 @@ export default {
                 route: "/profile",
             },
         ],
-        artists_icon: [ "mdi-hops", "mdi-leaf", "mdi-chart-pie", "mdi-chart-donut-variant", "mdi-lock-pattern", "mdi-kodi" ],
+        artists_icon: [
+            "mdi-hops",
+            "mdi-leaf",
+            "mdi-chart-pie",
+            "mdi-chart-donut-variant",
+            "mdi-lock-pattern",
+            "mdi-kodi",
+        ],
         artists: [],
         albums: [],
     }),
     computed: {
+        ...mapGetters(['topartist']),
         size() {
             const size = {
                 xs: "x-small",
@@ -191,9 +205,11 @@ export default {
                 lg: "small",
                 xl: "small",
             } [this.$vuetify.breakpoint.name];
-            return size ? {
-                [size]: true,
-            } : {};
+            return size ?
+                {
+                    [size]: true,
+                } :
+                {};
         },
         playerHeight() {
             switch (this.$vuetify.breakpoint.name) {
@@ -225,6 +241,7 @@ export default {
         },
     },
     methods: {
+        ...mapActions(['fetchtopartist']),
         increment() {
             if (this.imageIndex < 14) {
                 this.imageIndex++;
@@ -245,25 +262,15 @@ export default {
         },
     },
     created() {
-        var SpotifyWebApi = require("spotify-web-api-node");
-        var spotifyApi = new SpotifyWebApi({
-            clientId: this.$myClientId,
-            clientSecret: this.$myClientSecret,
-            redirectUri: "http://localhost:8080/",
-        });
-        spotifyApi.setAccessToken(
-            this.$mySetAccessToken
-        );
+        // var SpotifyWebApi = require("spotify-web-api-node");
+        // var spotifyApi = new SpotifyWebApi({
+        //   clientId: this.$myClientId,
+        //   clientSecret: this.$myClientSecret,
+        //   redirectUri: "http://localhost:8080/",
+        // });
+        // spotifyApi.setAccessToken(this.$mySetAccessToken);
 
-        /* Get a User’s Top Artists*/
-        spotifyApi.getMyTopArtists()
-            .then((data) => {
-                let topArtists = data.body.items;
-                this.artists.push(topArtists);
-                console.log("67. Get a User’s Top Artists", topArtists);
-            }, function (err) {
-                console.log('67. Something went wrong!', err);
-            });
+        this.fetchtopartist();
 
         // // Get multiple artists
         // spotifyApi
@@ -999,7 +1006,6 @@ export default {
         /**
          * Personalization Endpoints
          */
-
     },
 };
 </script>
