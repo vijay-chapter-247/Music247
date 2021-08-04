@@ -2,8 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
-import { store } from "../store/index";
-// import store from "../store/index";
+import store from "../store/index.js";
 
 import Spotify from "spotify-web-api-node";
 import VueSpotify from "vue-spotify";
@@ -15,7 +14,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$myClientId = "6d280f8d789b4a858a67c830a85545be";
 Vue.prototype.$myClientSecret = "354f43281e0e40b8afa003a6f5361b54";
 Vue.prototype.$mySetAccessToken =
-  "BQD--Go7S9gcwoNelns-B-elNSlAhk0NSAuEU63EsZZelrz6Y35Xjbu7JcORee_uiXpWvB3GKpAGnaeC3cbo1_QC2YRYhwL2HbCMEj4cyinPWfVskKWkvyM2q4JHLJn7Cnm2qCnlom92ExYP5BnsBbCByi9WhIAMfs_GYSfxjxk_jc3scCfS7vHE9EbXOONmnXPmw0ZlkmN0RAu4Acd4AdYMFq1bi7RjHtCNYfm0ZY5zW09jNwQsKAjAQkHVHx56sO0xT79CGZsPOYRO3KK98ybjl1TlHvgasSkKfj9m";
+  "BQCYDlntTYmvslEkEQ1D2DAFRlIAoE_GEtY4GeNsUDZvsVeTT9gyqNXVMUuDHX9gcyjqsXYLTHwGRw2y9iPo3hZazmBjxZVGbivQzyiwINx_zDEMPZf9z-yvVWe7CjlNPj6izpH40dlC86n1ucE5oosQRfw5Ud12IhH3FR3POriYIo4NkpCBuHsuOwJKs7R9HsgO-fn9hAj24WxHUDQSb0cESG0US3hrnJOWDMG3eBLd01hdzufWh9riLDUnWY8L2fXAq27ZMjobelTCDxt5-FyiX_nsVUxGK9fvKU-I";
 
 new Vue({
   router,
