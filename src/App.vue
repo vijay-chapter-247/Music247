@@ -9,7 +9,7 @@
 
             <!-- </v-card-title> -->
 
-            <v-text-field append-icon="mdi-magnify" placeholder="Search" filled dense rounded class="d-none d-sm-flex mt-6"></v-text-field>
+            <v-text-field append-icon="mdi-magnify" v-model="searchQuery" placeholder="Search" filled dense rounded class="d-none d-sm-flex mt-6"></v-text-field>
 
             <v-spacer></v-spacer>
             <v-spacer></v-spacer>
@@ -64,7 +64,7 @@
             <!-- Artist Section -->
             <v-subheader class="font-weight-black grey--text">Artists</v-subheader>
 
-            <div v-for="(artist, index) in topartist" :key="index">
+            <div v-for="(artist, index) in filterName" :key="index">
 
                 <v-btn text block :to="`/artists/${artist.id}`" class="body-2 py-5 text-none ">
                     <span class="bg--grey grey--light--text mr-5 pa-1 rounded-lg ">
@@ -144,6 +144,7 @@ import {
 export default {
     name: "App",
     data: () => ({
+        searchQuery: "",
         imageTrendingTrack: null,
         drawer: true,
         player: true,
@@ -197,6 +198,11 @@ export default {
     }),
     computed: {
         ...mapGetters(['topartist']),
+        filterName: function(){
+            return this.topartist.filter((artist) => {
+                return artist.name.toLowerCase().match(this.searchQuery)
+            })
+        },
         size() {
             const size = {
                 xs: "x-small",

@@ -1,43 +1,43 @@
 <template>
-<v-container>
-    <v-card dark flat class="dark mt-2">
-        <v-card-title>
-            <div class="headline  wrap--text--1">
-                Albums
-            </div>
-        </v-card-title>
-    </v-card>
+    <v-container>
+        <v-card dark flat class="dark mt-2">
+            <v-card-title>
+                <div class="headline  wrap--text--1">
+                    Albums
+                </div>
+            </v-card-title>
+        </v-card>
 
-    <v-card dark flat class="dark mt-2">
-        <v-card-text class="d-none d-md-block">
-            <!-- Heading -->
-            <v-row class="white--text d-none d-md-flex">
-                <v-col cols="1" class="text-center">
-                    <div class="body-1 font-weight-medium grey--text">#</div>
-                </v-col>
+        <v-card dark flat class="dark mt-2">
+            <v-card-text class="d-none d-md-block">
+                <!-- Heading -->
+                <v-row class="white--text d-none d-md-flex">
+                    <v-col cols="1" class="text-center">
+                        <div class="body-1 font-weight-medium grey--text">#</div>
+                    </v-col>
 
-                <v-col cols="10" md="6">
-                    <div class="body-1 font-weight-medium grey--text">Title</div>
-                </v-col>
+                    <v-col cols="10" md="6">
+                        <div class="body-1 font-weight-medium grey--text">Title</div>
+                    </v-col>
 
-                <v-col md="4" class="d-none d-md-flex">
-                    <div class="wrap--text--1 body-1 font-weight-medium grey--text">
-                        Album
-                    </div>
-                </v-col>
-                <v-col cols="1" class="text-center">
-                    <v-icon color="grey">mdi-clock-outline</v-icon>
-                </v-col>
-            </v-row>
+                    <v-col md="4" class="d-none d-md-flex">
+                        <div class="wrap--text--1 body-1 font-weight-medium grey--text">
+                            Album
+                        </div>
+                    </v-col>
+                    <v-col cols="1" class="text-center">
+                        <v-icon color="grey">mdi-clock-outline</v-icon>
+                    </v-col>
+                </v-row>
 
-            <!-- Divider -->
-            <v-row>
-                <v-divider color="grey"></v-divider>
-            </v-row>
-        </v-card-text>
+                <!-- Divider -->
+                <v-row>
+                    <v-divider color="grey"></v-divider>
+                </v-row>
+            </v-card-text>
 
-        <!-- Content -->
-        <!-- <v-card-text class="mt-3" v-for="(album, index) in albumsTrack" :key="index">
+            <!-- Content -->
+            <!-- <v-card-text class="mt-3" v-for="(album, index) in albumsTrack" :key="index">
             <template class="white--text " v-for="item in album.items">
                 <v-hover v-slot:default="{ hover }" :key="item.id">
                     <v-row class="rounded-lg" :class="{ lightdark: hover }">
@@ -103,68 +103,66 @@
             </template>
         </v-card-text> -->
 
-        <v-card-text class="mt-3">
-            <template v-for="(album, index) in albumtrack.items">
-                <v-hover v-slot:default="{ hover }" :key="index">
-                    <v-row class="rounded-lg" :class="{ lightdark: hover }">
-
-                        <iframe :src="`https://open.spotify.com/embed?uri=${album.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="0"></iframe>
-                    </v-row>
-                </v-hover>
-            </template>
-        </v-card-text>
-    </v-card>
-</v-container>
+            <v-card-text class="mt-3">
+                <template v-for="(album, index) in albumtrack.items">
+                    <v-hover v-slot:default="{ hover }" :key="index">
+                        <v-row class="rounded-lg" :class="{ lightdark: hover }">
+                            <iframe :src="`https://open.spotify.com/embed?uri=${album.uri}`" width="100%" height="80" style="margin: 7px;" frameborder="0"></iframe>
+                        </v-row>
+                    </v-hover>
+                </template>
+            </v-card-text>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
-    import {
-        mapActions,
-        mapGetters
-    } from "vuex";
-    export default {
-        data: () => ({
-            isPlaying: false,
-            selectedId: null,
-        }),
-        methods: {
-            ...mapActions(["fetchalbumtrack"]),
-            play() {
-                this.isPlaying = true;
-            },
-            pause() {
-                this.isPlaying = false;
-            },
-            changeSong(songId) {
-                if (this.selectedId === songId) {
-                    if (this.isPlaying) {
-                        this.pause();
-                    } else {
-                        this.play();
-                    }
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
+export default {
+    data: () => ({
+        isPlaying: false,
+        selectedId: null,
+    }),
+    methods: {
+        ...mapActions(["fetchAlbumtrack"]),
+        play() {
+            this.isPlaying = true;
+        },
+        pause() {
+            this.isPlaying = false;
+        },
+        changeSong(songId) {
+            if (this.selectedId === songId) {
+                if (this.isPlaying) {
+                    this.pause();
                 } else {
-                    this.selectedId = songId;
                     this.play();
                 }
-            },
-            millisToMinutesAndSeconds(millis) {
-                var minutes = Math.floor(millis / 60000);
-                var seconds = ((millis % 60000) / 1000).toFixed(0);
-                return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-            },
+            } else {
+                this.selectedId = songId;
+                this.play();
+            }
         },
-        computed: {
-            ...mapGetters(["albumtrack"]),
+        millisToMinutesAndSeconds(millis) {
+            var minutes = Math.floor(millis / 60000);
+            var seconds = ((millis % 60000) / 1000).toFixed(0);
+            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
         },
-        created() {
-            this.fetchalbumtrack();
-        },
-    };
+    },
+    computed: {
+        ...mapGetters(["albumtrack"]),
+    },
+    created() {
+        this.fetchAlbumtrack();
+    },
+};
 </script>
 
 <style scoped>
-    .border {
-        border: 1px solid red;
-    }
+.border {
+    border: 1px solid red;
+}
 </style>
-

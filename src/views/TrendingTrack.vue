@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-container v-for="tracks in trendingTrack" :key="tracks.id">
+    <v-container>
         <v-row class="dark mt-md-2 mt-0">
             <v-col>
                 <v-card flat class="dark">
@@ -16,10 +16,10 @@
                                 SINGLE
                             </v-subheader>
                             <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--2">
-                                {{ tracks.name }}
+                                {{ trendingtrack.name }}
                             </p>
                             <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2 ">
-                                <span class="item" v-for="artist in tracks.artists" :key="artist.id">
+                                <span class="item" v-for="artist in trendingtrack.artists" :key="artist.id">
                                     {{ artist.name }}
                                 </span>
                             </p>
@@ -114,7 +114,7 @@
                         </v-col> -->
 
 
-                        <iframe :src="`https://open.spotify.com/embed?uri=${tracks.uri}`" width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe :src="`https://open.spotify.com/embed?uri=${trendingtrack.uri}`" width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
                     </v-row>
                 </v-hover>
@@ -125,6 +125,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     props: {
         imageSource: String,
@@ -136,11 +137,7 @@ export default {
         trendingTrack: [],
     }),
     methods: {
-        millisToMinutesAndSeconds(millis) {
-            var minutes = Math.floor(millis / 60000);
-            var seconds = ((millis % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        },
+        ...mapActions(["fetchTrendingTrack"]),
         play() {
             this.isPlaying = true;
         },
@@ -159,8 +156,14 @@ export default {
                 this.play();
             }
         },
+                millisToMinutesAndSeconds(millis) {
+                    var minutes = Math.floor(millis / 60000);
+                    var seconds = ((millis % 60000) / 1000).toFixed(0);
+                    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+                },
     },
     computed: {
+        ...mapGetters(["trendingtrack"]),
         size() {
             const size = {
                 md: "large",
@@ -198,40 +201,7 @@ export default {
         },
     },
     created() {
-    var SpotifyWebApi = require("spotify-web-api-node");
-    var spotifyApi = new SpotifyWebApi({
-      clientId: this.$myClientId,
-      clientSecret: this.$myClientSecret,
-      redirectUri: "http://localhost:8080/",
-    });
-    spotifyApi.setAccessToken(
-        this.$mySetAccessToken
-    );
-
-        const trendingId = this.$route.params.trendingId;
-
-        // // Retrieve new releases
-        // spotifyApi
-        //     .getNewReleases(trendingId)
-        //     .then(
-        //         (data) => {
-        //             this.trendingTrack.push(data.body);
-        //             console.log("47. Retrieve new releases", data.body);
-        //         },
-        //         function (err) {
-        //             console.log("47. Something went wrong!", err);
-        //         }
-        //     );
-
-        spotifyApi.getAlbumTracks(trendingId).then(
-            (data) => {
-                this.trendingTrack.push(data.body.items[0]);
-                console.log(data.body.items[0]);
-            },
-            function (err) {
-                console.log("Something went wrong!", err);
-            }
-        );
+        this.fetchTrendingTrack();
     },
 };
 </script>
