@@ -92,41 +92,16 @@
 </template>
 
 <script>
-import {
-    mapActions,
-    mapGetters
-} from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import mergeMixin from "../mixins/mergeData.js";
+
 export default {
+    mixins: [ mergeMixin ],
     data: () => ({
-        isPlaying: false,
-        selectedId: null,
         show: true,
     }),
     methods: {
-        ...mapActions(["fetchArtist"]),
-        millisToMinutesAndSeconds(millis) {
-            var minutes = Math.floor(millis / 60000);
-            var seconds = ((millis % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        },
-        play() {
-            this.isPlaying = true;
-        },
-        pause() {
-            this.isPlaying = false;
-        },
-        changeSong(songId) {
-            if (this.selectedId === songId) {
-                if (this.isPlaying) {
-                    this.pause();
-                } else {
-                    this.play();
-                }
-            } else {
-                this.selectedId = songId;
-                this.play();
-            }
-        },
+        ...mapActions(["fetchtopartist"]),
     },
     computed: {
         ...mapGetters(["artist"]),
@@ -167,9 +142,16 @@ export default {
         },
     },
 
-    created() {
-        this.fetchArtist();
+    updated() {
+        this.fetchtopartist();
     },
+    mounted() {
+        this.fetchtopartist();
+    },
+
+    // created() {
+    //     this.fetchtopartist();
+    // },
 };
 </script>
 

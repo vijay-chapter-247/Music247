@@ -1,36 +1,18 @@
 <template>
-  <v-container>
-    <v-card dark flat class="dark mt-2 ">
-      <v-card-title class="">
-        <div class="headline  wrap--text--1 ">
-          Trending
-        </div>
-      </v-card-title>
-    </v-card>
-    <v-row class="px-3">
-      <v-col
-        cols="6"
-        sm="3"
-        v-for="(track, i) in trending"
-        :key="i"
-        class="px-1 px-sm-2"
-      >
-        <v-hover v-slot="{ hover }">
-          <v-card
-            exact
-            tile
-            :height="cardHeight"
-            :elevation="hover ? 15 : 0"
-            class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg"
-            @click.native="doSomething(track.images[0].url)"
-            :to="`trending/${track.id}`"
-          >
-            <v-img
-              :src="track.images[0].url"
-              :height="imageHeight"
-              class="rounded-lg"
-            >
-              <!-- <span class="d-none d-sm-inline">
+    <v-container>
+        <v-card dark flat class="dark mt-2 ">
+            <v-card-title class="">
+                <div class="headline  wrap--text--1 ">
+                    Trending
+                </div>
+            </v-card-title>
+        </v-card>
+        <v-row class="px-3">
+            <v-col cols="6" sm="3" v-for="(track, i) in trending" :key="i" class="px-1 px-sm-2">
+                <v-hover v-slot="{ hover }">
+                    <v-card exact tile :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`trending/${track.id}`">
+                        <v-img :src="track.images[0].url" :height="imageHeight" class="rounded-lg">
+                            <!-- <span class="d-none d-sm-inline">
                             <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(track.id)" v-if="isPlaying && item.id === selectedId" to="playlists">
                                 <v-icon>mdi-pause</v-icon>
                             </v-btn>
@@ -38,132 +20,55 @@
                                 <v-icon>mdi-play</v-icon>
                             </v-btn>
                         </span> -->
-            </v-img>
+                        </v-img>
 
-            <v-card-text class="white--text px-0">
-              <p
-                class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1"
-              >
-                {{ track.name }}
-              </p>
-              <v-hover
-                v-slot="{ hover }"
-                :class="{ 'text-decoration-underline': hover }"
-              >
-                <p
-                  class="mb-2 body-2 grey--text text-capitalize wrap--text--2"
-                  :class="{ 'text-decoration-underline': hover }"
-                >
-                  <span
-                    class="item"
-                    v-for="(artist, j) in track.artists"
-                    :key="j"
-                  >
-                    {{ artist.name }}
-                  </span>
-                </p>
-              </v-hover>
-            </v-card-text>
-          </v-card>
-        </v-hover>
-      </v-col>
-    </v-row>
-  </v-container>
+                        <v-card-text class="white--text px-0">
+                            <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
+                                {{ track.name }}
+                            </p>
+                            <v-hover v-slot="{ hover }" :class="{ 'text-decoration-underline': hover }">
+                                <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
+                                    <span class="item" v-for="(artist, j) in track.artists" :key="j">
+                                        {{ artist.name }}
+                                    </span>
+                                </p>
+                            </v-hover>
+                        </v-card-text>
+                    </v-card>
+                </v-hover>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
+import mergeMixin from "../mixins/mergeData.js";
+
 export default {
-  data: () => ({
-    isPlaying: false,
-    selectedId: null,
-    topTracks: [],
-    props: ["imageSource"],
-  }),
-  methods: {
-    ...mapActions(["fetchTrending"]),
-
-    doSomething(imageLink) {
-      this.$emit("imageLinkChange", imageLink);
+    mixins: [ mergeMixin ],
+    methods: {
+        ...mapActions(["fetchTrending"]),
     },
-    play() {
-      this.isPlaying = true;
+    computed: {
+        ...mapGetters(["trending"]),
     },
-    pause() {
-      this.isPlaying = false;
+    created() {
+        this.fetchTrending();
     },
-    changeSong(songId) {
-      if (this.selectedId === songId) {
-        if (this.isPlaying) {
-          this.pause();
-        } else {
-          this.play();
-        }
-      } else {
-        this.selectedId = songId;
-        this.play();
-      }
-    },
-  },
-  computed: {
-    ...mapGetters(["trending"]),
-    size() {
-      const size = {
-        xs: "x-small",
-        sm: "x-small",
-        md: "x-small",
-        lg: "small",
-        xl: "small",
-      }[this.$vuetify.breakpoint.name];
-      return size
-        ? {
-            [size]: true,
-          }
-        : {};
-    },
-    imageHeight() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "120";
-        case "sm":
-          return "110";
-        case "md":
-          return "140";
-        case "lg":
-          return "200";
-        default:
-          return "200";
-      }
-    },
-    cardHeight() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "230";
-        case "sm":
-          return "230";
-        case "md":
-          return "260";
-        case "lg":
-          return "320";
-        default:
-          return "320";
-      }
-    },
-  },
-
-  created() {
-    this.fetchTrending();
-  },
 };
 </script>
 
 <style>
 .position--bottom {
-  bottom: 5px !important;
-  right: 10px !important;
+    bottom: 5px !important;
+    right: 10px !important;
 }
 
-.item + .item:before {
-  content: ",";
+.item+.item:before {
+    content: ",";
 }
 </style>

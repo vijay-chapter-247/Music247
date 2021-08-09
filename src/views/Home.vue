@@ -177,7 +177,6 @@
 
         <v-row class="px-3">
             <v-col cols="12" sm="3" class="px-1 px-sm-2" v-for="(recentTrack, i) in recentplaylist" :key="i">
-                <!-- <p> {{ recentTrack.track.album.album_type }} </p> -->
                 <v-hover v-slot="{ hover }">
                     <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${recentTrack.track.album.id}`">
                         <v-img :src="recentTrack.track.album.images[0].url" :height="imageHeight" class="rounded-lg">
@@ -197,92 +196,21 @@
                 </v-hover>
             </v-col>
         </v-row>
-
-        <!-- <v-row v-for="(recentTrack,i) in recentTracks" :key="i">
-        <v-col v-for="(trackData,i) in recentTrack" :key="i">
-            <p class="white--text">{{ trackData.track.album.images[0].url }}</p>
-        </v-col>
-        </v-row> -->
     </v-container>
 </template>
 
 <script>
-import {
-    mapActions,
-    mapGetters
-} from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import mergeMixin from "../mixins/mergeData.js";
+
 export default {
-    data: () => ({
-        isPlaying: false,
-        selectedId: null,
-    }),
+    mixins: [ mergeMixin ],
     methods: {
         ...mapActions(["fetchRecentPlaylist"]),
-        play() {
-            this.isPlaying = true;
-        },
-        pause() {
-            this.isPlaying = false;
-        },
-        changeSong(songId) {
-            if (this.selectedId === songId) {
-                if (this.isPlaying) {
-                    this.pause();
-                } else {
-                    this.play();
-                }
-            } else {
-                this.selectedId = songId;
-                this.play();
-            }
-        },
     },
     computed: {
         ...mapGetters(["recentplaylist"]),
-        size() {
-            const size = {
-                xs: "x-small",
-                sm: "x-small",
-                md: "x-small",
-                lg: "small",
-                xl: "small",
-            } [this.$vuetify.breakpoint.name];
-            return size ?
-                {
-                    [size]: true,
-                } :
-                {};
-        },
-        imageHeight() {
-            switch (this.$vuetify.breakpoint.name) {
-                case "xs":
-                    return "120";
-                case "sm":
-                    return "110";
-                case "md":
-                    return "140";
-                case "lg":
-                    return "200";
-                default:
-                    return "200";
-            }
-        },
-        cardHeight() {
-            switch (this.$vuetify.breakpoint.name) {
-                case "xs":
-                    return "230";
-                case "sm":
-                    return "230";
-                case "md":
-                    return "260";
-                case "lg":
-                    return "320";
-                default:
-                    return "320";
-            }
-        },
     },
-
     created() {
         this.fetchRecentPlaylist();
     },

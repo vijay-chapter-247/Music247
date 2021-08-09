@@ -149,9 +149,7 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-col> -->
-                                <iframe :src="
-                    `https://open.spotify.com/embed?uri=${playlistSongs.track.uri}`
-                  " width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                <iframe :src="`https://open.spotify.com/embed?uri=${playlistSongs.track.uri}`" width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </v-row>
                         </v-hover>
                     </div>
@@ -162,45 +160,17 @@
 </template>
 
 <script>
-import {
-    mapActions,
-    mapGetters
-} from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import mergeMixin from "../mixins/mergeData.js";
+
 export default {
+    mixins: [ mergeMixin ],
     data: () => ({
-        isPlaying: false,
-        selectedId: null,
         show: true,
-        playlistTrack: [],
-        playlistSongs: [],
-        array: [],
     }),
     methods: {
         ...mapActions(["fetchPlaylistTrack"]),
         ...mapActions(["fetchPlaylistHeader"]),
-        play() {
-            this.isPlaying = true;
-        },
-        pause() {
-            this.isPlaying = false;
-        },
-        changeSong(songId) {
-            if (this.selectedId === songId) {
-                if (this.isPlaying) {
-                    this.pause();
-                } else {
-                    this.play();
-                }
-            } else {
-                this.selectedId = songId;
-                this.play();
-            }
-        },
-        millisToMinutesAndSeconds(millis) {
-            var minutes = Math.floor(millis / 60000);
-            var seconds = ((millis % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        },
     },
     computed: {
         ...mapGetters(["playlisttrack"]),
