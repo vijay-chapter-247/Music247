@@ -92,11 +92,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 import mergeMixin from "../mixins/mergeData.js";
 
 export default {
-    mixins: [ mergeMixin ],
+    mixins: [mergeMixin],
     data: () => ({
         show: true,
     }),

@@ -121,36 +121,12 @@ import {
     mapActions,
     mapGetters
 } from "vuex";
+import mergeMixin from "../mixins/mergeData.js";
+
 export default {
-    data: () => ({
-        isPlaying: false,
-        selectedId: null,
-    }),
+    mixins: [mergeMixin],
     methods: {
         ...mapActions(["fetchAlbumtrack"]),
-        play() {
-            this.isPlaying = true;
-        },
-        pause() {
-            this.isPlaying = false;
-        },
-        changeSong(songId) {
-            if (this.selectedId === songId) {
-                if (this.isPlaying) {
-                    this.pause();
-                } else {
-                    this.play();
-                }
-            } else {
-                this.selectedId = songId;
-                this.play();
-            }
-        },
-        millisToMinutesAndSeconds(millis) {
-            var minutes = Math.floor(millis / 60000);
-            var seconds = ((millis % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        },
     },
     computed: {
         ...mapGetters(["albumtrack"]),

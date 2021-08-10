@@ -13,14 +13,7 @@
                 <v-hover v-slot="{ hover }">
                     <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`playlists/${item.id}`">
                         <v-img :src="item.images[0].url" :height="imageHeight" class="rounded-lg">
-                            <!-- <span class="d-none d-sm-inline">
-                            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-if="isPlaying && item.id === selectedId" to="playlists">
-                                <v-icon>mdi-pause</v-icon>
-                            </v-btn>
-                            <v-btn fab v-bind="size" absolute right bottom class="arrow bg--orange  white--text no-background-hover position--bottom" @click="changeSong(item.id)" v-else v-show="hover" to="playlists">
-                                <v-icon>mdi-play</v-icon>
-                            </v-btn>
-                        </span> -->
+                            <Controller :hover="hover" :item="item.id" />
                         </v-img>
                         <v-card-text class="white--text px-0">
                             <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
@@ -40,11 +33,18 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import mergeMixin from '../mixins/mergeData.js'
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
+import Controller from "./Controller.vue";
+import mergeMixin from "../mixins/mergeData.js";
 
 export default {
-    mixins: [ mergeMixin ],
+    components: {
+        Controller,
+    },
+    mixins: [mergeMixin],
     methods: {
         ...mapActions(["fetchPlaylist"]),
     },
@@ -57,9 +57,3 @@ export default {
 };
 </script>
 
-<style>
-.position--bottom {
-    bottom: 5px !important;
-    right: 10px !important;
-}
-</style>

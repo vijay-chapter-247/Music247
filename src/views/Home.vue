@@ -180,6 +180,7 @@
                 <v-hover v-slot="{ hover }">
                     <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${recentTrack.track.album.id}`">
                         <v-img :src="recentTrack.track.album.images[0].url" :height="imageHeight" class="rounded-lg">
+                            <Controller :hover="hover" :item="recentTrack.track.album.id" />
                         </v-img>
 
                         <v-card-text class="white--text px-0">
@@ -201,9 +202,13 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Controller from './Controller.vue'
 import mergeMixin from "../mixins/mergeData.js";
 
 export default {
+    components: {
+        Controller
+    },
     mixins: [ mergeMixin ],
     methods: {
         ...mapActions(["fetchRecentPlaylist"]),

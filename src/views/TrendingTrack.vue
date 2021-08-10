@@ -2,8 +2,7 @@
     <div>
         <v-container>
 
-
-            <p class="white--text"> {{  }} </p>
+            <p class="white--text"> {{ }} </p>
             <v-row class="dark mt-md-2 mt-0">
                 <v-col>
                     <v-card flat class="dark">
@@ -131,37 +130,15 @@ import {
     mapActions,
     mapGetters
 } from 'vuex'
+import mergeMixin from "../mixins/mergeData.js";
+
 export default {
+    mixins: [mergeMixin],
     data: () => ({
-        isPlaying: false,
-        selectedId: null,
         show: true,
     }),
     methods: {
         ...mapActions(["fetchTrendingTrack"]),
-        play() {
-            this.isPlaying = true;
-        },
-        pause() {
-            this.isPlaying = false;
-        },
-        changeSong(songId) {
-            if (this.selectedId === songId) {
-                if (this.isPlaying) {
-                    this.pause();
-                } else {
-                    this.play();
-                }
-            } else {
-                this.selectedId = songId;
-                this.play();
-            }
-        },
-        millisToMinutesAndSeconds(millis) {
-            var minutes = Math.floor(millis / 60000);
-            var seconds = ((millis % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        },
     },
     computed: {
         ...mapGetters(["trendingtrack", "trendingImage"]),

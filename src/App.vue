@@ -199,6 +199,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "App",
   data: () => ({
@@ -340,7 +341,7 @@ export default {
     });
 
     spotifyApi.setAccessToken(
-      "BQB8RKYAtWNB7zP68JpMyIwwtRDpCAdLPi5eb-gqjlS4XwgDan1EFlNQgtoT16ccJSMtjh8SdjUXBKHU1-UDpPx3RwfNQYGtYQI1Zh1yDB_C0OAJLtM3rpuckBvC2EILok26OYN0Ewkf_hCw1K358uqgk2XOIBNG6oiKhNfrACQj2NY_BF1S7xuhP1KQR7KOBSysey-2zkFzfKd8XB0d7q1Ifqe39tMWtcOFQre8ftmqLH1dwk0Ke0-g2473s8dexCdcDDZ-KPKwGvLIgcIONYoLxwif1SyTgawtPmfn"
+      "BQCxufzhiSyrThqurkv70xF5UcbtpVuPZhBN1H5GnghjTTeUq905X5eiZPhM96-GR7PgC6A-PuFvWxfaQRgX-nrlLmzRjUDpFWn2j3xOYqqw8F2D4g_pKhEC_lgturx9mPIjCH0hhE-5jmlkgzUOA7EkhZKcUEcbdR47i5cLPvjIcv7uxCai-0dM_T9nDtMGDS6Q3hmsSs376bxTA-o5dC3cKQn6zla8t_3Cxn5NwP3JIzyMggT0ZjJTAU239ztp1CQskr5hRxlq-eEfx4-wSqyOxRC79ROgD7sdej47"
     );
 
     // // Get multiple artists

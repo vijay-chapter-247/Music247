@@ -10,9 +10,12 @@
                                     <v-img :src="playlistheader.images[0].url"></v-img>
 
                                     <!-- Showing Error -->
-                                    <!-- <p class="white--text"> {{ playlistheader.images[0].url }} </p> -->
                                 </v-avatar>
                             </v-col>
+
+                            <!-- <v-col>
+                                    <p class="white--text pa-15"> {{ playlistheader.images[0].url }} </p>
+                            </v-col> -->
 
                             <v-col cols="12" md="9" class="text-center text-md-start pb-0 mt-0 mt-md-5">
                                 <v-subheader class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold">
