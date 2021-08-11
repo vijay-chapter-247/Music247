@@ -7,7 +7,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: "http://localhost:8080/",
 });
 spotifyApi.setAccessToken(
-  "BQCxufzhiSyrThqurkv70xF5UcbtpVuPZhBN1H5GnghjTTeUq905X5eiZPhM96-GR7PgC6A-PuFvWxfaQRgX-nrlLmzRjUDpFWn2j3xOYqqw8F2D4g_pKhEC_lgturx9mPIjCH0hhE-5jmlkgzUOA7EkhZKcUEcbdR47i5cLPvjIcv7uxCai-0dM_T9nDtMGDS6Q3hmsSs376bxTA-o5dC3cKQn6zla8t_3Cxn5NwP3JIzyMggT0ZjJTAU239ztp1CQskr5hRxlq-eEfx4-wSqyOxRC79ROgD7sdej47"
+  "BQC4LE2SPWYDHwJoVHbDF7hiN8J_ORGiybhSYfbNrOc507_NJ_RtUnHyunS0vCkAhHtIrtt7lAYUF6w6-SVcl14vm-9XlMwOiiy5TL5mIm0lPaaReMKlUSiGoLH9bkSrehYe2Pt9o7xh15b9NmfGAa-VPCK1wlJWguekFRkTMQ72cChsyDFWo2LoyIfEh4nSHQ_5NINCJTD8d3OSNHPvm5DE6JyoLtyG3HcEduvSwAU_o9bjCkVwq7EowaSsS7PBx3J6AooPL8jtA_Jb8by5Agl7PXoEFDyzrp72TZ1E"
 );
 
 const state = {
