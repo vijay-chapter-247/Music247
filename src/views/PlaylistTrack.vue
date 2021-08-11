@@ -7,12 +7,11 @@
                         <v-row class="white--text" justify="center">
                             <v-col cols="12" md="3" class="text-center text-md-start">
                                 <v-avatar :size="avatarSize" tile>
-                                    <v-img :src="playlistheader.images[0].url"></v-img>
-
+                                    <v-img :src="playlistheader.images && playlistheader.images.length > 0 ? playlistheader.images[0].url : '' "></v-img>
+                                    
                                     <!-- Showing Error -->
                                 </v-avatar>
                             </v-col>
-
                             <!-- <v-col>
                                     <p class="white--text pa-15"> {{ playlistheader.images[0].url }} </p>
                             </v-col> -->
@@ -28,7 +27,7 @@
                                     {{ playlistheader.description }}
                                 </p>
                                 <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2">
-                                    {{ playlistheader.owner.display_name }} . 1HR 30 MIN
+                                    {{ playlistheader.owner ? playlistheader.owner.display_name : ' ' }} . 1HR 30 MIN
                                 </p>
                             </v-col>
 
