@@ -7,7 +7,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: "http://localhost:8080/",
 });
 spotifyApi.setAccessToken(
-  "BQC4LE2SPWYDHwJoVHbDF7hiN8J_ORGiybhSYfbNrOc507_NJ_RtUnHyunS0vCkAhHtIrtt7lAYUF6w6-SVcl14vm-9XlMwOiiy5TL5mIm0lPaaReMKlUSiGoLH9bkSrehYe2Pt9o7xh15b9NmfGAa-VPCK1wlJWguekFRkTMQ72cChsyDFWo2LoyIfEh4nSHQ_5NINCJTD8d3OSNHPvm5DE6JyoLtyG3HcEduvSwAU_o9bjCkVwq7EowaSsS7PBx3J6AooPL8jtA_Jb8by5Agl7PXoEFDyzrp72TZ1E"
+  "BQBxIxbVk8YhUqAgGmb2SE3OI0QbW5I4docQeacfHgZ0OMHNs41iuKGkaFG8mwzK9fl5vBddWm3qMrulYJ21D4UtDO7l1yJ-ZfjwLjjtCLm7Qfv5oq5VGQ778NgO84WpRsDpj1gzCHaTPS4CAkFOWTjj7WyUBj8NqP7Ey_uRMiP4H-N7Uo_ewfkF1IvO9qUgSOnhftRR9GGnp6VFUjn3DcAZas7rqjuHmQ6dHU86J4FtXUIqMu4kmdYtTdzh0tKeYlppz2pwO-xMfcPh9s6NFs7z6X8luHMS2_U0Cadx"
 );
 
 const state = {
@@ -21,6 +21,8 @@ const state = {
   recentplaylist: [],
   // artist: [],
   topartist: [],
+  categories: [],
+  categoriesTrack: []
 };
 
 const getters = {
@@ -49,6 +51,10 @@ const getters = {
     state.topartist.find((p) => p.id === router.currentRoute.params.artistId),
 
   topartist: (state) => state.topartist,
+
+  categories: (state) => state.categories,
+
+  categoriesTracks: (state) => state.categoriesTrack,
 };
 
 const actions = {
@@ -58,7 +64,7 @@ const actions = {
       (data) => {
         commit("setRecentplaylist", data.body.items);
       },
-      function(err) {
+      function (err) {
         console.log("56. Something went wrong!", err);
       }
     );
@@ -69,7 +75,7 @@ const actions = {
       (data) => {
         commit("setTrending", data.body.albums.items);
       },
-      function(err) {
+      function (err) {
         console.log("47. Something went wrong!", err);
       }
     );
@@ -80,10 +86,8 @@ const actions = {
     spotifyApi.getAlbumTracks(trendingId).then(
       (data) => {
         commit("setTrendingTrack", data.body.items[0]);
-        // this.trendingTrack.push(data.body.items[0]);
-        // console.log(data.body.items[0]);
       },
-      function(err) {
+      function (err) {
         console.log("Something went wrong!", err);
       }
     );
@@ -94,7 +98,7 @@ const actions = {
       (data) => {
         commit("setPlaylist", data.body.items);
       },
-      function(err) {
+      function (err) {
         console.log("20. Something went wrong!", err);
       }
     );
@@ -107,7 +111,7 @@ const actions = {
         // this.playlistTrack.push(data.body);
         commit("setPlaylistHeader", data.body);
       },
-      function(err) {
+      function (err) {
         console.log("19. Something went wrong!", err);
       }
     );
@@ -119,28 +123,28 @@ const actions = {
       (data) => {
         commit("setPlaylistTrack", data.body);
       },
-      function(err) {
+      function (err) {
         console.log("11. Something went wrong!", err);
       }
     );
   },
   async fetchAlbum({ commit }) {
-    // Get multiple albums
-    spotifyApi
-      .getAlbums([
-        "5U4W9E5WsYb2jUQWePT8Xm",
-        "3KyVcddATClQKIdtaap4bV",
-        "6GKdqG98cRgVf8mI9wJU5g",
-        "61kijqkLmurIjlNOv65WYJ",
-        "1lz1oSTTrZuNe0nE02PjKJ",
-        "4KA206tstq17hbvPIZm2nZ",
-      ])
+    spotifyApi.getAlbums([
+      "1CHHIPnOBaLjn0XO0sN07W",
+      "0I4qWmnLr665zzPdIhRIB5",
+      "4nsfoy12XSqqLDwJzAGGH7",
+      "61kijqkLmurIjlNOv65WYJ",
+      "4bTGJwlmrPCsl5Ib62S7CE",
+      "2gNPnKP1PDkB5SZz3IMKuX",
+      "2nVYv9PlewRjBK6vfPTpxw",
+      "3cbW8Lfxw1NJzSxiMMtsrk",
+    ])
       .then(
         (data) => {
           // this.albums.push(data.body.albums);
           commit("setAlbum", data.body.albums);
         },
-        function(err) {
+        function (err) {
           console.error("2. Something went wrong!", err);
         }
       );
@@ -152,7 +156,7 @@ const actions = {
       (data) => {
         commit("setAlbumTrack", data.body);
       },
-      function(err) {
+      function (err) {
         console.log("11. Something went wrong!", err);
       }
     );
@@ -175,10 +179,30 @@ const actions = {
       (data) => {
         commit("setTopArtist", data.body.items);
       },
-      function(err) {
+      function (err) {
         console.log("67. Something went wrong!", err);
       }
     );
+  },
+  async fetchCategories({ commit }) {
+    // Get a List of Categories
+    spotifyApi.getCategories({ limit: 50, country: 'IN' }).then(
+      (data) => {
+        commit("setCategories", data.body.categories.items);
+      },
+      function (err) {
+        console.log("49. Something went wrong!", err);
+      }
+    );
+  },
+  async fetchCategoriesTrack({ commit }) {
+    // Get Playlists for a Category
+    const categoryId = router.currentRoute.params.categoryId;
+    spotifyApi.getPlaylistsForCategory(categoryId, { country: 'IN', limit: 50 }).then((data) => {
+      commit("setCategoriesTrack", data.body.playlists.items);
+    }, function (err) {
+      console.log("51. Something went wrong!", err);
+    });
   },
 };
 const mutations = {
@@ -205,6 +229,10 @@ const mutations = {
   // setArtist: (state, artist) => (state.artist = artist),
 
   setTopArtist: (state, topartist) => (state.topartist = topartist),
+
+  setCategories: (state, categories) => (state.categories = categories),
+
+  setCategoriesTrack: (state, categoriesTrack) => (state.categoriesTrack = categoriesTrack),
 };
 
 export default {

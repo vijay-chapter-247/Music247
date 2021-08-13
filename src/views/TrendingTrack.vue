@@ -1,75 +1,75 @@
 <template>
-    <div>
-        <v-container>
+<div>
+    <v-container>
 
-            <p class="white--text"> {{ }} </p>
-            <v-row class="dark mt-md-2 mt-0">
-                <v-col>
-                    <v-card flat class="dark">
-                        <v-row class="white--text" justify="center">
-                            <v-col cols="12" md="3" class="text-center text-md-start">
-                                <v-avatar :size="avatarSize" tile>
-                                    <v-img :src="trendingImage.images[0].url"></v-img>
-                                </v-avatar>
-                            </v-col>
-
-                            <v-col cols="12" md="9" class="text-center text-md-start pb-0 mt-0 mt-md-5">
-                                <v-subheader class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold">
-                                    SINGLE
-                                </v-subheader>
-                                <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--2">
-                                    {{ trendingtrack.name }}
-                                </p>
-                                <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2 ">
-                                    <span class="item" v-for="artist in trendingtrack.artists" :key="artist.id">
-                                        {{ artist.name }}
-                                    </span>
-                                </p>
-                            </v-col>
-
-                            <v-col class="text-center text-md-start pt-0 my-0 my-md-5">
-                                <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="!show">
-                                    <v-icon v-bind="iconSize">mdi-pause</v-icon>
-                                </v-btn>
-                                <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="show">
-                                    <v-icon v-bind="iconSize">mdi-play</v-icon>
-                                </v-btn>
-
-                                <v-icon large class="grey--text no-background-hover d-none d-md-inline ml-5">mdi-dots-horizontal</v-icon>
-                            </v-col>
-                        </v-row>
-                    </v-card>
-                </v-col>
-            </v-row>
-
-            <v-card dark flat class="dark mt-0 mt-md-2">
-                <v-card-text class="d-none d-md-block">
-                    <!-- Heading -->
-                    <v-row class="white--text d-none d-md-flex">
-                        <v-col cols="1" class="text-center">
-                            <div class="body-1 font-weight-medium grey--text">#</div>
+        <p class="white--text"> {{ }} </p>
+        <v-row class="dark mt-md-2 mt-0">
+            <v-col>
+                <v-card flat class="dark">
+                    <v-row class="white--text" justify="center">
+                        <v-col cols="12" md="3" class="text-center text-md-start">
+                            <v-avatar :size="avatarSize" tile>
+                                <v-img :src="trendingImage.images[0].url"></v-img>
+                            </v-avatar>
                         </v-col>
 
-                        <v-col cols="10">
-                            <div class="body-1 font-weight-medium grey--text">Title</div>
+                        <v-col cols="12" md="9" class="text-center text-md-start pb-0 mt-0 mt-md-5">
+                            <v-subheader class="pl-0 d-none d-md-inline caption text-uppercase white--text font-weight-bold">
+                                SINGLE
+                            </v-subheader>
+                            <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--2">
+                                {{ trendingtrack.name }}
+                            </p>
+                            <p class="my-3 caption text-md-body-1 font-weight-medium wrap--text--2 ">
+                                <span class="item" v-for="artist in trendingtrack.artists" :key="artist.id">
+                                    {{ artist.name }}
+                                </span>
+                            </p>
                         </v-col>
 
-                        <v-col cols="1" class="text-center">
-                            <v-icon color="grey">mdi-clock-outline</v-icon>
+                        <v-col class="text-center text-md-start pt-0 my-0 my-md-5">
+                            <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="!show">
+                                <v-icon v-bind="iconSize">mdi-pause</v-icon>
+                            </v-btn>
+                            <v-btn fab v-bind="size" class="arrow bg--orange  white--text no-background-hover" @click="show = !show" v-show="show">
+                                <v-icon v-bind="iconSize">mdi-play</v-icon>
+                            </v-btn>
+
+                            <v-icon large class="grey--text no-background-hover d-none d-md-inline ml-5">mdi-dots-horizontal</v-icon>
                         </v-col>
                     </v-row>
+                </v-card>
+            </v-col>
+        </v-row>
 
-                    <!-- Divider -->
-                    <v-row>
-                        <v-divider color="grey"></v-divider>
-                    </v-row>
-                </v-card-text>
+        <v-card dark flat class="dark mt-0 mt-md-2">
+            <v-card-text class="d-none d-md-block">
+                <!-- Heading -->
+                <v-row class="white--text d-none d-md-flex">
+                    <v-col cols="1" class="text-center">
+                        <div class="body-1 font-weight-medium grey--text">#</div>
+                    </v-col>
 
-                <!-- Content -->
-                <v-card-text class="mt-5 mt-sm-3">
-                    <v-hover v-slot:default="{ hover }">
-                        <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
-                            <!-- <v-col cols="1" class="text-center body-2 pa-0 font-weight-medium" align-self="center">
+                    <v-col cols="10">
+                        <div class="body-1 font-weight-medium grey--text">Title</div>
+                    </v-col>
+
+                    <v-col cols="1" class="text-center">
+                        <v-icon color="grey">mdi-clock-outline</v-icon>
+                    </v-col>
+                </v-row>
+
+                <!-- Divider -->
+                <v-row>
+                    <v-divider color="grey"></v-divider>
+                </v-row>
+            </v-card-text>
+
+            <!-- Content -->
+            <v-card-text class="mt-5 mt-sm-3">
+                <v-hover v-slot:default="{ hover }">
+                    <v-row class="rounded-lg mb-2" :class="{ lightdark: hover }">
+                        <!-- <v-col cols="1" class="text-center body-2 pa-0 font-weight-medium" align-self="center">
                             <div v-show="!hover && !(isPlaying && tracks.id === selectedId)">
                                 1
                             </div>
@@ -115,14 +115,14 @@
                             </v-list-item>
                         </v-col> -->
 
-                            <iframe :src="`https://open.spotify.com/embed?uri=${trendingtrack.uri}`" width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe :src="`https://open.spotify.com/embed?uri=${trendingtrack.uri}`" width="100%" height="80" style="margin: 7px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
-                        </v-row>
-                    </v-hover>
-                </v-card-text>
-            </v-card>
-        </v-container>
-    </div>
+                    </v-row>
+                </v-hover>
+            </v-card-text>
+        </v-card>
+    </v-container>
+</div>
 </template>
 
 <script>

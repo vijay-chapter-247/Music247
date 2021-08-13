@@ -1,124 +1,124 @@
 <template>
-    <v-container fluid class="dark mt-n5">
-        <!-- Discover Section -->
-        <v-card dark flat class="dark">
-            <v-card-title>
-                <div class="font-weight-bold text-h4  wrap--text--1">
-                    Discover
-                </div>
-            </v-card-title>
-        </v-card>
+<v-container fluid class="dark mt-n5">
+    <!-- Discover Section -->
+    <v-card dark flat class="dark">
+        <v-card-title>
+            <div class="font-weight-bold text-h4  wrap--text--1">
+                Discover
+            </div>
+        </v-card-title>
+    </v-card>
 
-        <v-row>
-            <v-col cols="12" sm="6" md="7">
-                <v-card id="create" class="rounded-xl">
-                    <v-img src="./../assets/image_1.png" height="400">
-                        <v-speed-dial top left class="card-title-position">
-                            <template v-slot:activator>
-                                <div class="card-title-cover rounded-xl pa-1">
-                                    <div class="card--title display-1 text-md-h4 font-weight-bold white--text wrap--text--4">
-                                        How to do Basic Jumping and how to landing safely
-                                    </div>
+    <v-row>
+        <v-col cols="12" sm="6" md="7">
+            <v-card id="create" class="rounded-xl">
+                <v-img src="./../assets/image_1.png" height="400">
+                    <v-speed-dial top left class="card-title-position">
+                        <template v-slot:activator>
+                            <div class="card-title-cover rounded-xl pa-1">
+                                <div class="card--title display-1 text-md-h4 font-weight-bold white--text wrap--text--4">
+                                    How to do Basic Jumping and how to landing safely
                                 </div>
-                            </template>
-                        </v-speed-dial>
+                            </div>
+                        </template>
+                    </v-speed-dial>
 
-                        <v-speed-dial bottom right>
-                            <template v-slot:activator>
-                                <v-chip small color="#3d414d" class="white--text font-weight-bold ">7:30 min</v-chip>
-                            </template>
-                        </v-speed-dial>
+                    <v-speed-dial bottom right>
+                        <template v-slot:activator>
+                            <v-chip small color="#3d414d" class="white--text font-weight-bold ">7:30 min</v-chip>
+                        </template>
+                    </v-speed-dial>
 
-                        <v-speed-dial bottom left class="card-avatar-position">
-                            <template v-slot:activator>
-                                <div class="avatar--border-1 pa-2 ">
-                                    <v-avatar size="50">
-                                        <v-img src="./../assets/image_2.png"></v-img>
-                                    </v-avatar>
-                                    <span class="position--absolute rounded-circle border--card--1">
-                                        <v-icon color="white">mdi-check-circle</v-icon>
-                                    </span>
+                    <v-speed-dial bottom left class="card-avatar-position">
+                        <template v-slot:activator>
+                            <div class="avatar--border-1 pa-2 ">
+                                <v-avatar size="50">
+                                    <v-img src="./../assets/image_2.png"></v-img>
+                                </v-avatar>
+                                <span class="position--absolute rounded-circle border--card--1">
+                                    <v-icon color="white">mdi-check-circle</v-icon>
+                                </span>
+                            </div>
+                        </template>
+                    </v-speed-dial>
+
+                    <v-speed-dial bottom left class="card-1-name-position">
+                        <template v-slot:activator>
+                            <div class="card-title-cover rounded-xl pa-1">
+                                <div class="white--text text-h6  wrap--text--1">
+                                    Thomas Hope
                                 </div>
-                            </template>
-                        </v-speed-dial>
-
-                        <v-speed-dial bottom left class="card-1-name-position">
-                            <template v-slot:activator>
-                                <div class="card-title-cover rounded-xl pa-1">
-                                    <div class="white--text text-h6  wrap--text--1">
-                                        Thomas Hope
-                                    </div>
-                                    <div class="subtitle-1 lightblue--text  wrap--text--1">
-                                        53K plays . 2 week ago
-                                    </div>
+                                <div class="subtitle-1 lightblue--text  wrap--text--1">
+                                    53K plays . 2 week ago
                                 </div>
-                            </template>
-                        </v-speed-dial>
-                    </v-img>
-                </v-card>
-            </v-col>
+                            </div>
+                        </template>
+                    </v-speed-dial>
+                </v-img>
+            </v-card>
+        </v-col>
 
-            <v-col cols="12" sm="6" md="5">
-                <v-card id="create" class="rounded-xl">
-                    <v-img src="./../assets/image_3.png" height="400">
-                        <v-speed-dial top left class="card-title-position">
-                            <template v-slot:activator>
-                                <div class="card-title-cover rounded-xl pa-1">
-                                    <div class="card--title display-1 text-md-h4 font-weight-bold white--text wrap--text--3">
-                                        Skateboard Tips You need to know
-                                    </div>
+        <v-col cols="12" sm="6" md="5">
+            <v-card id="create" class="rounded-xl">
+                <v-img src="./../assets/image_3.png" height="400">
+                    <v-speed-dial top left class="card-title-position">
+                        <template v-slot:activator>
+                            <div class="card-title-cover rounded-xl pa-1">
+                                <div class="card--title display-1 text-md-h4 font-weight-bold white--text wrap--text--3">
+                                    Skateboard Tips You need to know
                                 </div>
-                            </template>
-                        </v-speed-dial>
+                            </div>
+                        </template>
+                    </v-speed-dial>
 
-                        <v-speed-dial bottom right>
-                            <template v-slot:activator>
-                                <v-chip small color="#3d414d" class="white--text font-weight-bold ">12:10 min</v-chip>
-                            </template>
-                        </v-speed-dial>
+                    <v-speed-dial bottom right>
+                        <template v-slot:activator>
+                            <v-chip small color="#3d414d" class="white--text font-weight-bold ">12:10 min</v-chip>
+                        </template>
+                    </v-speed-dial>
 
-                        <v-speed-dial bottom left class="card-avatar-position">
-                            <template v-slot:activator>
-                                <div class="avatar--border-2 pa-2">
-                                    <v-avatar size="50">
-                                        <v-img src="./../assets/image_4.png"></v-img>
-                                    </v-avatar>
-                                    <span class="position--absolute rounded-circle border--card--2">
-                                        <v-icon color="white">mdi-check-circle</v-icon>
-                                    </span>
+                    <v-speed-dial bottom left class="card-avatar-position">
+                        <template v-slot:activator>
+                            <div class="avatar--border-2 pa-2">
+                                <v-avatar size="50">
+                                    <v-img src="./../assets/image_4.png"></v-img>
+                                </v-avatar>
+                                <span class="position--absolute rounded-circle border--card--2">
+                                    <v-icon color="white">mdi-check-circle</v-icon>
+                                </span>
+                            </div>
+                        </template>
+                    </v-speed-dial>
+
+                    <v-speed-dial bottom left class="card-2-name-position">
+                        <template v-slot:activator>
+                            <div class="card-title-cover rounded-xl pa-1">
+                                <div class="white--text text-h6  wrap--text--1">
+                                    Tony Andrew
                                 </div>
-                            </template>
-                        </v-speed-dial>
-
-                        <v-speed-dial bottom left class="card-2-name-position">
-                            <template v-slot:activator>
-                                <div class="card-title-cover rounded-xl pa-1">
-                                    <div class="white--text text-h6  wrap--text--1">
-                                        Tony Andrew
-                                    </div>
-                                    <div class="subtitle-1 lightorange--text  wrap--text--1">
-                                        53K plays . 2 week ago
-                                    </div>
+                                <div class="subtitle-1 lightorange--text  wrap--text--1">
+                                    53K plays . 2 week ago
                                 </div>
-                            </template>
-                        </v-speed-dial>
-                    </v-img>
-                </v-card>
-            </v-col>
-        </v-row>
+                            </div>
+                        </template>
+                    </v-speed-dial>
+                </v-img>
+            </v-card>
+        </v-col>
+    </v-row>
 
-        <!-- Recently Played Section -->
+    <!-- Recently Played Section -->
 
-        <v-card dark flat class="dark mt-2">
-            <v-card-title>
-                <div class="headline  wrap--text--1">
-                    Recently Played
-                </div>
-            </v-card-title>
-        </v-card>
+    <v-card dark flat class="dark mt-2">
+        <v-card-title>
+            <div class="headline  wrap--text--1">
+                Recently Played
+            </div>
+        </v-card-title>
+    </v-card>
 
-        <!-- Most Listened Card -->
-        <!-- <v-row>
+    <!-- Most Listened Card -->
+    <!-- <v-row>
         <v-col cols="12" sm="6" md="3" v-for="(card, index) in cards" :key="index">
             <v-card id="create" class="rounded-xl lightdark" height="370">
                 <v-img :src="require('./../assets/' + card.image)" height="200px">
@@ -175,33 +175,36 @@
         </v-col>
     </v-row> -->
 
-        <v-row class="px-3">
-            <v-col cols="12" sm="3" class="px-1 px-sm-2" v-for="(recentTrack, i) in recentplaylist" :key="i">
-                <v-hover v-slot="{ hover }">
-                    <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${recentTrack.track.album.id}`">
-                        <v-img :src="recentTrack.track.album.images[0].url" :height="imageHeight" class="rounded-lg">
-                            <Controller :hover="hover" :item="recentTrack.track.album.id" />
-                        </v-img>
+    <v-row class="px-3">
+        <v-col cols="12" sm="3" class="px-1 px-sm-2" v-for="(recentTrack, i) in recentplaylist" :key="i">
+            <v-hover v-slot="{ hover }">
+                <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`albums/${recentTrack.track.album.id}`">
+                    <v-img :src="recentTrack.track.album.images[0].url" :height="imageHeight" class="rounded-lg">
+                        <Controller :hover="hover" :item="recentTrack.track.album.id" />
+                    </v-img>
 
-                        <v-card-text class="white--text px-0">
-                            <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
-                                {{ recentTrack.track.album.album_type }}
+                    <v-card-text class="white--text px-0">
+                        <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
+                            {{ recentTrack.track.album.album_type }}
+                        </p>
+                        <v-hover v-slot="{ hover }">
+                            <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
+                                {{ recentTrack.track.album.name }}
                             </p>
-                            <v-hover v-slot="{ hover }">
-                                <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
-                                    {{ recentTrack.track.album.name }}
-                                </p>
-                            </v-hover>
-                        </v-card-text>
-                    </v-card>
-                </v-hover>
-            </v-col>
-        </v-row>
-    </v-container>
+                        </v-hover>
+                    </v-card-text>
+                </v-card>
+            </v-hover>
+        </v-col>
+    </v-row>
+</v-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 import Controller from './Controller.vue'
 import mergeMixin from "../mixins/mergeData.js";
 
@@ -209,7 +212,7 @@ export default {
     components: {
         Controller
     },
-    mixins: [ mergeMixin ],
+    mixins: [mergeMixin],
     methods: {
         ...mapActions(["fetchRecentPlaylist"]),
     },
