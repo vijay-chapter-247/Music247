@@ -8,6 +8,8 @@
         </v-card-title>
     </v-card>
 
+
+    <!-- Category Section -->
     <v-row class="px-3">
         <v-col cols="6" sm="3" class="px-1 px-sm-2" v-for="(category,i) in categories" :key="i">
             <v-hover v-slot="{ hover }">

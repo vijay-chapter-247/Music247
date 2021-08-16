@@ -10,13 +10,11 @@
 
     <v-row class="px-3">
         <v-col cols="6" sm="3" class="px-1 px-sm-2" v-for="(categoryTrack, index) in categoriesTracks" :key="index">
-
              <v-hover v-slot="{ hover }">
                 <v-card :height="cardHeight" :elevation="hover ? 15 : 0" class="pt-3 pt-md-5 px-3 px-md-5 lightdark pointer rounded-lg" :to="`/playlists/${categoryTrack.id}`">
                     <v-img :src="categoryTrack.images[0].url" :height="imageHeight" class="rounded-lg">
                          <Controller :hover="hover" :item="categoryTrack.id" />
                     </v-img>
-
                     <v-card-text class="white--text px-0">
                         <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
                             {{ categoryTrack.name }}
@@ -58,3 +56,5 @@ export default {
     },
 };
 </script>
+
+
