@@ -185,7 +185,7 @@
 
                     <v-card-text class="white--text px-0">
                         <p class="mb-1 Subtitle-1 font-weight-bold text-capitalize wrap--text--1">
-                            {{ recentTrack.track.album.album_type }}
+                            {{ recentTrack.track.album.album_type | toUpperCase }}
                         </p>
                         <v-hover v-slot="{ hover }">
                             <p class="mb-2 body-2 grey--text text-capitalize wrap--text--2" :class="{ 'text-decoration-underline': hover }">
@@ -225,35 +225,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.wrap--text--1 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 1;
-}
-
-.wrap--text--2 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-}
-
-.wrap--text--4 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 4;
-}
-
-.wrap--text--3 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-}
-
+<style scoped lang="scss">
 .card--title {
     max-width: 250px;
 }
@@ -304,19 +276,21 @@ export default {
     }
 }
 
-.avatar--border-1 {
-    border: 2px solid #09c6db;
+@mixin avatar-border-radius($value) {
+    border: 2px solid $value;
     border-radius: 50%;
+}
+
+.avatar--border-1 {
+    @include avatar-border-radius(#09c6db);
 }
 
 .avatar--border-2 {
-    border: 2px solid #ead5b4;
-    border-radius: 50%;
+    @include avatar-border-radius(#ead5b4);
 }
 
 .avatar--border-3 {
-    border: 2px solid #ffffff;
-    border-radius: 50%;
+    @include avatar-border-radius(#ffffff);
 }
 
 .position--absolute {
@@ -352,10 +326,6 @@ export default {
 .lightdark {
     background-color: #202b38;
 }
-
-/* . {
-  font-family: "Poppins", sans-serif !important;
-} */
 
 .position--down {
     top: 165px !important;

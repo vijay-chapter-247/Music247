@@ -16,7 +16,7 @@
                                 {{ artist.type }}
                             </v-subheader>
                             <p class="mb-3 text-h6 text-sm-h5 text-md-h2 font-weight-bold wrap--text--1">
-                                {{ artist.name }}
+                                {{ artist.name | toUpperCase  }}
                             </p>
                             <p class="my-3 body-2 text-md-body-2 wrap--text--2 text-uppercase">
                                 Followers : {{ artist.followers.total }}
@@ -158,7 +158,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .item+.item:before {
     content: ",";
 }
