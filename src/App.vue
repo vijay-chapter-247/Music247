@@ -36,7 +36,7 @@
         </v-app-bar>
 
         <!-- Drawer Content -->
-        <v-navigation-drawer v-model="drawer" app dark color="dark" class="white--text">
+        <v-navigation-drawer :v-model="drawer" app dark color="dark" class="white--text">
             <v-card-title class="dark font-weight-bold ">
                 Songs247x7
             </v-card-title>
@@ -146,7 +146,7 @@ export default {
     data: () => ({
         searchQuery: "",
         imageTrendingTrack: null,
-        drawer: true,
+        // drawer: true,
         player: true,
         imageIndex: 1,
         links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
@@ -221,6 +221,18 @@ export default {
                 [size]: true,
             } : {};
         },
+        drawer() {
+            const drawer = {
+                xs: false,
+                sm: false,
+                md: true,
+                lg: true,
+                xl: true,
+            } [this.$vuetify.breakpoint.name];
+            return drawer ? {
+                [drawer]: true,
+            } : {};
+        },
         playerHeight() {
             switch (this.$vuetify.breakpoint.name) {
                 case "xs":
@@ -283,7 +295,7 @@ export default {
         });
 
         spotifyApi.setAccessToken(
-            "BQCvdK48zAg5reFfB2sTHmsxpqJNGH-lodcESYQ1RnHxgEOOnpT3Oie5vxbnNRwvxt8Yg1aSiBjfkxIDOCgIwGPv3k2rsTlvCw0AIsBGnPB0__US2kpl7ZINGS3wAgVnNqZu6E202LL-GusRMD7i27xM4n6U3uHAl252YERKioZedzJBTglSDqLQnKXkT3WJorDryXabdl5Ge_1ffGaSkdz_or2Rg53e2jqoTkTQv2cs0h8xrwiiJni1KosyUhcFq6XbeklPOkq2j_L-plb-j9k6JfQbB-BiWrFESMxl"
+            "BQCZPw0Psl-aZ6iO71tFHRNObpQIBGvbQ2oUI3Ym4HhjfrFA7RSeKLTh9ZHa5k_-UGRonTuSthknQz9OjMyFnnWHsWRVkpZG0HqAkyT4UjOTnWjzVeWRn7GGfRiEs_3aPzTn4p1CaeTkuhYmWM-w-lHpOw93hCe5-8bBVCETNTl1d8-6S37wcCxUUgjqv-_l6GObukAF8hICfyKyeyVUJe6IfPHrL-aadWjMWEedGWjlb_f7txYB3UMkSrbYUd21QFClw1WfJ5hKkZgfFb0a8qit53VEepzqyQBm6OCX"
         );
 
         // // Get multiple artists

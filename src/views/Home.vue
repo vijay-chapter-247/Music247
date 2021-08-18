@@ -303,19 +303,25 @@ export default {
     position: absolute;
 }
 
+@mixin borderCard($value){
+    border: 1px solid $value;
+    background-color: $value;
+}
+
 .border--card--1 {
-    border: 1px solid #50b7ca;
-    background-color: #50b7ca;
+    @include borderCard(#50b7ca);
 }
 
 .border--card--2 {
-    border: 1px solid #ebc080;
-    background-color: #ebc080;
+    @include borderCard(#ebc080);
+    // border: 1px solid #ebc080;
+    // background-color: #ebc080;
 }
 
 .border--card--3 {
-    border: 1px solid #ffffff;
-    background-color: #ffffff;
+    @include borderCard(#ffffff);
+    // border: 1px solid #ffffff;
+    // background-color: #ffffff;
 }
 
 .white--border {
