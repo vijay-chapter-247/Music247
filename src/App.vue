@@ -41,7 +41,7 @@
                 Songs247x7
             </v-card-title>
 
-            <v-text-field class="d-sm-none mx-4 my-0 py-0" placeholder="Search" append-icon="mdi-magnify" filled dense rounded></v-text-field>
+            <v-text-field class="d-sm-none mx-4 my-0 py-0" v-model="searchQuery" placeholder="Search" append-icon="mdi-magnify" filled dense rounded></v-text-field>
 
             <v-subheader class="font-weight-black grey--text">Menu</v-subheader>
 
@@ -282,7 +282,7 @@ export default {
         });
 
         spotifyApi.setAccessToken(
-            "BQAaPhyT5DUu0M3u-brF84naQuOHi_XuHMNnTPogcGhFOITnYqlvy5fMeWIaV1ljI96zxZCz-vMOe8oXrX_GA4zUkPfVtbmG1sIHXFjukXZEaXvirsTiMGBiBvKDzUmRUIuw2rOeoMFhO8Csp0cUsuAnJU0diZq0Mdkp-PswV8yB5LKj2oYnDM1RPOtJ6Sc9_JzjsjljgfxoM88ZQJCvm626aVa2Z_88vaV8Wlb01D4-_4gP9VU69LC-jxr-CiY-TXyDEXNrDxgiUtxmiAO3p5c8BcBGNC8LUWBN_ppq"
+            "BQBlVgv7nvQUDM_0a3h2xxgIrQu2NYlF5_QZFnvh8EfFCCZ3LVJaSN04aLxRE8YLWqmVjj7PLDLlo7Fe8bE6aVl9efR5xI6riEJxa_F3VFrwbqXWCbac4WKO9NJNgYz__KKLWsEcb7FqVXP4nMoO4drRHZhsOZlUwiqaBsMCf0A_wCsWt6vNo7nvtv4icVENUmsrBkNEdERO75a5tGlvI6qdHw-UFePHsZEKuIZS8SFNwuw7bU0qX4CmRzemQ6rpPvQbDoUFurt7cIb_758dK4Gzb-SyHmpD1406M1w2"
         );
 
         // // Get multiple artists
@@ -914,7 +914,7 @@ export default {
         //         console.log('54. Something went wrong!', err);
         //     });
 
-        // // Get Information About The User's Current Playback State
+        // Get Information About The User's Current Playback State
         // spotifyApi.getMyCurrentPlaybackState()
         //     .then(function (data) {
         //         // Output items
@@ -1028,7 +1028,6 @@ export default {
 $lightBlack : #202b38;
 
 // Mixin
-
 @media only screen and (max-width: 624px) {
     .font--subtitle--2 {
         font-size: 0.875rem !important;

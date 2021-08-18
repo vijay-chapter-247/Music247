@@ -7,7 +7,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: "http://localhost:8080/",
 });
 spotifyApi.setAccessToken(
-  "BQAaPhyT5DUu0M3u-brF84naQuOHi_XuHMNnTPogcGhFOITnYqlvy5fMeWIaV1ljI96zxZCz-vMOe8oXrX_GA4zUkPfVtbmG1sIHXFjukXZEaXvirsTiMGBiBvKDzUmRUIuw2rOeoMFhO8Csp0cUsuAnJU0diZq0Mdkp-PswV8yB5LKj2oYnDM1RPOtJ6Sc9_JzjsjljgfxoM88ZQJCvm626aVa2Z_88vaV8Wlb01D4-_4gP9VU69LC-jxr-CiY-TXyDEXNrDxgiUtxmiAO3p5c8BcBGNC8LUWBN_ppq"
+  "BQBlVgv7nvQUDM_0a3h2xxgIrQu2NYlF5_QZFnvh8EfFCCZ3LVJaSN04aLxRE8YLWqmVjj7PLDLlo7Fe8bE6aVl9efR5xI6riEJxa_F3VFrwbqXWCbac4WKO9NJNgYz__KKLWsEcb7FqVXP4nMoO4drRHZhsOZlUwiqaBsMCf0A_wCsWt6vNo7nvtv4icVENUmsrBkNEdERO75a5tGlvI6qdHw-UFePHsZEKuIZS8SFNwuw7bU0qX4CmRzemQ6rpPvQbDoUFurt7cIb_758dK4Gzb-SyHmpD1406M1w2"
 );
 
 const state = {
@@ -19,7 +19,6 @@ const state = {
   album: [],
   albumtrack: [],
   recentplaylist: [],
-  // artist: [],
   topartist: [],
   categories: [],
   categoriesTrack: []
@@ -45,10 +44,7 @@ const getters = {
 
   recentplaylist: (state) => state.recentplaylist,
 
-  // artist: (state) => state.artist,
-
-  artist: (state) =>
-    state.topartist.find((p) => p.id === router.currentRoute.params.artistId),
+  artist: (state) => state.topartist.find((p) => p.id === router.currentRoute.params.artistId),
 
   topartist: (state) => state.topartist,
 
@@ -82,7 +78,6 @@ const actions = {
   },
   async fetchTrendingTrack({ commit }) {
     const trendingId = router.currentRoute.params.trendingId;
-
     spotifyApi.getAlbumTracks(trendingId).then(
       (data) => {
         commit("setTrendingTrack", data.body.items[0]);
@@ -161,18 +156,6 @@ const actions = {
       }
     );
   },
-  // async fetchArtist({ commit }) {
-  //   // Get an artist
-  //   const artistsId = router.currentRoute.params.artistId;
-  //   spotifyApi.getArtist(artistsId).then(
-  //     (data) => {
-  //       commit("setArtist", data.body);
-  //     },
-  //     function(err) {
-  //       console.error(err);
-  //     }
-  //   );
-  // },
   async fetchtopartist({ commit }) {
     /* Get a User’s Top Artists*/
     spotifyApi.getMyTopArtists().then(
@@ -208,25 +191,19 @@ const actions = {
 const mutations = {
   setPlaylist: (state, playlist) => (state.playlist = playlist),
 
-  setPlaylistTrack: (state, playlisttrack) =>
-    (state.playlisttrack = playlisttrack),
+  setPlaylistTrack: (state, playlisttrack) => (state.playlisttrack = playlisttrack),
 
-  setPlaylistHeader: (state, playlistheader) =>
-    (state.playlistheader = playlistheader),
+  setPlaylistHeader: (state, playlistheader) => (state.playlistheader = playlistheader),
 
   setTrending: (state, trending) => (state.trending = trending),
 
-  setTrendingTrack: (state, trendingtrack) =>
-    (state.trendingtrack = trendingtrack),
+  setTrendingTrack: (state, trendingtrack) => (state.trendingtrack = trendingtrack),
 
   setAlbum: (state, album) => (state.album = album),
 
   setAlbumTrack: (state, albumtrack) => (state.albumtrack = albumtrack),
 
-  setRecentplaylist: (state, recentplaylist) =>
-    (state.recentplaylist = recentplaylist),
-
-  // setArtist: (state, artist) => (state.artist = artist),
+  setRecentplaylist: (state, recentplaylist) => (state.recentplaylist = recentplaylist),
 
   setTopArtist: (state, topartist) => (state.topartist = topartist),
 

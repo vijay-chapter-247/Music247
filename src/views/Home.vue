@@ -235,19 +235,21 @@ export default {
     left: 30px;
 }
 
+@mixin card-avatar-position($unit-1, $unit-2) {
+    bottom: $unit-1 + px;
+    left: $unit-2 + px;
+}
+
 .card-avatar-position {
-    bottom: 80px;
-    left: 25px;
+    @include card-avatar-position(80, 25);
 }
 
 .card-1-name-position {
-    bottom: 80px;
-    left: 100px;
+    @include card-avatar-position(80, 100);
 }
 
 .card-2-name-position {
-    bottom: 155px;
-    left: 30px;
+    @include card-avatar-position(155, 30);
 }
 
 .lightblue--text {
@@ -303,25 +305,21 @@ export default {
     position: absolute;
 }
 
-@mixin borderCard($value){
+@mixin border--card($value){
     border: 1px solid $value;
     background-color: $value;
 }
 
 .border--card--1 {
-    @include borderCard(#50b7ca);
+    @include border--card(#50b7ca);
 }
 
 .border--card--2 {
-    @include borderCard(#ebc080);
-    // border: 1px solid #ebc080;
-    // background-color: #ebc080;
+    @include border--card(#ebc080);
 }
 
 .border--card--3 {
-    @include borderCard(#ffffff);
-    // border: 1px solid #ffffff;
-    // background-color: #ffffff;
+    @include border--card(#ffffff);
 }
 
 .white--border {
