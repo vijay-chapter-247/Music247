@@ -36,7 +36,7 @@
         </v-app-bar>
 
         <!-- Drawer Content -->
-        <v-navigation-drawer :v-model="drawer" app dark color="dark" class="white--text">
+        <v-navigation-drawer v-model="drawer" app dark color="dark" class="white--text">
             <v-card-title class="dark font-weight-bold ">
                 Songs247x7
             </v-card-title>
@@ -146,7 +146,7 @@ export default {
     data: () => ({
         searchQuery: "",
         imageTrendingTrack: null,
-        // drawer: true,
+        drawer: true,
         player: true,
         imageIndex: 1,
         links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
@@ -203,7 +203,6 @@ export default {
     }),
     computed: {
         ...mapGetters(["topartist"]),
-
         filterName: function () {
             return this.topartist.filter((artist) => {
                 return artist.name.toLowerCase().match(this.searchQuery);
@@ -219,18 +218,6 @@ export default {
             } [this.$vuetify.breakpoint.name];
             return size ? {
                 [size]: true,
-            } : {};
-        },
-        drawer() {
-            const drawer = {
-                xs: false,
-                sm: false,
-                md: true,
-                lg: true,
-                xl: true,
-            } [this.$vuetify.breakpoint.name];
-            return drawer ? {
-                [drawer]: true,
             } : {};
         },
         playerHeight() {
@@ -295,7 +282,7 @@ export default {
         });
 
         spotifyApi.setAccessToken(
-            "BQCZPw0Psl-aZ6iO71tFHRNObpQIBGvbQ2oUI3Ym4HhjfrFA7RSeKLTh9ZHa5k_-UGRonTuSthknQz9OjMyFnnWHsWRVkpZG0HqAkyT4UjOTnWjzVeWRn7GGfRiEs_3aPzTn4p1CaeTkuhYmWM-w-lHpOw93hCe5-8bBVCETNTl1d8-6S37wcCxUUgjqv-_l6GObukAF8hICfyKyeyVUJe6IfPHrL-aadWjMWEedGWjlb_f7txYB3UMkSrbYUd21QFClw1WfJ5hKkZgfFb0a8qit53VEepzqyQBm6OCX"
+            "BQAaPhyT5DUu0M3u-brF84naQuOHi_XuHMNnTPogcGhFOITnYqlvy5fMeWIaV1ljI96zxZCz-vMOe8oXrX_GA4zUkPfVtbmG1sIHXFjukXZEaXvirsTiMGBiBvKDzUmRUIuw2rOeoMFhO8Csp0cUsuAnJU0diZq0Mdkp-PswV8yB5LKj2oYnDM1RPOtJ6Sc9_JzjsjljgfxoM88ZQJCvm626aVa2Z_88vaV8Wlb01D4-_4gP9VU69LC-jxr-CiY-TXyDEXNrDxgiUtxmiAO3p5c8BcBGNC8LUWBN_ppq"
         );
 
         // // Get multiple artists
