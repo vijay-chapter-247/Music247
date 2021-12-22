@@ -7,7 +7,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: "http://localhost:8080/",
 });
 spotifyApi.setAccessToken(
-  "BQBlVgv7nvQUDM_0a3h2xxgIrQu2NYlF5_QZFnvh8EfFCCZ3LVJaSN04aLxRE8YLWqmVjj7PLDLlo7Fe8bE6aVl9efR5xI6riEJxa_F3VFrwbqXWCbac4WKO9NJNgYz__KKLWsEcb7FqVXP4nMoO4drRHZhsOZlUwiqaBsMCf0A_wCsWt6vNo7nvtv4icVENUmsrBkNEdERO75a5tGlvI6qdHw-UFePHsZEKuIZS8SFNwuw7bU0qX4CmRzemQ6rpPvQbDoUFurt7cIb_758dK4Gzb-SyHmpD1406M1w2"
+  "BQCNf1QMvSCVqfCsTKShiG26wV36_VNgADQzkeAAeghrFd11W6czPDK3M7zYSMuhnPZhU3KpzITUvB3tdFFCqJg52yN3ZQuIrlRz5r0tqGDXsLR9aBlxgkKZXoU8o-HHqswckoh8H4wYbeOpwYcGJ6nUihc_AdSPgpjCduZkrUdhnhyY7Nzm-82hehpQh1gwHPeBcUZQec6UCDLLpV6xoXzbsO0eUQzo9Qg9hSTOr89jxa9XlGJvpmxvmhJNCZXiR3WkKO9D09e_5QhUmZJmucild5n1QMvjQdgzno-z"
 );
 
 const state = {
@@ -35,8 +35,7 @@ const getters = {
 
   trendingtrack: (state) => state.trendingtrack,
 
-  trendingImage: (state) =>
-    state.trending.find((p) => p.id === router.currentRoute.params.trendingId),
+  trendingImage: (state) => state.trending.find((p) => p.id === router.currentRoute.params.trendingId),
 
   album: (state) => state.album,
 
