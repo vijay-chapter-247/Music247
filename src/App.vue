@@ -282,7 +282,7 @@ export default {
         });
 
         spotifyApi.setAccessToken(
-            "BQCNf1QMvSCVqfCsTKShiG26wV36_VNgADQzkeAAeghrFd11W6czPDK3M7zYSMuhnPZhU3KpzITUvB3tdFFCqJg52yN3ZQuIrlRz5r0tqGDXsLR9aBlxgkKZXoU8o-HHqswckoh8H4wYbeOpwYcGJ6nUihc_AdSPgpjCduZkrUdhnhyY7Nzm-82hehpQh1gwHPeBcUZQec6UCDLLpV6xoXzbsO0eUQzo9Qg9hSTOr89jxa9XlGJvpmxvmhJNCZXiR3WkKO9D09e_5QhUmZJmucild5n1QMvjQdgzno-z"
+            "BQDJPVT9Mq24GY5nSZs2ArXvoDRgQitrK1mTHgR6mdc4PUkgFQhsH7rqC-CYNk9OYiCDu8iG_ereA3MR0oebw0neZYcya45bDeIdlZ9wushNYbLC3v8Vk-ODfpey8_w7JfLgujvXRx-D2cKsAvYkWjikOn-8uxdY0l6W2zP-jpWUFUCFJu2YE6nzg33gaVUlBB6CRuxmlposN9x7BPkH5bLektWiyta74sBLGmQ9cqscC0OyYkBqo5Rp7Z-eHdkeRCOHhStAI6CwKOXa4xgWebFYgXSpyRtaby13V59j"
         );
 
         // // Get multiple artists
